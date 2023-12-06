@@ -3,7 +3,12 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 
 import React, { useState, useEffect } from 'react';
-import { addToCart, checkout, fetchProducts } from '@/ShopifyService';
+import {
+  addToCart,
+  checkout,
+  fetchProducts,
+  fetchProductsByName,
+} from '@/ShopifyService';
 
 const page = () => {
   const [product, setProducts] = useState([]);
@@ -11,7 +16,9 @@ const page = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const fetchedProducts = await fetchProducts();
+      const fetchedProducts = await fetchProductsByName({
+        searchQuery: 'mi',
+      });
       console.log(fetchedProducts);
       setProducts(fetchedProducts);
     };

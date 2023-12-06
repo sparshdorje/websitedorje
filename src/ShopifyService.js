@@ -15,6 +15,18 @@ export const fetchProducts = async () => {
   }
 };
 
+export const fetchProductsByName = async ({ searchQuery }) => {
+  try {
+    const products = await client.product.fetchQuery({
+      query: `title:${searchQuery}*`,
+    });
+    return products;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
+};
+
 // export const fetchProductsByPage = async (perPage = 10, page = 1) => {
 //   try {
 //     const productsQuery = client.graphQLClient.query((root) => {
