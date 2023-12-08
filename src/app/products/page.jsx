@@ -26,6 +26,47 @@ const page = () => {
     getProducts();
   }, []);
 
+  // useEffect(() => {
+  //   async function createCustomer() {
+  //     try {
+  //       const response = await axiosInstance.post('/', {
+  //         query: `
+  //           mutation {
+  //             customerCreate(input: {
+  //               email: "abhishekcoolyadav6.ay@gmail.com",
+  //               password: "abhishek6700",
+  //               firstName: "Abhishek",
+  //               lastName: "Yadav"
+  //             }) {
+  //               customer {
+  //                 id
+  //                 email
+  //                 firstName
+  //                 lastName
+  //                 phone
+  //               }
+  //               customerUserErrors {
+  //                 code
+  //                 field
+  //                 message
+  //               }
+  //             }
+  //           }
+  //         `,
+  //       });
+
+  //       console.log(
+  //         'Created Customer:',
+  //         response.data.data.customerCreate.customer
+  //       );
+  //     } catch (error) {
+  //       console.error('Error creating customer:', error);
+  //     }
+  //   }
+
+  //   createCustomer();
+  // }, []);
+
   const handleAddToCart = async (productId) => {
     console.log(productId, 'pp');
     const checkoutUrl = await addToCart(productId);
