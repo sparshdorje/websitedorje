@@ -5,10 +5,12 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import React, { useState, useEffect } from 'react';
 import {
   addToCart,
-  axiosInstance,
   checkout,
   fetchProducts,
-} from '@/ShopifyService';
+  fetchProductsByName,
+} from '@/services/ShopifyService';
+import Link from 'next/link';
+import CollectionService from '@/services/collection';
 
 const page = () => {
   const [product, setProducts] = useState([]);
@@ -16,7 +18,9 @@ const page = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const fetchedProducts = await fetchProducts();
+      const fetchedProducts = await fetchProductsByName({
+        searchQuery: 'mi',
+      });
       console.log(fetchedProducts);
       setProducts(fetchedProducts);
     };
@@ -24,46 +28,19 @@ const page = () => {
     getProducts();
   }, []);
 
-  // useEffect(() => {
-  //   async function createCustomer() {
-  //     try {
-  //       const response = await axiosInstance.post('/', {
-  //         query: `
-  //           mutation {
-  //             customerCreate(input: {
-  //               email: "abhishekcoolyadav6.ay@gmail.com",
-  //               password: "abhishek6700",
-  //               firstName: "Abhishek",
-  //               lastName: "Yadav"
-  //             }) {
-  //               customer {
-  //                 id
-  //                 email
-  //                 firstName
-  //                 lastName
-  //                 phone
-  //               }
-  //               customerUserErrors {
-  //                 code
-  //                 field
-  //                 message
-  //               }
-  //             }
-  //           }
-  //         `,
-  //       });
+  useEffect(() => {
+    async function createCustomer() {
+      try {
+        const response = await CollectionService.getCollections();
 
-  //       console.log(
-  //         'Created Customer:',
-  //         response.data.data.customerCreate.customer
-  //       );
-  //     } catch (error) {
-  //       console.error('Error creating customer:', error);
-  //     }
-  //   }
+        console.log('Created Customer:', response.data.data);
+      } catch (error) {
+        console.error('Error creating customer:', error);
+      }
+    }
 
-  //   createCustomer();
-  // }, []);
+    createCustomer();
+  }, []);
 
   const handleAddToCart = async (productId) => {
     console.log(productId, 'pp');
@@ -82,15 +59,18 @@ const page = () => {
       <h1>Products</h1>
       <ul>
         {product.map((prod) => (
-          <li key={prod.id}>
-            <h2>{prod.title}</h2>
-            <p>{prod.description}</p>
-            <p>{prod.id}</p>
-            <p>{prod.variants?.[0]?.price?.amount}</p>
+          <li key={prod.title}>
+            <Link href={`/products/${prod.handle}`}>
+              <h2>{prod.title}</h2>
+              <p>{prod.description}</p>
+              <p>{prod.id}</p>
+              <p>{prod.variants?.[0]?.price?.amount}</p>
 
-            <button onClick={() => handleAddToCart(prod.variants?.[0]?.id)}>
-              add to cart
-            </button>
+              <button onClick={() => handleAddToCart(prod.variants?.[0]?.id)}>
+                add to cart
+              </button>
+            </Link>
+
             {/* Display other product information */}
           </li>
         ))}
