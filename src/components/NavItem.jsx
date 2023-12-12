@@ -7,17 +7,21 @@ import { cn } from '@/lib/utils';
 
 const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
   return (
-    <div className="flex cursor-pointer h-full z-20">
-      <div className="relative flex items-end h-full">
-        {category?.featured?.length > 0 ? (
-          <div
-            className={buttonVariants({
-              className: 'gap-1.5 h-16 pb-8 pt-5 hover:bg-[#FFF5EB]',
-              variant: 'ghost',
-            })}
-            onMouseEnter={handleOpen}
-            onMouseLeave={() => close()}
-            variant={isOpen ? 'secondary' : 'ghost'}
+    <div
+      className="flex cursor-pointer h-full z-20"
+      onMouseEnter={handleOpen}
+      onMouseLeave={() => close()}
+    >
+      <div className="relative flex items-center h-full ">
+        {category?.dropdown ? (
+          <Button
+            className={cn(
+              '   gap-1.5 h-16 rounded-tl-md rounded-tr-md rounded-br-none rounded-bl-none font-questrial hover:bg-[#FFF5EB]',
+              {
+                'bg-[#FFF5EB]': isOpen,
+              }
+            )}
+            variant={'ghost'}
           >
             {category.label}
 
@@ -26,11 +30,11 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
                 '-rotate-180': isOpen,
               })}
             />
-          </div>
+          </Button>
         ) : (
           <Link
             className={buttonVariants({
-              className: 'gap-1.5 h-16 pb-8 pt-5 ',
+              className: 'gap-1.5 h-16  ',
               variant: 'link',
             })}
             href={category?.link ?? ''}
@@ -40,7 +44,7 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
         )}
       </div>
 
-      {isOpen && category?.featured?.length > 0 ? (
+      {isOpen && category?.dropdown > 0 ? (
         <div
           className={cn(
             'absolute inset-x-0 top-full text-sm text-muted-foreground',
@@ -60,7 +64,7 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
                 <div className="col-span-4 col-start-1 grid grid-cols-3 gap-x-8">
                   {category?.featured?.map((item) => (
                     <div
-                      onClick={() => close}
+                      onClick={() => close()}
                       key={item.name}
                       className="group relative text-base sm:text-sm"
                     >
@@ -75,7 +79,7 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
 
                       <Link
                         href={item.href}
-                        className="mt-6 block font-medium text-gray-900"
+                        className="mt-6 block font-fraunces font-bold text-gray-900"
                       >
                         {item.name}
                       </Link>

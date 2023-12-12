@@ -19,6 +19,7 @@ export const PRODUCT_CATEGORIES = [
         imageSrc: '/nav/ui-kits/purple.jpg',
       },
     ],
+    dropdown: true,
   },
   {
     label: 'SHOP BY NEED',
@@ -40,20 +41,72 @@ export const PRODUCT_CATEGORIES = [
         imageSrc: '/nav/icons/bestsellers.jpg',
       },
     ],
+    dropdown: true,
   },
   {
     label: 'NEW: ORIGINAL CHAI',
-    value: 'shop_by_need',
-    link: '/new',
+    value: 'new_original_chai',
+    featured: [
+      {
+        name: 'Favorite Icon Picks',
+        href: `/products?category=icons`,
+        imageSrc: '/nav/icons/picks.jpg',
+      },
+      {
+        name: 'New Arrivals',
+        href: '/products?category=icons&sort=desc',
+        imageSrc: '/nav/icons/new.jpg',
+      },
+      {
+        name: 'Bestselling Icons',
+        href: '/products?category=icons',
+        imageSrc: '/nav/icons/bestsellers.jpg',
+      },
+    ],
+    dropdown: true,
   },
   {
     label: 'EXPERIENCE',
     value: 'experience',
-    link: '/experience',
+    featured: [
+      {
+        name: 'Favorite Icon Picks',
+        href: `/products?category=icons`,
+        imageSrc: '/nav/icons/picks.jpg',
+      },
+      {
+        name: 'New Arrivals',
+        href: '/products?category=icons&sort=desc',
+        imageSrc: '/nav/icons/new.jpg',
+      },
+      {
+        name: 'Bestselling Icons',
+        href: '/products?category=icons',
+        imageSrc: '/nav/icons/bestsellers.jpg',
+      },
+    ],
+    dropdown: true,
   },
   {
     label: 'LEARN MORE',
     value: 'learn_more',
-    link: '/learn-more',
+    featured: [
+      {
+        name: 'Favorite Icon Picks',
+        href: `/products?category=icons`,
+        imageSrc: '/nav/icons/picks.jpg',
+      },
+      {
+        name: 'New Arrivals',
+        href: '/products?category=icons&sort=desc',
+        imageSrc: '/nav/icons/new.jpg',
+      },
+      {
+        name: 'Bestselling Icons',
+        href: '/products?category=icons',
+        imageSrc: '/nav/icons/bestsellers.jpg',
+      },
+    ],
+    dropdown: true,
   },
 ];
