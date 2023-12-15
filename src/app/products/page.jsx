@@ -11,6 +11,7 @@ import {
 } from '@/services/ShopifyService';
 import Link from 'next/link';
 import CollectionService from '@/services/collection';
+import Head from 'next/head';
 
 const page = () => {
   const [product, setProducts] = useState([]);
@@ -56,6 +57,10 @@ const page = () => {
   };
   return (
     <MaxWidthWrapper>
+      <Head>
+        <title>Dorje Teas | Products</title>
+        <meta property="og:title" content="Dorje Teas | Products" key="title" />
+      </Head>
       <h1>Products</h1>
       <ul>
         {product.map((prod) => (

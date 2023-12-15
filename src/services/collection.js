@@ -4,7 +4,6 @@ const CollectionService = {
   getCollections: async () => {
     return axiosInstance.post('/', {
       query: `
-               
       query getCollections {
         collections(first: 100) {
           edges {
@@ -20,8 +19,7 @@ const CollectionService = {
             hasPreviousPage
           }
         }
-      }
-              
+      }   
             `,
     });
   },

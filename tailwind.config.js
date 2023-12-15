@@ -29,6 +29,7 @@ module.exports = {
         secondary: {
           DEFAULT: '#2C5657',
           foreground: 'hsl(var(--secondary-foreground))',
+          dark: '#434E55',
         },
         tertiary: {
           DEFAULT: '#679FA1',

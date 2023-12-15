@@ -28,14 +28,26 @@ export const fetchProductsByName = async ({ searchQuery }) => {
   }
 };
 
-// export const fetchProductsByPage = async (perPage = 10, page = 1) => {
-//   try {
-//     const productsQuery = client.graphQLClient.query((root) => {
-//       root.addConnection('products', { args: { first: 200 } }, (product) => {
-//         product.add('title');
-//         product.add('tags'); // Add fields to be returned
-//       });
-//     });
+export const addToCart = async (productId, quantity = 1) => {
+  try {
+    const checkout = await client.checkout.create();
+    const lineItemsToAdd = [
+      {
+        variantId: productId,
+        quantity: quantity,
+      },
+    ];
+    const updatedCheckout = await client.checkout.addLineItems(
+      checkout.id,
+      lineItemsToAdd
+    );
+    return updatedCheckout.webUrl; // Return the URL for the checkout
+  } catch (error) {
+    console.error('Error adding product to cart:', error);
+    return null;
+  }
+};
+
 const shopifyStoreUrl = `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN}/api/2023-10/graphql`; // Replace with your store's URL and API version
 
 export const axiosInstance = axios.create({
