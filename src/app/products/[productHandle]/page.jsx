@@ -3,6 +3,11 @@
 import ImageSlider from '@/components/ImageSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import { Button, buttonVariants } from '@/components/ui/button';
+import BrandStorySlider from '@/components/BrandStorySlider';
+import BrewingGuideSlider from '@/components/BrewingGuideSlider';
+import TestimonialsSlider from '@/components/TestimonialsSlider';
+import StarRating from '@/components/StarRating';
+import ReviewCard from '@/components/ReviewCard';
 import AddToCartButton from '@/components/AddToCartButton';
 import { addToCart } from '@/services/ShopifyService';
 import ProductService from '@/services/product';
@@ -116,7 +121,11 @@ const Page = ({ params }) => {
         <title>{product.title}</title>
         <meta property="og:title" content={product.title} key="title" />
       </Head>
-      <MaxWidthWrapper className={'py-8 px-4 w-full max-w-screen-xl'}>
+      <MaxWidthWrapper
+        className={
+          'pt-8 pb-52 px-4 w-full max-w-screen-xl grid grid-cols-1 gap-32'
+        }
+      >
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:justify-between">
           <div className="hidden lg:block col-6">
             <div className="h-[600px] w-[520px] rounded-lg">
@@ -126,8 +135,11 @@ const Page = ({ params }) => {
           <div className="col-6 flex flex-col justify-between items-start gap-4">
             {/* TITLE AND DESCRIPTION */}
             <div className="flex flex-col gap-4">
-              <div className="font-fraunces font-semibold text-xl lg:text-4xl text-primary">
+              <div className="font-fraunces font-semibold text-xl lg:text-4xl text-secondary">
                 {product.title}
+              </div>
+              <div>
+                <StarRating rating={3.3} totalRatings={238} />
               </div>
               <div className="mx-auto lg:hidden grid grid-cols-1 w-full">
                 <div className="h-[376px] rounded-lg">
@@ -162,8 +174,8 @@ const Page = ({ params }) => {
                           }`,
                           className: `${
                             selectedOptions[optionIdx].value === value
-                              ? 'bg-secondary-dark'
-                              : 'text-secondary-dark border-secondary-dark'
+                              ? 'bg-secondary'
+                              : 'text-secondary border-secondary'
                           } cursor-pointer font-questrial`,
                         })}
                       >
@@ -178,7 +190,7 @@ const Page = ({ params }) => {
                 <div className="font-questrial text-primary mb-3">Quantity</div>
                 <div className="flex items-center gap-3">
                   <Button
-                    className="border-secondary-dark bg-secondary-dark text-white"
+                    className="border-secondary bg-secondary text-white"
                     onClick={decreaseQuantity}
                   >
                     -
@@ -192,7 +204,7 @@ const Page = ({ params }) => {
                     {quantity}
                   </div>
                   <Button
-                    className="border-secondary-dark bg-secondary-dark text-white"
+                    className="border-secondary bg-secondary text-white"
                     onClick={increaseQuantity}
                   >
                     +
@@ -205,7 +217,7 @@ const Page = ({ params }) => {
             <div className="hidden lg:flex justify-between gap-3 w-full">
               <Button
                 onClick={() => handleBuyNow()}
-                className="border border-secondary-dark bg-secondary-dark text-white flex-1 lg:text-lg py-6"
+                className="border border-secondary bg-secondary text-white flex-1 lg:text-lg py-6"
               >
                 Buy Now
               </Button>
@@ -213,12 +225,70 @@ const Page = ({ params }) => {
             </div>
           </div>
         </div>
+
+        {/* KNOW YOUR TEA */}
+        <div>
+          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+            Know your tea
+          </div>
+          <div className="text-base text-center mb-10 font-questrial">
+            Understand the composition of your favourite tea
+          </div>
+          <TestimonialsSlider />
+        </div>
+
+        {/* BRAND STORY */}
+        <div>
+          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+            What makes Dorje Special
+          </div>
+          <div className="text-base text-center mb-10 font-questrial">
+            Learn the story behind the brewing of the wonderful Himalayan tea
+          </div>
+          <BrandStorySlider />
+        </div>
+
+        {/* BREWING GUIDE */}
+        <div>
+          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+            Brewing guide
+          </div>
+          <div className="text-base text-center mb-10 font-questrial">
+            Learn the story behind the brewing of the wonderful Himalayan tea
+          </div>
+          <BrewingGuideSlider />
+        </div>
+
+        {/* TESTIMONIALS */}
+        <div>
+          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+            Hear what people say about us
+          </div>
+          <div className="text-base text-center mb-10 font-questrial">
+            Here’s what people of the industry say about us
+          </div>
+          <TestimonialsSlider />
+        </div>
+
+        {/* CUSTOMER REVIEWS */}
+        <div>
+          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+            Customer Reviews
+          </div>
+          <div className="text-base text-center mb-10 font-questrial">
+            Hear what our fans say about us
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <ReviewCard />
+          </div>
+        </div>
       </MaxWidthWrapper>
       {/* BUY AND ADD TO CART MOBILE*/}
-      <div className="fixed bottom-0 bg-background p-2 flex lg:hidden justify-center gap-3 w-screen">
+      <div className="z-50 fixed bottom-0 bg-background p-2 flex lg:hidden justify-center gap-3 w-screen">
         <Button
           onClick={() => handleBuyNow()}
-          className="border border-secondary-dark bg-secondary-dark text-white flex-1 lg:text-lg py-6"
+          className="border border-secondary bg-secondary text-white flex-1 lg:text-lg py-6"
         >
           Buy Now
         </Button>

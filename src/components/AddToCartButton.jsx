@@ -23,7 +23,7 @@ const AddToCartButton = ({ product, quantity }) => {
         setIsSuccess(true);
       }}
       variant="outline"
-      className="border-secondary-dark text-secondary-dark flex-1 lg:text-lg py-6"
+      className="border-secondary text-secondary flex-1 lg:text-lg py-6"
     >
       {isSuccess ? 'Added!' : 'Add to cart'}
     </Button>
