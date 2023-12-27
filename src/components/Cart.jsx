@@ -9,7 +9,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from './ui/sheet';
+import CartItem from '@/components/CartItem';
 import { buttonVariants } from './ui/button';
+import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
 import { formatPrice } from '@/lib/utils';
 import Image from 'next/image';
@@ -18,9 +20,10 @@ import Link from 'next/link';
 // import { ScrollArea } from './ui/scroll-area';
 // import CartItem from './CartItem';
 import { useEffect, useState } from 'react';
+import { useCart } from '@/hooks/useCart';
 
 const Cart = () => {
-  const items = [];
+  const { items } = useCart();
   const itemCount = items.length;
 
   const [isMounted, setIsMounted] = useState(false);
@@ -30,11 +33,9 @@ const Cart = () => {
   }, []);
 
   const cartTotal = items.reduce(
-    (total, { product }) => total + product.price,
+    (total, { product }) => total + product.price.amount * product.quantity,
     0
   );
-
-  const fee = 1;
 
   return (
     <Sheet>
@@ -55,24 +56,16 @@ const Cart = () => {
         {itemCount > 0 ? (
           <>
             <div className="flex w-full flex-col pr-6">
-              {/* <ScrollArea>
+              <ScrollArea>
                 {items.map(({ product }) => (
                   <CartItem product={product} key={product.id} />
                 ))}
-              </ScrollArea> */}
+              </ScrollArea>
             </div>
 
             <div className="space-y-4 pr-6">
               <Separator />
               <div className="space-y-1.5 text-sm">
-                <div className="flex">
-                  <div className="flex-1">Shipping</div>
-                  <div>Free</div>
-                </div>
-                <div className="flex">
-                  <div className="flex-1">Transaction Fee</div>
-                  <div>{formatPrice(fee)}</div>
-                </div>
                 <div className="flex">
                   <div className="flex-1">Total</div>
                   <div>{formatPrice(cartTotal)}</div>

@@ -18,7 +18,11 @@ const Navbar = () => {
             {/* <MobileNav /> */}
             <div className="ml-4 flex lg:ml-0">
               <Link href="/">
-                <Image src={DorjeLogo} className="h-10 w-10 md:h-16 md:w-16" />
+                <Image
+                  src={DorjeLogo}
+                  className="h-10 w-10 md:h-16 md:w-16"
+                  alt="Dorje Teas Logo"
+                />
               </Link>
             </div>
 
