@@ -1,4 +1,4 @@
-import { Fraunces, Questrial } from 'next/font/google';
+import { Fraunces, Quicksand } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import Navbar from '@/components/Navbar';
@@ -8,8 +8,7 @@ const fraunces = Fraunces({
   subsets: ['latin'],
   variable: '--font-fraunces',
 });
-const questrial = Questrial({
-  weight: '400',
+const questrial = Quicksand({
   subsets: ['latin'],
   variable: '--font-questrial',
 });
@@ -29,7 +28,7 @@ export default function RootLayout({ children }) {
           questrial.variable
         )}
       >
-        <NextTopLoader showSpinner={false} />
+        {/* <NextTopLoader showSpinner={false} /> */}
         <main className="relative flex flex-col min-h-screen">
           <Navbar />
           <div className="flex-grow flex-1">{children}</div>
