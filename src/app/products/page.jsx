@@ -12,15 +12,20 @@ import {
 import Link from 'next/link';
 import CollectionService from '@/services/collection';
 import Head from 'next/head';
+import { useSearchParams } from 'next/navigation';
+import ProductCard from '../../components/ProductCard';
+import Image from 'next/image';
 
 const page = () => {
   const [product, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const query = useSearchParams();
+
+  console.log(query, 'query');
 
   useEffect(() => {
     const getProducts = async () => {
-      const fetchedProducts = await fetchProductsByName({
-        searchQuery: 'mi',
+      const fetchedProducts = await CollectionService.getProductsInCollection({
+        handle: 'mi',
       });
       console.log(fetchedProducts);
       setProducts(fetchedProducts);
@@ -29,57 +34,34 @@ const page = () => {
     getProducts();
   }, []);
 
-  useEffect(() => {
-    async function createCustomer() {
-      try {
-        const response = await CollectionService.getCollections();
+  // useEffect(() => {
+  //   async function createCustomer() {
+  //     try {
+  //       const response = await CollectionService.getCollections();
 
-        console.log('Created Customer:', response.data.data);
-      } catch (error) {
-        console.error('Error creating customer:', error);
-      }
-    }
+  //       console.log('Created Customer:', response.data.data);
+  //     } catch (error) {
+  //       console.error('Error creating customer:', error);
+  //     }
+  //   }
 
-    createCustomer();
-  }, []);
+  //   createCustomer();
+  // }, []);
 
-  const handleAddToCart = async (productId) => {
-    console.log(productId, 'pp');
-    const checkoutUrl = await addToCart(productId);
-
-    if (checkoutUrl) {
-      console.log(checkoutUrl);
-      window.location.href = checkoutUrl;
-      // Redirect to the checkout page
-    } else {
-      console.error('Failed to add the product to the cart.');
-    }
-  };
   return (
     <MaxWidthWrapper>
       <Head>
         <title>Dorje Teas | Products</title>
         <meta property="og:title" content="Dorje Teas | Products" key="title" />
       </Head>
-      <h1>Products</h1>
-      <ul>
+      <div className="w-full rounded-2xl h-[600px]">
+        <Image src={''} />
+      </div>
+      <div>
         {product.map((prod) => (
-          <li key={prod.title}>
-            <Link href={`/products/${prod.handle}`}>
-              <h2>{prod.title}</h2>
-              <p>{prod.description}</p>
-              <p>{prod.id}</p>
-              <p>{prod.variants?.[0]?.price?.amount}</p>
-
-              <button onClick={() => handleAddToCart(prod.variants?.[0]?.id)}>
-                add to cart
-              </button>
-            </Link>
-
-            {/* Display other product information */}
-          </li>
+          <ProductCard product={prod} key={prod.id} />
         ))}
-      </ul>
+      </div>
     </MaxWidthWrapper>
   );
 };

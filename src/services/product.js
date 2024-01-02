@@ -10,6 +10,7 @@ const ProductService = {
           title
           description
           productType
+          tags
           priceRange{
             maxVariantPrice{
               amount

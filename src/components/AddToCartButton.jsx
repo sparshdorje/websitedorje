@@ -3,8 +3,14 @@
 import { useCart } from '@/hooks/useCart';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
 
-const AddToCartButton = ({ product, quantity }) => {
+const AddToCartButton = ({
+  product,
+  quantity,
+  extraClasses,
+  variant = 'outline',
+}) => {
   const { addItem } = useCart();
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -18,12 +24,16 @@ const AddToCartButton = ({ product, quantity }) => {
 
   return (
     <Button
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault();
         addItem({ ...product, quantity });
         setIsSuccess(true);
       }}
-      variant="outline"
-      className="border-secondary text-secondary flex-1 lg:text-lg py-6"
+      variant={variant}
+      className={cn(
+        'border-secondary z-30 text-secondary flex-1 lg:text-lg py-6',
+        extraClasses
+      )}
     >
       {isSuccess ? 'Added!' : 'Add to cart'}
     </Button>

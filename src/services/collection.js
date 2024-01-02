@@ -23,6 +23,90 @@ const CollectionService = {
             `,
     });
   },
+  getCollectionByHandle: async ({ handle }) => {
+    return axiosInstance.post('/', {
+      query: `
+      query getCollectionByHandle {
+        collection(handle: "${handle}") {
+          id
+          title
+          description
+          image{
+            id
+            url
+            width
+            height
+            altText
+      }
+        }
+      }`,
+    });
+  },
+  getProductsInCollection: async ({ handle }) => {
+    return axiosInstance.post('/', {
+      query: `query getProductsInCollection {
+        collection(handle: "${handle}") {
+          products(first: 250, sortKey: BEST_SELLING) {
+            edges {
+              node {
+                id
+                title
+                vendor
+                description
+                handle
+                availableForSale
+                images(first: 1) {
+                  edges {
+                    node {
+                      id
+                      url
+                      width
+                      height
+                      altText
+                    }
+                  }
+                }
+                variants(first: 100) {
+                  edges {
+                    cursor
+                    node {
+                      availableForSale
+                      selectedOptions{
+                        name
+                        value
+                      }
+                      id
+                      title
+                      image{
+                        url
+                      }
+                      price {
+                        amount
+                        currencyCode
+                      }
+                      product{
+                        title
+                      }
+                    }
+                  }
+                }
+                priceRange {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                  maxVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`,
+    });
+  },
 };
 
 export default CollectionService;

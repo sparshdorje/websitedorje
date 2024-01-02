@@ -3,6 +3,7 @@ import React from 'react';
 import { buttonVariants } from './ui/button';
 import MaxWidthWrapper from './MaxWidthWrapper';
 import NavItems from './NavItems';
+import MobileNav from './MobileNav';
 import DorjeLogo from '../../public/assets/icons/dorje-logo.png';
 import Image from 'next/image';
 import Cart from './Cart';
@@ -14,8 +15,8 @@ const Navbar = () => {
     <div className="bg-white sticky z-50 top-0 inset-x-0 h:16 md:h-24 shadow-sm">
       <header className="relative bg-white">
         <MaxWidthWrapper>
-          <div className="flex h-16 md:h-24 items-center justify-center md:justify-start ">
-            {/* <MobileNav /> */}
+          <div className="flex h-16 md:h-24 items-center justify-between lg:justify-center md:justify-start ">
+            <MobileNav />
             <div className="ml-4 flex lg:ml-0">
               <Link href="/">
                 <Image
@@ -30,10 +31,10 @@ const Navbar = () => {
               <NavItems />
             </div>
 
-            <div className="ml-auto flex items-center">
-              <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+            <div className="lg:ml-auto flex items-center">
+              <div className="flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                 {user ? null : (
-                  <Link href="/sign-in">
+                  <Link href="/sign-in" className="hidden lg:block">
                     <UserRound className="h-6 w-6 flex-shrink-0 text-gray-400 hover:text-gray-500" />
                   </Link>
                 )}

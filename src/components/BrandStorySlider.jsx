@@ -10,6 +10,8 @@ import LeftArrow from '@/components/LeftArrow';
 import RightArrow from '@/components/RigthArrow';
 import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import ReactPlayer from 'react-player';
+import Image from 'next/image';
 
 const BrandStorySlider = ({
   urls = [
@@ -19,6 +21,14 @@ const BrandStorySlider = ({
     '/assets/brand-story/4.mp4',
     '/assets/brand-story/5.mp4',
     '/assets/brand-story/6.mp4',
+  ],
+  thumbnails = [
+    '/assets/brand-story/thumbnails/1.png',
+    '/assets/brand-story/thumbnails/2.png',
+    '/assets/brand-story/thumbnails/3.png',
+    '/assets/brand-story/thumbnails/4.png',
+    '/assets/brand-story/thumbnails/5.png',
+    '/assets/brand-story/thumbnails/6.png',
   ],
 }) => {
   const isMobile = window.innerWidth < 768;
@@ -51,14 +61,42 @@ const BrandStorySlider = ({
         grabCursor={true}
         spaceBetween={isMobile ? 30 : 50}
         modules={[Autoplay, Pagination, Navigation]}
-        className="flex"
+        className="flex h-full w-full"
       >
         {urls.map((url, i) => (
-          <SwiperSlide key={i} className="-z-10 relative h-full w-full">
-            <video width="640" height="360" controls className="rounded-xl">
+          <SwiperSlide key={i} className="-z-10 relative !h-[480px] w-full">
+            <ReactPlayer
+              url={url}
+              height="100%"
+              width="100%"
+              className="rounded-xl overflow-hidden h-full object-fill"
+              loop
+              controls
+              playing
+              playIcon={
+                <Image
+                  height={40}
+                  width={40}
+                  alt="play icon"
+                  className="z-10"
+                  src={'/assets/icons/play-icon.png'}
+                />
+              }
+              fallback={
+                <Image
+                  alt="thumbnnail"
+                  width={'100'}
+                  height={'100'}
+                  className="z-10 h-full w-full"
+                  src={thumbnails[i]}
+                />
+              }
+              light={thumbnails[i]}
+            />
+            {/* <video  controls >
               <source src={url} type="video/mp4" />
               Your browser does not support the video tag.
-            </video>
+            </video> */}
           </SwiperSlide>
         ))}
       </Swiper>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, buttonVariants } from './ui/button';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import NavCards from './NavCards';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -59,33 +60,16 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
           />
 
           <div className="relative bg-[#FFF5EB]">
-            <div className="mx-auto max-w-7xl px-8">
-              <div className="grid grid-cols-4 gap-x-8 gap-y-10 py-16">
-                <div className="col-span-4 col-start-1 grid grid-cols-3 gap-x-8">
+            <div className="mx-auto max-w-7xl">
+              <div className="grid grid-cols-1 gap-x-8 gap-y-10 py-16">
+                <div className="flex justify-center items-start gap-5">
                   {category?.featured?.map((item) => (
                     <div
                       onClick={() => close()}
                       key={item.name}
                       className="group relative text-base sm:text-sm"
                     >
-                      <div className="relative aspect-video overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                        <Image
-                          src={item.imageSrc}
-                          alt="product category image"
-                          fill
-                          className="object-cover object-center"
-                        />
-                      </div>
-
-                      <Link
-                        href={item.href}
-                        className="mt-6 block font-fraunces font-bold text-gray-900"
-                      >
-                        {item.name}
-                      </Link>
-                      <p className="mt-1" aria-hidden="true">
-                        Shop now
-                      </p>
+                      <NavCards item={item} variant={category.cardType} />
                     </div>
                   ))}
                 </div>
