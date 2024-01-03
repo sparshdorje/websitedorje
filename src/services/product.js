@@ -1,9 +1,9 @@
-import { axiosInstance } from './ShopifyService';
+import { shopifyInstance } from './ShopifyService';
 
 const ProductService = {
   getAllProducts: async () => {},
   getProductByHandle: async ({ productHandle }) => {
-    return axiosInstance.post('/', {
+    return shopifyInstance.post('/', {
       query: `query getProductByHandle {
         product(handle: "${productHandle}") {
           id

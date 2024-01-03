@@ -9,7 +9,7 @@ import TestimonialsSlider from '@/components/TestimonialsSlider';
 import StarRating from '@/components/StarRating';
 import ReviewCard from '@/components/ReviewCard';
 import AddToCartButton from '@/components/AddToCartButton';
-import { addToCart } from '@/services/ShopifyService';
+import { addToCart, judgeMeInstance } from '@/services/ShopifyService';
 import ProductService from '@/services/product';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -48,7 +48,6 @@ const Page = ({ params }) => {
         productHandle,
       });
 
-      console.log(response.data.data);
       setProduct(response.data.data.product);
 
       setVariants(() => {
@@ -97,9 +96,7 @@ const Page = ({ params }) => {
     }
   };
 
-  console.log(variants, 'variants');
-  console.log(selectedOptions, 'option');
-  console.log(selectedVariant, 'selectedVariant');
+  console.log(product, 'prodict');
 
   const handleBuyNow = async () => {
     const checkoutUrl = await addToCart(selectedVariant.id, quantity);

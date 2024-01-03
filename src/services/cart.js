@@ -1,8 +1,8 @@
-import { axiosInstance } from './ShopifyService';
+import { shopifyInstance } from './ShopifyService';
 
 const CartService = {
   createCartWithSingleItem: async (cartInput) => {
-    return axiosInstance.post('/', {
+    return shopifyInstance.post('/', {
       query: `
         mutation createCart($cartInput: ${cartInput}) {
             cartCreate(input: $cartInput) {
