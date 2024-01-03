@@ -12,12 +12,6 @@ import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 // WEB TESTIMONIALS IMPORT
-import AnupamWeb from '../../public/assets/testimonials/web/anupam-web.jpg';
-import FoodkaWeb from '../../public/assets/testimonials/web/foodka-web.jpg';
-import PeyushWeb from '../../public/assets/testimonials/web/peyush-web.jpg';
-import ShiveshWeb from '../../public/assets/testimonials/web/shivesh-web.jpg';
-import VineetaWeb from '../../public/assets/testimonials/web/vineeta-web.jpg';
-import VirWeb from '../../public/assets/testimonials/web/vir-web.jpg';
 import Image from 'next/image';
 
 // MOBILE TESTIMONIALS IMPORT

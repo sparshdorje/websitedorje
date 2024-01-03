@@ -48,7 +48,7 @@ const Cart = () => {
           {isMounted ? itemCount : 0}
         </span>
       </SheetTrigger>
-      <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
+      <SheetContent className="flex w-full flex-col lg:pr-0 sm:max-w-lg">
         <SheetHeader className="space-y-2.5 pr-6">
           <SheetTitle>Cart ({isMounted ? itemCount : 0})</SheetTitle>
         </SheetHeader>
