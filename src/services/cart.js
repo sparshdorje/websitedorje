@@ -1,54 +1,58 @@
 import { shopifyInstance } from './ShopifyService';
 
 const CartService = {
-  createCartWithSingleItem: async (cartInput) => {
+  createCartWithLineItems: async (lineItems = []) => {
     return shopifyInstance.post('/', {
       query: `
-        mutation createCart($cartInput: ${cartInput}) {
-            cartCreate(input: $cartInput) {
-              cart {
-                id
-                createdAt
-                updatedAt
-                checkoutUrl
-                lines(first: 10) {
-                  edges {
-                    node {
+      mutation createCart($cartInput: CartInput) {
+        cartCreate(input: $cartInput) {
+          cart {
+            id
+            createdAt
+            updatedAt
+            checkoutUrl
+            lines(first: 10) {
+              edges {
+                node {
+                  id
+                  merchandise {
+                    ... on ProductVariant {
                       id
-                      merchandise {
-                        ... on ProductVariant {
-                          id
-                        }
-                      }
                     }
-                  }
-                }
-                attributes {
-                  key
-                  value
-                }
-                cost {
-                  totalAmount {
-                    amount
-                    currencyCode
-                  }
-                  subtotalAmount {
-                    amount
-                    currencyCode
-                  }
-                  totalTaxAmount {
-                    amount
-                    currencyCode
-                  }
-                  totalDutyAmount {
-                    amount
-                    currencyCode
                   }
                 }
               }
             }
+            attributes {
+              key
+              value
+            }
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+              totalTaxAmount {
+                amount
+                currencyCode
+              }
+              totalDutyAmount {
+                amount
+                currencyCode
+              }
+            }
           }
-              `,
+        }
+      }  `,
+      variables: {
+        cartInput: {
+          lines: lineItems,
+        },
+      },
     });
   },
 };

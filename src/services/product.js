@@ -68,6 +68,28 @@ const ProductService = {
       }`,
     });
   },
+  getRelatedProduct: async ({ productId }) => {
+    return shopifyInstance.post('/', {
+      query: ` query getProductRecommendations {
+        productRecommendations(productId: "${productId}") {
+          id
+          title
+          handle
+          images(first: 100) {
+          edges {
+          node {
+            id
+            originalSrc
+            altText
+            url
+           }
+          }
+        }
+
+        }
+      }`,
+    });
+  },
 };
 
 export default ProductService;

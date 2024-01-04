@@ -6,8 +6,11 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import BrandStorySlider from '@/components/BrandStorySlider';
 import BrewingGuideSlider from '@/components/BrewingGuideSlider';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
+import KnowYourTeaSlider from '@/components/KnowYourTeaSlider';
 import StarRating from '@/components/StarRating';
 import ReviewCard from '@/components/ReviewCard';
+import RelatedProductCard from '@/components/RelatedProductCard';
+import Faq from '@/components/Faq';
 import AddToCartButton from '@/components/AddToCartButton';
 import { addToCart, judgeMeInstance } from '@/services/ShopifyService';
 import ProductService from '@/services/product';
@@ -19,6 +22,7 @@ import Image from 'next/image';
 const Page = ({ params }) => {
   const { productHandle } = params;
   const [product, setProduct] = useState({});
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [variants, setVariants] = useState([]);
@@ -66,9 +70,25 @@ const Page = ({ params }) => {
     }
   }
 
+  async function fetchRelatedProduct(productId) {
+    try {
+      const response = await ProductService.getRelatedProduct({
+        productId,
+      });
+
+      setRelatedProducts(response.data.data.productRecommendations.slice(0, 4));
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    }
+  }
+
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  useEffect(() => {
+    fetchRelatedProduct(product.id);
+  }, [product]);
 
   useEffect(() => {
     findMatchingVariant();
@@ -97,8 +117,6 @@ const Page = ({ params }) => {
       }
     }
   };
-
-  console.log(product, 'prodict');
 
   const handleBuyNow = async () => {
     const checkoutUrl = await addToCart(selectedVariant.id, quantity);
@@ -238,7 +256,7 @@ const Page = ({ params }) => {
             <div className="text-base text-center mb-10 font-questrial text-white">
               Understand the composition of your favourite tea
             </div>
-            <TestimonialsSlider />
+            <KnowYourTeaSlider productHandle={product.handle} />
           </MaxWidthWrapper>
         </div>
 
@@ -260,7 +278,7 @@ const Page = ({ params }) => {
           style={{
             width: '100%',
             height: '100%', // Set your desired height
-            background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
+            background: `url(/assets/svg/ProductPageAsSeenOnBG.svg) no-repeat`,
             backgroundSize: 'cover',
           }}
           className="py-16"
@@ -296,7 +314,7 @@ const Page = ({ params }) => {
             <div className="text-base text-center mb-10 font-questrial">
               Learn the story behind the brewing of the wonderful Himalayan tea
             </div>
-            <BrewingGuideSlider />
+            <BrewingGuideSlider productHandle={product.handle} />
           </MaxWidthWrapper>
         </div>
 
@@ -344,31 +362,41 @@ const Page = ({ params }) => {
               FAQs
             </div>
 
-            <div className="max-w-4xl mx-auto"></div>
+            <div className="max-w-4xl mx-auto">
+              <Faq />
+            </div>
           </MaxWidthWrapper>
         </div>
       </div>
-      {/* RELATED PRODUCTS */}
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
-          backgroundSize: 'cover',
-        }}
-        className="py-16"
-      >
-        <MaxWidthWrapper className={'max-w-screen-xl'}>
-          <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
-            Related products
-          </div>
-          <div className="text-base text-center mb-10 font-questrial text-white ">
-            People also bought...
-          </div>
 
-          <div className="max-w-4xl mx-auto"></div>
-        </MaxWidthWrapper>
-      </div>
+      {/* RELATED PRODUCTS */}
+      {relatedProducts.length > 0 && (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
+            backgroundSize: 'cover',
+          }}
+          className="py-16 mb-12 lg:mb-0"
+        >
+          <MaxWidthWrapper className={'max-w-screen-xl'}>
+            <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
+              Related products
+            </div>
+            <div className="text-base text-center mb-10 font-questrial text-white ">
+              People also bought...
+            </div>
+
+            <div className="mx-auto flex items-start justify-start overflow-x-scroll lg:justify-center gap-6">
+              {relatedProducts?.map((product) => (
+                <RelatedProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </MaxWidthWrapper>
+        </div>
+      )}
+
       {/* BUY AND ADD TO CART MOBILE*/}
       <div className="z-50 fixed bottom-0 bg-background p-2 flex lg:hidden justify-center gap-3 w-screen">
         <Button

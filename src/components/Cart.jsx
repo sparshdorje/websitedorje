@@ -16,17 +16,46 @@ import { Separator } from './ui/separator';
 import { formatPrice } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import CartService from '@/services/cart';
 
 // import { ScrollArea } from './ui/scroll-area';
 // import CartItem from './CartItem';
 import { useEffect, useState } from 'react';
 import { useCart } from '@/hooks/useCart';
+import { useRouter } from 'next/navigation';
 
 const Cart = () => {
   const { items } = useCart();
   const itemCount = items.length;
 
+  const router = useRouter();
+
   const [isMounted, setIsMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const continueToCheckout = async () => {
+    try {
+      setIsLoading(true);
+      const lineItems = items.map((item) => {
+        return {
+          quantity: item.product.quantity,
+          merchandiseId: item.product.id,
+        };
+      });
+
+      const cartResponse = await CartService.createCartWithLineItems(lineItems);
+
+      const checkoutUrl =
+        cartResponse?.data?.data?.cartCreate?.cart?.checkoutUrl || '';
+
+      if (checkoutUrl !== '') {
+        router.push(checkoutUrl);
+      }
+      setIsLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -70,19 +99,20 @@ const Cart = () => {
                   <div className="flex-1">Total</div>
                   <div>{formatPrice(cartTotal)}</div>
                 </div>
+                <div className="font-questrial text-primary text-xs text-end">
+                  * Shipping Calculated at checkout
+                </div>
               </div>
             </div>
             <SheetFooter>
-              <SheetTrigger asChild>
-                <Link
-                  href="/cart"
-                  className={buttonVariants({
-                    className: 'w-full',
-                  })}
-                >
-                  Continue to Checkout
-                </Link>
-              </SheetTrigger>
+              <div
+                onClick={continueToCheckout}
+                className={buttonVariants({
+                  className: 'w-full cursor-pointer',
+                })}
+              >
+                {isLoading ? 'Processing...' : 'Continue to Checkout'}
+              </div>
             </SheetFooter>
           </>
         ) : (

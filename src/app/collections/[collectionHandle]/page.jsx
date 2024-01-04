@@ -44,8 +44,6 @@ const page = ({ params }) => {
     getProducts();
   }, []);
 
-  console.log(collection);
-
   return (
     <MaxWidthWrapper
       className={

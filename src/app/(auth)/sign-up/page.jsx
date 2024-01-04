@@ -46,8 +46,6 @@ const page = () => {
         toast.success(`Verification email sent to ${email}.`);
         router.push('/verify-email?to=' + email);
       } else {
-        console.log(customerError, ' accessTokenError');
-
         toast.error(customerError.message);
       }
     } catch (e) {

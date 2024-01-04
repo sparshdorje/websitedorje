@@ -7,8 +7,6 @@ const page = async () => {
   const nextCookies = cookies();
   const user = await getServerSideUser(nextCookies);
 
-  console.log(user, 'user');
-
   return (
     <MaxWidthWrapper
       className={'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-8'}

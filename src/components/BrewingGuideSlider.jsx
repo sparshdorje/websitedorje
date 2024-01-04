@@ -12,19 +12,17 @@ import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
 
-const BrewingGuideSlider = ({
-  urls = [
-    '/assets/brewing-guide/normal-tea/step-1.png',
-    '/assets/brewing-guide/normal-tea/step-2.png',
-    '/assets/brewing-guide/normal-tea/step-3.png',
-    '/assets/brewing-guide/normal-tea/step-4.png',
-    '/assets/brewing-guide/normal-tea/step-5.png',
-    '/assets/brewing-guide/normal-tea/step-6.png',
-  ],
-}) => {
+const BrewingGuideSlider = ({ productHandle }) => {
   const isMobile = window.innerWidth < 768;
-  const { swiper, slideConfig, setSwiper, activeStyles, inactiveStyles } =
-    useSlider({ urls });
+
+  const {
+    swiper,
+    slideConfig,
+    setSwiper,
+    activeStyles,
+    inactiveStyles,
+    brewingGuideUrls,
+  } = useSlider({ productHandle });
 
   return (
     <div className="relative lg:px-10 overflow-hidden">
@@ -54,7 +52,7 @@ const BrewingGuideSlider = ({
         modules={[Autoplay, Pagination, Navigation]}
         className="flex"
       >
-        {urls.map((url, i) => (
+        {brewingGuideUrls.map((url, i) => (
           <SwiperSlide key={i} className="-z-10 relative h-full w-full">
             <Image
               width="640"

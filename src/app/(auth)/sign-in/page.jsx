@@ -61,7 +61,6 @@ const page = () => {
         router.push('/');
         router.refresh();
       } else {
-        console.log(accessTokenError, ' accessTokenError');
         if (accessTokenError.code === 'UNIDENTIFIED_CUSTOMER') {
           toast.error('User does not exist or verified');
         } else {

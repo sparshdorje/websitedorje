@@ -29,8 +29,6 @@ export default function Home() {
     getBestsellers();
   }, [selectedCollectionForBestsellers]);
 
-  console.log(bestSellingProducts);
-
   return (
     <div className={'pt-8 pb-52 w-full grid grid-cols-1 gap-16'}>
       {/* COLLECTIONS */}

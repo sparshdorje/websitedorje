@@ -32,8 +32,6 @@ const BrandStorySlider = ({
   ],
 }) => {
   const isMobile = window && window.innerWidth < 768;
-
-  console.log(isMobile, 'ismobuel');
   const { swiper, slideConfig, setSwiper, activeStyles, inactiveStyles } =
     useSlider({ urls });
 
@@ -57,7 +55,7 @@ const BrandStorySlider = ({
       </div>
       <Swiper
         onSwiper={(swiper) => setSwiper(swiper)}
-        slidesPerView={isMobile ? 1 : 4}
+        slidesPerView={isMobile ? 1.2 : 4}
         navigation={{ prevEl: 'prev-arrow', nextEl: 'next-arrow' }}
         freeMode={true}
         grabCursor={true}

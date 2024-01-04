@@ -20,14 +20,11 @@ const page = () => {
   const [product, setProducts] = useState([]);
   const query = useSearchParams();
 
-  console.log(query, 'query');
-
   useEffect(() => {
     const getProducts = async () => {
       const fetchedProducts = await CollectionService.getProductsInCollection({
         handle: 'mi',
       });
-      console.log(fetchedProducts);
       setProducts(fetchedProducts);
     };
 

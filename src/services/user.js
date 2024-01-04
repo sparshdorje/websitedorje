@@ -2,7 +2,6 @@ import { shopifyInstance } from './ShopifyService';
 
 const UserService = {
   createUser: async (requestObject) => {
-    console.log(requestObject);
     return shopifyInstance.post('/', {
       query: `mutation createCustomerAccount($input: CustomerCreateInput!) {
         customerCreate(input: $input) {
@@ -25,7 +24,6 @@ const UserService = {
     });
   },
   getAccessToken: async (requestObject) => {
-    console.log(requestObject);
     return shopifyInstance.post('/', {
       query: `mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
         customerAccessTokenCreate(input: $input) {
