@@ -3,7 +3,7 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { AuthCredentialValidator } from '../../../lib/validators/accountCredentialsValidator';
+import { SignUpValidator } from '../../../lib/validators/accountCredentialsValidator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
@@ -13,27 +13,53 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '../../../lib/utils';
 import DorjeLogo from '../../../../public/assets/icons/dorje-logo.png';
 import Image from 'next/image';
+import UserService from '@/services/user';
+import { toast } from 'sonner';
 
 const page = () => {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const origin = searchParams.get('origin');
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(AuthCredentialValidator),
+    resolver: zodResolver(SignUpValidator),
   });
 
-  const onsubmit = ({ email, password }) => {
-    signUp({ email, password });
+  const signUp = async ({ email, password, firstName, lastName }) => {
+    try {
+      const res = await UserService.createUser({
+        email,
+        password,
+        firstName,
+        lastName,
+        acceptsMarketing: true,
+      });
+
+      const customerData = res?.data?.data?.customerCreate?.customer || {};
+
+      const customerError =
+        res?.data?.data?.customerCreate?.customerUserErrors?.[0] || {};
+
+      if (customerData && Object.keys(customerData).length > 0) {
+        toast.success(`Verification email sent to ${email}.`);
+        router.push('/verify-email?to=' + email);
+      } else {
+        toast.error(customerError.message);
+      }
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  const onsubmit = ({ email, password, firstName, lastName }) => {
+    signUp({ email, password, firstName, lastName });
   };
 
   return (
     <>
-      <div className="container relative flex pt-20 flex-col items-center justify-center lg:px-0">
+      <div className="container relative flex pt-20 flex-col items-center min-h-screen lg:px-0">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Image
@@ -61,6 +87,40 @@ const page = () => {
                   {errors?.email && (
                     <p className="text-sm text-red-500">
                       {errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="grid gap-1 py-2">
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input
+                    {...register('firstName')}
+                    type="text"
+                    className={cn({
+                      'focus-visible:ring-red-500': errors.firstName,
+                    })}
+                    placeholder="First Name"
+                  />
+                  {errors?.firstName && (
+                    <p className="text-sm text-red-500">
+                      {errors.firstName.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="grid gap-1 py-2">
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input
+                    {...register('lastName')}
+                    type="text"
+                    className={cn({
+                      'focus-visible:ring-red-500': errors.lastName,
+                    })}
+                    placeholder="Last Name"
+                  />
+                  {errors?.lastName && (
+                    <p className="text-sm text-red-500">
+                      {errors.lastName.message}
                     </p>
                   )}
                 </div>

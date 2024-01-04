@@ -1,8 +1,8 @@
-import { axiosInstance } from './ShopifyService';
+import { shopifyInstance } from './ShopifyService';
 
 const CollectionService = {
   getCollections: async () => {
-    return axiosInstance.post('/', {
+    return shopifyInstance.post('/', {
       query: `
       query getCollections {
         collections(first: 100) {
@@ -24,7 +24,7 @@ const CollectionService = {
     });
   },
   getCollectionByHandle: async ({ handle }) => {
-    return axiosInstance.post('/', {
+    return shopifyInstance.post('/', {
       query: `
       query getCollectionByHandle {
         collection(handle: "${handle}") {
@@ -43,7 +43,7 @@ const CollectionService = {
     });
   },
   getProductsInCollection: async ({ handle }) => {
-    return axiosInstance.post('/', {
+    return shopifyInstance.post('/', {
       query: `query getProductsInCollection {
         collection(handle: "${handle}") {
           products(first: 250, sortKey: BEST_SELLING) {

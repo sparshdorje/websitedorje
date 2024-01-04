@@ -20,33 +20,16 @@ const page = () => {
   const [product, setProducts] = useState([]);
   const query = useSearchParams();
 
-  console.log(query, 'query');
-
   useEffect(() => {
     const getProducts = async () => {
       const fetchedProducts = await CollectionService.getProductsInCollection({
         handle: 'mi',
       });
-      console.log(fetchedProducts);
       setProducts(fetchedProducts);
     };
 
     getProducts();
   }, []);
-
-  // useEffect(() => {
-  //   async function createCustomer() {
-  //     try {
-  //       const response = await CollectionService.getCollections();
-
-  //       console.log('Created Customer:', response.data.data);
-  //     } catch (error) {
-  //       console.error('Error creating customer:', error);
-  //     }
-  //   }
-
-  //   createCustomer();
-  // }, []);
 
   return (
     <MaxWidthWrapper>

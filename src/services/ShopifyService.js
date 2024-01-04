@@ -50,7 +50,7 @@ export const addToCart = async (productId, quantity = 1) => {
 
 const shopifyStoreUrl = `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN}/api/2023-10/graphql`; // Replace with your store's URL and API version
 
-export const axiosInstance = axios.create({
+export const shopifyInstance = axios.create({
   baseURL: shopifyStoreUrl,
   headers: {
     'X-Shopify-Storefront-Access-Token':

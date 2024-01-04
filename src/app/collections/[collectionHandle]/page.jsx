@@ -44,8 +44,6 @@ const page = ({ params }) => {
     getProducts();
   }, []);
 
-  console.log(collection);
-
   return (
     <MaxWidthWrapper
       className={
@@ -62,6 +60,7 @@ const page = ({ params }) => {
         {COLLECTIONS.map((collection, idx) => (
           <Link
             href={collection.href}
+            key={collection.handle}
             className="flex flex-col items-center gap-4"
           >
             <div
@@ -104,11 +103,12 @@ const page = ({ params }) => {
         />
       </div>
 
-      {/* COLLECTIONS DESLTOP */}
+      {/* COLLECTIONS DESKTOP */}
       <div className="hidden lg:flex items-center overflow-x-scroll justify-start lg:justify-center gap-9">
         {COLLECTIONS.map((collection, idx) => (
           <Link
             href={collection.href}
+            key={collection.handle}
             className="flex flex-col items-center gap-4"
           >
             <div

@@ -6,17 +6,23 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import BrandStorySlider from '@/components/BrandStorySlider';
 import BrewingGuideSlider from '@/components/BrewingGuideSlider';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
+import KnowYourTeaSlider from '@/components/KnowYourTeaSlider';
 import StarRating from '@/components/StarRating';
 import ReviewCard from '@/components/ReviewCard';
+import RelatedProductCard from '@/components/RelatedProductCard';
+import Faq from '@/components/Faq';
 import AddToCartButton from '@/components/AddToCartButton';
-import { addToCart } from '@/services/ShopifyService';
+import { addToCart, judgeMeInstance } from '@/services/ShopifyService';
 import ProductService from '@/services/product';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { HOME_PAGE_AS_SEEN_ON } from '@/config';
+import Image from 'next/image';
 
 const Page = ({ params }) => {
   const { productHandle } = params;
   const [product, setProduct] = useState({});
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [variants, setVariants] = useState([]);
@@ -48,7 +54,6 @@ const Page = ({ params }) => {
         productHandle,
       });
 
-      console.log(response.data.data);
       setProduct(response.data.data.product);
 
       setVariants(() => {
@@ -65,9 +70,25 @@ const Page = ({ params }) => {
     }
   }
 
+  async function fetchRelatedProduct(productId) {
+    try {
+      const response = await ProductService.getRelatedProduct({
+        productId,
+      });
+
+      setRelatedProducts(response.data.data.productRecommendations.slice(0, 4));
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    }
+  }
+
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  useEffect(() => {
+    fetchRelatedProduct(product.id);
+  }, [product]);
 
   useEffect(() => {
     findMatchingVariant();
@@ -97,10 +118,6 @@ const Page = ({ params }) => {
     }
   };
 
-  console.log(variants, 'variants');
-  console.log(selectedOptions, 'option');
-  console.log(selectedVariant, 'selectedVariant');
-
   const handleBuyNow = async () => {
     const checkoutUrl = await addToCart(selectedVariant.id, quantity);
 
@@ -121,12 +138,8 @@ const Page = ({ params }) => {
         <title>{product.title}</title>
         <meta property="og:title" content={product.title} key="title" />
       </Head>
-      <MaxWidthWrapper
-        className={
-          'pt-8 pb-52 px-4 w-full max-w-screen-xl grid grid-cols-1 gap-32'
-        }
-      >
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:justify-between">
+      <div className={'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-32'}>
+        <MaxWidthWrapper className="lg:grid lg:grid-cols-2 lg:gap-8 lg:justify-between px-4 max-w-screen-xl">
           <div className="hidden lg:block col-6">
             <div className="h-[600px] w-[520px] rounded-lg">
               <ImageSlider urls={validUrls} />
@@ -135,7 +148,7 @@ const Page = ({ params }) => {
           <div className="col-6 flex flex-col justify-between items-start gap-4">
             {/* TITLE AND DESCRIPTION */}
             <div className="flex flex-col gap-4">
-              <div className="font-fraunces font-semibold text-xl lg:text-4xl text-secondary">
+              <div className="font-fraunces font-semibold text-xl lg:text-4xl text-primary">
                 {product.title}
               </div>
               <div>
@@ -174,8 +187,8 @@ const Page = ({ params }) => {
                           }`,
                           className: `${
                             selectedOptions[optionIdx].value === value
-                              ? 'bg-secondary'
-                              : 'text-secondary border-secondary'
+                              ? 'bg-primary'
+                              : 'text-primary border-primary'
                           } cursor-pointer font-questrial`,
                         })}
                       >
@@ -190,7 +203,7 @@ const Page = ({ params }) => {
                 <div className="font-questrial text-primary mb-3">Quantity</div>
                 <div className="flex items-center gap-3">
                   <Button
-                    className="border-secondary bg-secondary text-white"
+                    className="border-primary bg-primary text-white"
                     onClick={decreaseQuantity}
                   >
                     -
@@ -204,7 +217,7 @@ const Page = ({ params }) => {
                     {quantity}
                   </div>
                   <Button
-                    className="border-secondary bg-secondary text-white"
+                    className="border-primary bg-primary text-white"
                     onClick={increaseQuantity}
                   >
                     +
@@ -224,66 +237,166 @@ const Page = ({ params }) => {
               <AddToCartButton product={selectedVariant} quantity={quantity} />
             </div>
           </div>
-        </div>
+        </MaxWidthWrapper>
 
         {/* KNOW YOUR TEA */}
-        <div>
-          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
-            Know your tea
-          </div>
-          <div className="text-base text-center mb-10 font-questrial">
-            Understand the composition of your favourite tea
-          </div>
-          <TestimonialsSlider />
+        <div
+          style={{
+            width: '100%',
+            height: '100%', // Set your desired height
+            background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
+            backgroundSize: 'cover',
+          }}
+          className="py-16"
+        >
+          <MaxWidthWrapper className={'max-w-screen-xl'}>
+            <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
+              Know your tea
+            </div>
+            <div className="text-base text-center mb-10 font-questrial text-white">
+              Understand the composition of your favourite tea
+            </div>
+            <KnowYourTeaSlider productHandle={product.handle} />
+          </MaxWidthWrapper>
         </div>
 
         {/* BRAND STORY */}
         <div>
-          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
-            What makes Dorje Special
+          <MaxWidthWrapper className={'max-w-screen-xl'}>
+            <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+              What makes Dorje Special
+            </div>
+            <div className="text-base text-center mb-10 font-questrial">
+              Learn the story behind the brewing of the wonderful Himalayan tea
+            </div>
+            <BrandStorySlider />
+          </MaxWidthWrapper>
+        </div>
+
+        {/* AS SEEN ON */}
+        <div
+          style={{
+            width: '100%',
+            height: '100%', // Set your desired height
+            background: `url(/assets/svg/ProductPageAsSeenOnBG.svg) no-repeat`,
+            backgroundSize: 'cover',
+          }}
+          className="py-16"
+        >
+          <div className="text-3xl text-center mb-8 font-fraunces text-white font-semibold">
+            As seen on
           </div>
-          <div className="text-base text-center mb-10 font-questrial">
-            Learn the story behind the brewing of the wonderful Himalayan tea
+          <div className="w-ful py-6">
+            <MaxWidthWrapper
+              className={
+                'flex items-center justify-between lg:justify-center lg:gap-12 max-w-screen-xl'
+              }
+            >
+              {HOME_PAGE_AS_SEEN_ON.map((imgSrc, idx) => (
+                <Image
+                  key={imgSrc}
+                  src={'/assets/icons/shark-tank.png'}
+                  width={100}
+                  height={100}
+                  className="h-[80px] lg:h-[100px] object-contain"
+                />
+              ))}
+            </MaxWidthWrapper>
           </div>
-          <BrandStorySlider />
         </div>
 
         {/* BREWING GUIDE */}
         <div>
-          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
-            Brewing guide
-          </div>
-          <div className="text-base text-center mb-10 font-questrial">
-            Learn the story behind the brewing of the wonderful Himalayan tea
-          </div>
-          <BrewingGuideSlider />
+          <MaxWidthWrapper className={'max-w-screen-xl'}>
+            <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+              Brewing guide
+            </div>
+            <div className="text-base text-center mb-10 font-questrial">
+              Learn the story behind the brewing of the wonderful Himalayan tea
+            </div>
+            <BrewingGuideSlider productHandle={product.handle} />
+          </MaxWidthWrapper>
         </div>
 
         {/* TESTIMONIALS */}
-        <div>
-          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
-            Hear what people say about us
-          </div>
-          <div className="text-base text-center mb-10 font-questrial">
-            Here’s what people of the industry say about us
-          </div>
-          <TestimonialsSlider />
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
+            backgroundSize: 'cover',
+          }}
+          className="py-16"
+        >
+          <MaxWidthWrapper className={'max-w-screen-xl'}>
+            <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
+              Hear what people say about us
+            </div>
+            <div className="text-base text-center mb-10 font-questrial text-white">
+              Here’s what people of the industry say about us
+            </div>
+            <TestimonialsSlider />
+          </MaxWidthWrapper>
         </div>
 
         {/* CUSTOMER REVIEWS */}
         <div>
-          <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
-            Customer Reviews
-          </div>
-          <div className="text-base text-center mb-10 font-questrial">
-            Hear what our fans say about us
-          </div>
+          <MaxWidthWrapper className={'max-w-screen-xl'}>
+            <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+              Customer Reviews
+            </div>
+            <div className="text-base text-center mb-10 font-questrial">
+              Hear what our fans say about us
+            </div>
 
-          <div className="max-w-4xl mx-auto">
-            <ReviewCard />
-          </div>
+            <div className="max-w-4xl mx-auto">
+              <ReviewCard />
+            </div>
+          </MaxWidthWrapper>
         </div>
-      </MaxWidthWrapper>
+
+        {/* FAQs */}
+        <div>
+          <MaxWidthWrapper className={'max-w-screen-xl'}>
+            <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+              FAQs
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <Faq />
+            </div>
+          </MaxWidthWrapper>
+        </div>
+      </div>
+
+      {/* RELATED PRODUCTS */}
+      {relatedProducts.length > 0 && (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
+            backgroundSize: 'cover',
+          }}
+          className="py-16 mb-12 lg:mb-0"
+        >
+          <MaxWidthWrapper className={'max-w-screen-xl'}>
+            <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
+              Related products
+            </div>
+            <div className="text-base text-center mb-10 font-questrial text-white ">
+              People also bought...
+            </div>
+
+            <div className="mx-auto flex items-start justify-start overflow-x-scroll lg:justify-center gap-6">
+              {relatedProducts?.map((product) => (
+                <RelatedProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </MaxWidthWrapper>
+        </div>
+      )}
+
       {/* BUY AND ADD TO CART MOBILE*/}
       <div className="z-50 fixed bottom-0 bg-background p-2 flex lg:hidden justify-center gap-3 w-screen">
         <Button

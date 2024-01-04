@@ -32,6 +32,37 @@ export const useCart = create()(
         set((state) => ({
           items: state.items.filter((item) => item.product.id !== id),
         })),
+      increaseQuantity: (productId) => {
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.product.id === productId
+              ? {
+                  ...item,
+                  product: {
+                    ...item.product,
+                    quantity: item.product.quantity + 1,
+                  },
+                }
+              : item
+          ),
+        }));
+      },
+
+      decreaseQuantity: (productId) => {
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.product.id === productId && item.product.quantity > 1
+              ? {
+                  ...item,
+                  product: {
+                    ...item.product,
+                    quantity: item.product.quantity - 1,
+                  },
+                }
+              : item
+          ),
+        }));
+      },
       clearCart: () => set({ items: [] }),
     }),
     {

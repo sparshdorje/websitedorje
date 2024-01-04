@@ -37,6 +37,12 @@ export const COLLECTIONS = [
   },
 ];
 
+export const HOME_PAGE_AS_SEEN_ON = [
+  '/assets/icons/bloomberg.png',
+  '/assets/icons/times.png',
+  '/assets/icons/gq.png',
+];
+
 export const PRODUCT_CATEGORIES = [
   {
     label: 'SHOP NOW',

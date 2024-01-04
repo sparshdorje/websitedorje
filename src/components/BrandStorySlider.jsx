@@ -31,7 +31,7 @@ const BrandStorySlider = ({
     '/assets/brand-story/thumbnails/6.png',
   ],
 }) => {
-  const isMobile = window.innerWidth < 768;
+  const isMobile = window && window.innerWidth < 768;
   const { swiper, slideConfig, setSwiper, activeStyles, inactiveStyles } =
     useSlider({ urls });
 
@@ -64,7 +64,7 @@ const BrandStorySlider = ({
         className="flex h-full w-full"
       >
         {urls.map((url, i) => (
-          <SwiperSlide key={i} className="-z-10 relative !h-[480px] w-full">
+          <SwiperSlide key={url} className="-z-10 relative !h-[480px] w-full">
             <ReactPlayer
               url={url}
               height="100%"
@@ -93,10 +93,6 @@ const BrandStorySlider = ({
               }
               light={thumbnails[i]}
             />
-            {/* <video  controls >
-              <source src={url} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video> */}
           </SwiperSlide>
         ))}
       </Swiper>
