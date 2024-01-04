@@ -34,20 +34,6 @@ const page = () => {
     getProducts();
   }, []);
 
-  // useEffect(() => {
-  //   async function createCustomer() {
-  //     try {
-  //       const response = await CollectionService.getCollections();
-
-  //       console.log('Created Customer:', response.data.data);
-  //     } catch (error) {
-  //       console.error('Error creating customer:', error);
-  //     }
-  //   }
-
-  //   createCustomer();
-  // }, []);
-
   return (
     <MaxWidthWrapper>
       <Head>

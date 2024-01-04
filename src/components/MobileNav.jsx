@@ -1,7 +1,7 @@
 'use client';
 
 import { PRODUCT_CATEGORIES } from '@/config';
-import { Menu, X } from 'lucide-react';
+import { Menu, UserRound, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -12,9 +12,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Button } from './ui/button';
+import { useAuth } from '@/hooks/useAuth';
 
-const MobileNav = () => {
+const MobileNav = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { signOut } = useAuth();
 
   const pathname = usePathname();
 
@@ -49,16 +52,16 @@ const MobileNav = () => {
     );
 
   return (
-    <div className=" h-screen">
+    <div className="w-screen h-screen">
       <div className="relative z-40 lg:hidden">
         <div className="fixed inset-0 bg-black bg-opacity-25" />
       </div>
 
-      <div className="fixed overflow-y-scroll overscroll-y-none h-full inset-0 z-40 flex">
+      <div className="fixed overflow-y-scroll overscroll-y-none w-full h-full inset-0 z-40 flex">
         <div className="w-full h-full">
           <div className="relative flex w-full h-full max-w-sm flex-col justify-between overflow-y-auto bg-white pb-12 shadow-xl">
             <div className="mt-2 px-4">
-              <div className="flex pb-2 pt-5">
+              <div className="flex justify-between items-center pb-2 pt-5">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
@@ -66,6 +69,11 @@ const MobileNav = () => {
                 >
                   <X className="h-6 w-6" aria-hidden="true" />
                 </button>
+                {user && (
+                  <Link href="/account">
+                    <UserRound className="h-6 w-6 flex-shrink-0 text-gray-400 hover:text-gray-500" />
+                  </Link>
+                )}
               </div>
               {PRODUCT_CATEGORIES.map((category) => (
                 <Accordion key={category.label} type="single" collapsible>
@@ -105,26 +113,34 @@ const MobileNav = () => {
               ))}
             </div>
 
-            <div className="border-t border-gray-200 px-4 py-6">
-              <div className="flow-root">
-                <Link
-                  onClick={() => closeOnCurrent('/sign-in')}
-                  href="/sign-in"
-                  className="-m-2 block p-2 font-medium text-gray-900"
-                >
-                  Sign in
-                </Link>
+            {user ? (
+              <div className="border-t border-gray-200 px-4 py-6">
+                <div className="flow-root">
+                  <Link
+                    onClick={() => closeOnCurrent('/sign-in')}
+                    href="/sign-in"
+                    className="-m-2 block p-2 font-medium text-gray-900"
+                  >
+                    Sign in
+                  </Link>
+                </div>
+                <div className="flow-root">
+                  <Link
+                    onClick={() => closeOnCurrent('/sign-up')}
+                    href="/sign-up"
+                    className="-m-2 block p-2 font-medium text-gray-900"
+                  >
+                    Sign up
+                  </Link>
+                </div>
               </div>
-              <div className="flow-root">
-                <Link
-                  onClick={() => closeOnCurrent('/sign-up')}
-                  href="/sign-up"
-                  className="-m-2 block p-2 font-medium text-gray-900"
-                >
-                  Sign up
-                </Link>
+            ) : (
+              <div className="px-4 py-6">
+                <Button className="w-fit " onClick={signOut}>
+                  Log out
+                </Button>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ const BestsellerCard = ({ product }) => {
 
       <div className="flex flex-col w-full items-start justify-between h-full">
         <div className="px-4 flex gap-3 justify-between items-start w-full">
-          <div className=" font-fraunces font-semibold text-base text-secondary">
+          <div className="text-left font-fraunces font-semibold text-base text-secondary">
             {product.title}
           </div>
           <div className="font-questrial text-sm font-bold text-secondary">

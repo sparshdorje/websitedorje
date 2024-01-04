@@ -10,9 +10,12 @@ import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { cn } from '../../../lib/utils';
+import { cn, setCookie } from '../../../lib/utils';
 import DorjeLogo from '../../../../public/assets/icons/dorje-logo.png';
 import Image from 'next/image';
+import { toast } from 'sonner';
+
+import UserService from '@/services/user';
 
 const page = () => {
   const searchParams = useSearchParams();
@@ -27,13 +30,56 @@ const page = () => {
     resolver: zodResolver(AuthCredentialValidator),
   });
 
+  const signIn = async ({ email, password }) => {
+    try {
+      const res = await UserService.getAccessToken({
+        email,
+        password,
+      });
+
+      const accessTokenData =
+        res?.data?.data?.customerAccessTokenCreate?.customerAccessToken || {};
+
+      const accessTokenError =
+        res?.data?.data?.customerAccessTokenCreate?.customerUserErrors?.[0] ||
+        {};
+
+      if (accessTokenData && Object.keys(accessTokenData).length > 0) {
+        toast.success('Signed in successfully');
+
+        setCookie({
+          name: 'access_token',
+          value: accessTokenData.accessToken,
+          expiresAt: accessTokenData.expiresAt,
+        });
+
+        if (origin) {
+          router.push(`/${origin}`);
+          return;
+        }
+
+        router.push('/');
+        router.refresh();
+      } else {
+        console.log(accessTokenError, ' accessTokenError');
+        if (accessTokenError.code === 'UNIDENTIFIED_CUSTOMER') {
+          toast.error('User does not exist or verified');
+        } else {
+          toast.error('Something Went Wrong');
+        }
+      }
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
   const onsubmit = ({ email, password }) => {
     signIn({ email, password });
   };
 
   return (
     <>
-      <div className="container relative flex pt-20 flex-col items-center justify-center lg:px-0">
+      <div className="container relative flex flex-col items-center pt-20 min-h-screen lg:px-0">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
             <Image

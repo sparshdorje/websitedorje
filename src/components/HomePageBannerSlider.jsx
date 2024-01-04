@@ -38,7 +38,7 @@ const HomePageBannerSlider = () => {
     useSlider({ urls });
 
   return (
-    <div className="relative overflow-hidden aspect-[16/8] max-h-[750px] lg:aspect-video w-full">
+    <div className="relative overflow-hidden aspect-[16/8] h-[240px] lg:h-[750px] lg:aspect-video w-full">
       <Swiper
         pagination={{
           renderBullet: (_, className) => {
@@ -46,11 +46,11 @@ const HomePageBannerSlider = () => {
           },
         }}
         onSwiper={(swiper) => setSwiper(swiper)}
-        slidesPerView={isMobile ? 1.2 : 1}
+        slidesPerView={1}
         freeMode={true}
         grabCursor={true}
         autoplay
-        spaceBetween={isMobile ? 10 : 50}
+        spaceBetween={50}
         modules={[Autoplay, Pagination, Navigation]}
         className="flex w-full h-full"
       >

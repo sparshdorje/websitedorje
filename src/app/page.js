@@ -97,11 +97,15 @@ export default function Home() {
       >
         <div>Bestsellers</div>
         <div className="w-full py-6">
-          <MaxWidthWrapper className={'flex flex-col items-center  lg:gap-12'}>
-            <div className="flex items-center gap-3 mb-6">
+          <MaxWidthWrapper
+            className={
+              'flex flex-col justify-start items-start lg:items-center gap:10 lg:gap-12'
+            }
+          >
+            <div className="flex w-full justify-start lg:justify-center items-center gap-3 mb-3 overflow-x-scroll py-3">
               {COLLECTIONS.map((collection, idx) => (
                 <div
-                  className="flex justify-center items-center px-3 cursor-pointer py-2 rounded-3xl font-questrial text-center text-xs text-primary font-bold"
+                  className="flex min-w-fit justify-center items-center px-3 cursor-pointer py-2 rounded-3xl font-questrial text-center text-xs text-primary font-bold"
                   style={{
                     border: '1px solid #14222B',
                     background:
@@ -122,11 +126,9 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div className="flex justify-center items-start overflow-x-scroll gap-5">
+            <div className="flex justify-start lg:justify-center w-full items-start overflow-x-scroll gap-5">
               {bestSellingProducts?.map((prod, i) => (
-                <>
-                  <BestsellerCard product={prod.node} key={i} />
-                </>
+                <BestsellerCard product={prod.node} key={i} />
               ))}
             </div>
           </MaxWidthWrapper>
