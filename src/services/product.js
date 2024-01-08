@@ -1,7 +1,35 @@
 import { shopifyInstance } from './ShopifyService';
 
+//https://judge.me/api/v1/reviews
+
+// url: dorjeteas.myshopify.com
+// shop_domain: dorjeteas.myshopify.com
+// platform: shopify
+// name: Abhishek
+// email: abhishekyadav6700.ay@gmail.com
+// rating: 5
+// title: Good product!
+// body: Good product!
+// id: 7470969454817
+
 const ProductService = {
-  getAllProducts: async () => {},
+  getAllProducts: async () => {
+    return shopifyInstance.post('/', {
+      query: `query getProductsAndVariants {
+        products(first: 250) {
+          edges {
+            cursor
+            node {
+              id
+              title
+              description
+              handle
+            }
+          }
+        }
+      }`,
+    });
+  },
   getProductByHandle: async ({ productHandle }) => {
     return shopifyInstance.post('/', {
       query: `query getProductByHandle {
@@ -11,6 +39,10 @@ const ProductService = {
           description
           productType
           tags
+          metafield( key: "rating"){
+            type
+            value
+          }
           priceRange{
             maxVariantPrice{
               amount
