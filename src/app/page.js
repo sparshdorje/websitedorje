@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
+import TestimonialsSlider from '@/components/TestimonialsSlider';
 
 export default function Home() {
   const [bestSellingProducts, setBestSellingProducts] = useState([]);
@@ -145,6 +146,33 @@ export default function Home() {
         </div>
         <BrandStorySlider />
       </MaxWidthWrapper>
+
+      {/* TESTIMONIALS */}
+      <div
+        className="py-16"
+        style={{
+          width: '100%',
+          height: '100%', // Set your desired height
+          background: `url(/assets/svg/BestSellerBG.svg) center center no-repeat`,
+          backgroundSize: 'cover',
+        }}
+      >
+        <div className="text-3xl text-center mb-3 font-fraunces text-secondary font-semibold">
+          Brewing Tea for over 1,00,000 lakh customers
+        </div>
+        <div className="text-base text-center mb-10 font-questrial max-w-3xl mx-auto">
+          Here’s what people of the industry say about us
+        </div>
+        <div className="w-full py-6">
+          <MaxWidthWrapper
+            className={
+              'flex flex-col justify-start items-start lg:items-center gap:10 lg:gap-12'
+            }
+          >
+            <TestimonialsSlider />
+          </MaxWidthWrapper>
+        </div>
+      </div>
 
       {/* VIDEO */}
       <MaxWidthWrapper className={'max-w-screen-xl'}>

@@ -3,6 +3,11 @@ import { cookies } from 'next/headers';
 import { getServerSideUser } from '@/lib/utils';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 
+export const metadata = {
+  title: 'My Account',
+  description: 'Dorje Teas | The Original Taste of Darjeeling ',
+};
+
 const page = async () => {
   const nextCookies = cookies();
   const user = await getServerSideUser(nextCookies);

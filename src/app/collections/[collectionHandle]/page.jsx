@@ -1,21 +1,40 @@
-'use client';
-
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-
+import BenefitsSlider from '@/components/BenefitsSlider';
+import ProductCard from '@/components/ProductCard';
+import CollectionVideo from '@/components/CollectionVideo';
+import { COLLECTIONS } from '@/config';
 import CollectionService from '@/services/collection';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import ProductCard from '@/components/ProductCard';
-import BenefitsSlider from '@/components/BenefitsSlider';
-import ReactPlayer from 'react-player';
-import { COLLECTIONS } from '@/config';
 import Link from 'next/link';
+import { cache } from 'react';
 
-const page = ({ params }) => {
-  const [bestSellingProducts, setBestSellingProducts] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
-  const [collection, setCollection] = useState({});
+const getCollection = cache(async (handle) => {
+  const fetchedProducts = await CollectionService.getCollectionByHandle({
+    handle,
+  });
+  const collection = fetchedProducts?.data?.data?.collection;
+
+  return collection;
+});
+
+export async function genrerateStaticParams() {
+  return COLLECTIONS.map((collection) => {
+    return collection.handle;
+  });
+}
+
+export async function generateMetadata({ params: { collectionHandle } }) {
+  const collection = await getCollection(collectionHandle);
+  const { title, description } = collection || {};
+
+  return {
+    title,
+    description,
+  };
+}
+
+const page = async ({ params }) => {
   const { collectionHandle } = params;
 
   const getProducts = async () => {
@@ -26,23 +45,16 @@ const page = ({ params }) => {
       fetchedProducts?.data?.data?.collection?.products?.edges?.slice(0, 4);
     const allProductsData =
       fetchedProducts?.data?.data?.collection?.products?.edges?.slice(4);
-    setBestSellingProducts(bestSellingProductsData);
-    setAllProducts(allProductsData);
+
+    return {
+      allProducts: allProductsData,
+      bestSellingProducts: bestSellingProductsData,
+    };
   };
 
-  const getCollection = async () => {
-    const fetchedProducts = await CollectionService.getCollectionByHandle({
-      handle: collectionHandle,
-    });
-    const collection = fetchedProducts?.data?.data?.collection;
-
-    setCollection(collection);
-  };
-
-  useEffect(() => {
-    getCollection();
-    getProducts();
-  }, []);
+  const collection = (await getCollection(collectionHandle)) || [];
+  const { allProducts = [], bestSellingProducts = [] } =
+    (await getProducts()) || {};
 
   return (
     <MaxWidthWrapper
@@ -167,34 +179,7 @@ const page = ({ params }) => {
           Taste of {collection.title}
         </div>
         <div className="w-full rounded-2xl h-[216px] lg:h-[600px] bg-white overflow-hidden">
-          <ReactPlayer
-            url={'/assets/brand-story/1.mp4'}
-            height="100%"
-            width="100%"
-            className="rounded-xl overflow-hidden h-full object-fill"
-            loop
-            controls
-            playing
-            playIcon={
-              <Image
-                height={40}
-                width={40}
-                alt="play icon"
-                className="z-10"
-                src={'/assets/icons/play-icon.png'}
-              />
-            }
-            fallback={
-              <Image
-                alt="thumbnnail"
-                width={'100'}
-                height={'100'}
-                className="z-10 h-full w-full"
-                src={'/assets/brand-story/thumbnails/1.png'}
-              />
-            }
-            light={'/assets/brand-story/thumbnails/1.png'}
-          />
+          <CollectionVideo />
         </div>
       </div>
 
