@@ -18,11 +18,11 @@ const getCollection = cache(async (handle) => {
   return collection;
 });
 
-export async function generateStaticParams() {
-  return COLLECTIONS.map((collection) => {
-    return collection.handle;
-  });
-}
+// export async function generateStaticParams() {
+//   return COLLECTIONS.map((collection) => {
+//     return collection.handle;
+//   });
+// }
 
 export async function generateMetadata({ params: { collectionHandle } }) {
   const collection = await getCollection(collectionHandle);
