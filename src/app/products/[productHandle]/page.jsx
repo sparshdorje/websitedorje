@@ -24,7 +24,7 @@ const fetchProduct = cache(async (productHandle) => {
   }
 });
 
-export async function genrerateStaticParams() {
+export async function generateStaticParams() {
   try {
     const response = await ProductService.getAllProducts();
 

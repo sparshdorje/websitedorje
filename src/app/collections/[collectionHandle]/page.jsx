@@ -18,7 +18,7 @@ const getCollection = cache(async (handle) => {
   return collection;
 });
 
-export async function genrerateStaticParams() {
+export async function generateStaticParams() {
   return COLLECTIONS.map((collection) => {
     return collection.handle;
   });

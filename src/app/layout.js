@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import { cn } from '@/lib/utils';
 import { Fraunces, Quicksand } from 'next/font/google';
 import { Toaster } from 'sonner';
+import { GoogleTagManager } from '@next/third-parties/google';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
           questrial.variable
         )}
       >
+        <GoogleTagManager gtmId="GTM-WL5K93Z4" />
         {/* <NextTopLoader showSpinner={false} /> */}
         <main className="relative flex flex-col min-h-screen">
           <Navbar />
