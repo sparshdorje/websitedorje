@@ -24,19 +24,19 @@ const fetchProduct = cache(async (productHandle) => {
   }
 });
 
-export async function generateStaticParams() {
-  try {
-    const response = await ProductService.getAllProducts();
+// export async function generateStaticParams() {
+//   try {
+//     const response = await ProductService.getAllProducts();
 
-    return response?.data?.data?.products?.edges
-      ?.map((product) => {
-        return product?.node?.handle;
-      })
-      .slice(0, 20);
-  } catch (error) {
-    console.error('Error fetching product:', error);
-  }
-}
+//     return response?.data?.data?.products?.edges
+//       ?.map((product) => {
+//         return product?.node?.handle;
+//       })
+//       .slice(0, 20);
+//   } catch (error) {
+//     console.error('Error fetching product:', error);
+//   }
+// }
 
 export async function generateMetadata({ params: { productHandle } }) {
   const product = await fetchProduct(productHandle);
