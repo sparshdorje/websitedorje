@@ -114,6 +114,12 @@ const MobileNav = ({ user }) => {
             </div>
 
             {user ? (
+              <div className="px-4 py-6">
+                <Button className="w-fit " onClick={signOut}>
+                  Log out
+                </Button>
+              </div>
+            ) : (
               <div className="border-t border-gray-200 px-4 py-6">
                 <div className="flow-root">
                   <Link
@@ -133,12 +139,6 @@ const MobileNav = ({ user }) => {
                     Sign up
                   </Link>
                 </div>
-              </div>
-            ) : (
-              <div className="px-4 py-6">
-                <Button className="w-fit " onClick={signOut}>
-                  Log out
-                </Button>
               </div>
             )}
           </div>
