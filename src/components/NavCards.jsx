@@ -12,6 +12,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
         >
           <div className="relative aspect-square h-32 w-32 overflow-hidden rounded-lg group-hover:opacity-75">
             <Image
+              loading="lazy"
               src={item.imageSrc}
               alt="product category image"
               fill
@@ -39,6 +40,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
 
           <div className="relative aspect-square h-24 w-24 overflow-hidden rounded-lg group-hover:opacity-75">
             <Image
+              loading="lazy"
               src={item.imageSrc}
               alt="product category image"
               fill

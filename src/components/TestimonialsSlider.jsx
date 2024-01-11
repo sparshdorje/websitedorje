@@ -72,7 +72,7 @@ const TestimonialsSlider = () => {
           <SwiperSlide key={i} className="-z-10 relative h-full w-full">
             <Image
               fill
-              loading="eager"
+              loading="lazy"
               className="h-full w-full object-cover object-center rounded-xl"
               src={url}
               alt="Testimonial image"

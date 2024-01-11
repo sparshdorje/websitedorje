@@ -27,6 +27,7 @@ const Navbar = async () => {
               <div className="ml-4 flex lg:ml-0">
                 <Link href="/">
                   <Image
+                    loading="lazy"
                     src={DorjeLogo}
                     className="h-10 w-10 md:h-16 md:w-16"
                     alt="Dorje Teas Logo"

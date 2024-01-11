@@ -83,6 +83,7 @@ const page = async ({ params }) => {
               }}
             >
               <Image
+                loading="lazy"
                 src={collection.imageSrc}
                 alt="product category image"
                 fill
@@ -104,6 +105,7 @@ const page = async ({ params }) => {
       {/* BANNER */}
       <div className="w-full rounded-2xl h-[216px] lg:h-[600px] bg-white overflow-hidden">
         <Image
+          loading="lazy"
           height={600}
           width={600}
           className="h-full w-full object-cover"
@@ -131,6 +133,7 @@ const page = async ({ params }) => {
               }}
             >
               <Image
+                loading="lazy"
                 src={collection.imageSrc}
                 alt="product category image"
                 fill

@@ -14,6 +14,7 @@ const Ticker = () => {
             className="h-full w-full object-contain"
             width={100}
             height={100}
+            loading="eager"
           />
         </div>
         <div className="text-white font-questrial text-xs lg:text-base">

@@ -17,7 +17,12 @@ const page = ({ searchParams }) => {
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-3">
             <div className="relative mb-4 h-40 w-40 text-muted-foreground">
-              <Image src={DorjeLogo} fill alt="hippo email sent image" />
+              <Image
+                loading="lazy"
+                src={DorjeLogo}
+                fill
+                alt="hippo email sent image"
+              />
             </div>
 
             <h3 className="font-semibold text-2xl">Check your email</h3>

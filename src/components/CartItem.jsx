@@ -17,6 +17,7 @@ const CartItem = ({ product }) => {
           <div className="relative aspect-square h-16 w-16 min-w-fit overflow-hidden rounded">
             {image?.url ? (
               <Image
+                loading="lazy"
                 src={image.url}
                 alt={product.product.title}
                 fill

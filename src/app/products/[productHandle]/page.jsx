@@ -132,6 +132,7 @@ const Page = async ({ params }) => {
                   src={'/assets/icons/shark-tank.png'}
                   width={100}
                   height={100}
+                  loading="lazy"
                   className="h-[80px] lg:h-[100px] object-contain"
                 />
               ))}

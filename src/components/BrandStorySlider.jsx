@@ -78,6 +78,7 @@ const BrandStorySlider = ({
               muted
               playIcon={
                 <Image
+                  loading="lazy"
                   height={40}
                   width={40}
                   alt="play icon"
@@ -87,6 +88,7 @@ const BrandStorySlider = ({
               }
               fallback={
                 <Image
+                  loading="lazy"
                   alt="thumbnnail"
                   width={'100'}
                   height={'100'}

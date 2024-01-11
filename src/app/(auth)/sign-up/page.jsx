@@ -66,6 +66,7 @@ const page = () => {
               src={DorjeLogo}
               className="h-20 w-20"
               alt="Dorje Teas Logo"
+              loading="lazy"
             />
             <h1 className="text-2xl font-semibold tracking-tight">
               Create an account

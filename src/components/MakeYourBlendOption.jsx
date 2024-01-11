@@ -51,6 +51,7 @@ const MakeYourBlendOption = ({ name, handleSelect, selected }) => {
 
       <div className="w-[75px] h-[75px] rounded-full overflow-hidden">
         <Image
+          loading="eager"
           height={100}
           width={100}
           src={ICONS[name]}

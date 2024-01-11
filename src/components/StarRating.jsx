@@ -29,6 +29,7 @@ const StarRating = ({
     if (index < fullStars) {
       return (
         <Image
+          loading="eager"
           key={index}
           src={STAR_VARIANT[variant].full}
           alt="Full Star"
@@ -39,6 +40,7 @@ const StarRating = ({
     } else if (index === fullStars && rating % 1 !== 0) {
       return (
         <Image
+          loading="eager"
           key={index}
           src={STAR_VARIANT[variant].half}
           alt="Half Star"
@@ -49,6 +51,7 @@ const StarRating = ({
     } else {
       return (
         <Image
+          loading="eager"
           key={index}
           src={STAR_VARIANT[variant].empty}
           alt="Empty Star"

@@ -38,6 +38,7 @@ const ProductCard = ({ product }) => {
         >
           <div className="h-[200px] w-full rounded-lg">
             <Image
+              loading="lazy"
               alt="product image"
               src={imageUrl}
               className="w-full h-[200px] object-cover rounded-2xl"

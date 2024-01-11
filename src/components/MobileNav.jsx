@@ -92,6 +92,7 @@ const MobileNav = ({ user }) => {
                           >
                             <div className="relative aspect-square overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                               <Image
+                                loading="lazy"
                                 fill
                                 src={item.imageSrc}
                                 alt="product category image"
