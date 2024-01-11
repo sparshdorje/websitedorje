@@ -65,7 +65,7 @@ const Page = async ({ params }) => {
 
   return (
     <>
-      <div className={'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-32'}>
+      <div className={'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-24'}>
         {product && <ProductDetail product={product} />}
 
         {/* <div

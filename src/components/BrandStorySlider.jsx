@@ -64,15 +64,18 @@ const BrandStorySlider = ({
         className="flex h-full w-full"
       >
         {urls.map((url, i) => (
-          <SwiperSlide key={url} className="-z-10 relative !h-[480px] w-full">
+          <SwiperSlide
+            key={url}
+            className="-z-10 relative !h-[535px] lg:!h-[460px] w-fill"
+          >
             <ReactPlayer
               url={url}
               height="100%"
               width="100%"
-              className="rounded-xl overflow-hidden h-full object-fill"
+              className="rounded-xl overflow-hidden h-full w-full object-fill"
               loop
-              controls
               playing
+              muted
               playIcon={
                 <Image
                   height={40}

@@ -97,7 +97,7 @@ const ProductDetail = ({ product }) => {
         <div className="col-6 flex flex-col justify-between items-start gap-4">
           {/* TITLE AND DESCRIPTION */}
           <div className="flex flex-col gap-4">
-            <div className="font-fraunces font-semibold text-xl lg:text-4xl text-primary">
+            <div className="font-fraunces font-semibold text-2xl lg:text-4xl text-primary">
               {product.title}
             </div>
             <div>
