@@ -43,6 +43,7 @@ export default function Home() {
             >
               <div className="relative aspect-square h-20 w-20 lg:h-28 lg:w-28 overflow-hidden rounded-full group-hover:opacity-75">
                 <Image
+                  loading="lazy"
                   src={collection.imageSrc}
                   alt="product category image"
                   fill
@@ -77,6 +78,7 @@ export default function Home() {
                 src={imgSrc}
                 width={100}
                 height={100}
+                loading="lazy"
                 className="h-[30px] lg:h-[60px] lg:!w-[200px] object-contain"
               />
             ))}
@@ -190,6 +192,7 @@ export default function Home() {
             playing
             playIcon={
               <Image
+                loading="lazy"
                 height={40}
                 width={40}
                 alt="play icon"
@@ -199,6 +202,7 @@ export default function Home() {
             }
             fallback={
               <Image
+                loading="lazy"
                 alt="thumbnnail"
                 width={'100'}
                 height={'100'}

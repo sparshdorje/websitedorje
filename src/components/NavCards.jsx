@@ -8,10 +8,11 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
       return (
         <Link
           href={item.href}
-          className="w-48 h-56 bg-white flex flex-col items-center rounded-xl justify-center"
+          className="w-40 h-52 lg:w-48 lg:h-56 bg-white flex flex-col items-center rounded-xl justify-center"
         >
-          <div className="relative aspect-square h-32 w-32 overflow-hidden rounded-lg group-hover:opacity-75">
+          <div className="relative aspect-square h-24 w-24 lg:h-32 lg:w-32 overflow-hidden rounded-lg group-hover:opacity-75">
             <Image
+              loading="lazy"
               src={item.imageSrc}
               alt="product category image"
               fill
@@ -19,7 +20,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
             />
           </div>
 
-          <div className="mt-6 block font-fraunces text-base font-bold text-brand">
+          <div className="mt-6 block font-fraunces text-small text-center lg:text-base font-bold text-brand">
             {item.name}
           </div>
         </Link>
@@ -39,6 +40,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
 
           <div className="relative aspect-square h-24 w-24 overflow-hidden rounded-lg group-hover:opacity-75">
             <Image
+              loading="lazy"
               src={item.imageSrc}
               alt="product category image"
               fill

@@ -38,7 +38,7 @@ const page = () => {
         <meta property="og:title" content="Dorje Teas | Products" key="title" />
       </Head>
       <div className="w-full rounded-2xl h-[600px]">
-        <Image src={''} />
+        <Image src={''} loading="lazy" />
       </div>
       <div>
         {product.map((prod) => (

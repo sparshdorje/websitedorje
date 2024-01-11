@@ -62,11 +62,6 @@ const page = async ({ params }) => {
         'pt-8 pb-52 px-4 w-full max-w-screen-xl grid grid-cols-1 gap-16 lg:gap-24'
       }
     >
-      <Head>
-        <title>Dorje Teas | Products</title>
-        <meta property="og:title" content="Dorje Teas | Products" key="title" />
-      </Head>
-
       {/* COLLECTIONS MOBILE */}
       <div className="lg:hidden flex items-start overflow-x-scroll justify-start gap-8 pb-2">
         {COLLECTIONS.map((collection, idx) => (
@@ -83,6 +78,7 @@ const page = async ({ params }) => {
               }}
             >
               <Image
+                loading="eager"
                 src={collection.imageSrc}
                 alt="product category image"
                 fill
@@ -104,6 +100,7 @@ const page = async ({ params }) => {
       {/* BANNER */}
       <div className="w-full rounded-2xl h-[216px] lg:h-[600px] bg-white overflow-hidden">
         <Image
+          loading="lazy"
           height={600}
           width={600}
           className="h-full w-full object-cover"
@@ -131,6 +128,7 @@ const page = async ({ params }) => {
               }}
             >
               <Image
+                loading="lazy"
                 src={collection.imageSrc}
                 alt="product category image"
                 fill
@@ -190,7 +188,7 @@ const page = async ({ params }) => {
           <div className="font-fraunces font-semibold text-xl mb-4 text-primary">
             All {collection.title} Products
           </div>
-          <div className="grid grid-cols-1 justify-center items-center overflow-x-scroll lg:grid-cols-4 gap-5">
+          <div className="flex grid-cols-4 overflow-x-scroll lg:grid gap-5">
             {allProducts?.map((prod) => (
               <ProductCard product={prod.node} key={prod.node.id} />
             ))}

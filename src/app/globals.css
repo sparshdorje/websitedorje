@@ -87,3 +87,7 @@
   background: #FFF !important;
   scale: 1 !important ;
 }
+
+.overflow-x-scroll::-webkit-scrollbar {
+  display: none;
+}

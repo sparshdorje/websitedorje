@@ -12,8 +12,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Button } from './ui/button';
+import { Button, buttonVariants } from './ui/button';
 import { useAuth } from '@/hooks/useAuth';
+import NavCards from './NavCards';
 
 const MobileNav = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,8 +61,8 @@ const MobileNav = ({ user }) => {
       <div className="fixed overflow-y-scroll overscroll-y-none w-full h-full inset-0 z-40 flex">
         <div className="w-full h-full">
           <div className="relative flex w-full h-full max-w-sm flex-col justify-between overflow-y-auto bg-white pb-12 shadow-xl">
-            <div className="mt-2 px-4">
-              <div className="flex justify-between items-center pb-2 pt-5">
+            <div className="mt-2">
+              <div className="flex justify-between items-center pb-2 pt-5 px-4">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
@@ -75,42 +76,43 @@ const MobileNav = ({ user }) => {
                   </Link>
                 )}
               </div>
-              {PRODUCT_CATEGORIES.map((category) => (
-                <Accordion key={category.label} type="single" collapsible>
-                  <AccordionItem value={category.label}>
-                    <AccordionTrigger>
-                      <p className="border-transparent text-gray-900 border-b-2 text-base font-medium">
-                        {category.label}
-                      </p>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="grid grid-cols-2 gap-y-10 gap-x-4">
-                        {category.featured.map((item) => (
-                          <div
-                            key={item.name}
-                            className="group relative text-sm"
-                          >
-                            <div className="relative aspect-square overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                              <Image
-                                fill
-                                src={item.imageSrc}
-                                alt="product category image"
-                                className="object-cover object-center"
+
+              <div className="flex flex-col items-start w-full">
+                {PRODUCT_CATEGORIES.map((category) =>
+                  category.dropdown ? (
+                    <Accordion
+                      key={category.label}
+                      type="single"
+                      collapsible
+                      className="w-full"
+                    >
+                      <AccordionItem value={category.label}>
+                        <AccordionTrigger className="px-4">
+                          <p className="border-transparent text-gray-900 border-b-2 text-base font-medium">
+                            {category.label}
+                          </p>
+                        </AccordionTrigger>
+                        <AccordionContent className="pb-0">
+                          <div className="flex flex-wrap justify-center p-2 py-4 gap-4 bg-background h-full">
+                            {category.featured.map((item) => (
+                              <NavCards
+                                item={item}
+                                variant={'collection-card'}
                               />
-                            </div>
-                            <Link
-                              href={item.href}
-                              className="mt-6 block font-medium text-gray-900"
-                            >
-                              {item.name}
-                            </Link>
+                            ))}
                           </div>
-                        ))}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  ) : (
+                    <Link href={category?.link ?? ''} className="p-4">
+                      <div className="text-gray-900 border-b-2 text-base font-medium">
+                        {category.label}
                       </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              ))}
+                    </Link>
+                  )
+                )}
+              </div>
             </div>
 
             {user ? (
@@ -120,23 +122,30 @@ const MobileNav = ({ user }) => {
                 </Button>
               </div>
             ) : (
-              <div className="border-t border-gray-200 px-4 py-6">
+              <div className="flex items-center border-t border-gray-200 px-4 py-6 gap-4">
+                <div className="flow-root">
+                  <Link
+                    onClick={() => closeOnCurrent('/sign-up')}
+                    href="/sign-up"
+                    className="-m-2 block p-2 font-medium"
+                  >
+                    <Button
+                      variant="outline"
+                      className={'bg-white text-primary border-primary'}
+                    >
+                      {' '}
+                      Sign up
+                    </Button>
+                  </Link>
+                </div>
+
                 <div className="flow-root">
                   <Link
                     onClick={() => closeOnCurrent('/sign-in')}
                     href="/sign-in"
                     className="-m-2 block p-2 font-medium text-gray-900"
                   >
-                    Sign in
-                  </Link>
-                </div>
-                <div className="flow-root">
-                  <Link
-                    onClick={() => closeOnCurrent('/sign-up')}
-                    href="/sign-up"
-                    className="-m-2 block p-2 font-medium text-gray-900"
-                  >
-                    Sign up
+                    <Button>Sign in</Button>
                   </Link>
                 </div>
               </div>

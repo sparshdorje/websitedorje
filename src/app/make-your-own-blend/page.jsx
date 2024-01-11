@@ -15,7 +15,7 @@ const page = () => {
           src={'/assets/make-your-own-blend/banner.webp'}
           height={700}
           width={700}
-          loading="eager"
+          loading="lazy"
           className="h-full w-full object-cover"
         />
 

@@ -19,6 +19,7 @@ const BestsellerCard = ({ product, className, truncateLimit = 120 }) => {
         <Image
           alt="product image"
           src={imageUrl}
+          loading="lazy"
           className="w-full h-[180px] object-cover"
           width={100}
           height={100}

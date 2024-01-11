@@ -13,6 +13,7 @@ const RelatedProductCard = ({ product }) => {
       <div className="w-full h-[200px] mb-1 rounded-xl overflow-hidden">
         <Image
           alt="product image"
+          loading="eager"
           src={imageUrl}
           className="w-full h-full object-cover"
           width={100}

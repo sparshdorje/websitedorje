@@ -45,6 +45,7 @@ const page = async () => {
 
           <div className="flex flex-col items-start gap-8 w-full lg:w-[60%] h-full">
             <Image
+              loading="lazy"
               height={700}
               width={700}
               src={'/assets/about-us/hero-bg.webp'}
@@ -63,6 +64,7 @@ const page = async () => {
         >
           <div className="flex flex-col lg:rounded-xl lg:overflow-hidden items-start gap-8 w-full h-full lg:w-[50%] lg:h-[80%]">
             <Image
+              loading="lazy"
               height={700}
               width={700}
               src={'/assets/about-us/about-bg.webp'}
@@ -131,6 +133,7 @@ const page = async () => {
 
           <div className="flex flex-col items-start gap-8 w-full h-full lg:w-[50%] lg:h-[80%]">
             <Image
+              loading="lazy"
               height={700}
               width={700}
               src={'/assets/about-us/location-bg.webp'}
