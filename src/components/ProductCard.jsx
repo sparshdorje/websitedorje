@@ -5,17 +5,30 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import AddToCartButton from './AddToCartButton';
 import { usePalette } from 'color-thief-react';
 import Image from 'next/image';
-import { cn, formatPrice, truncate } from '@/lib/utils';
+import { cn, extractProductId, formatPrice, truncate } from '@/lib/utils';
+import RatingService from '@/services/rating';
+import StarRating from './StarRating';
 
 const ProductCard = ({ product }) => {
+  const [ratingData, setRatingData] = useState({});
   const [backgroundColor, setBackgroundColor] = useState('#E08C5D'); // Initial background color
   const imageUrl = product?.images?.edges?.[0]?.node?.url;
+  const productId = extractProductId(product.id);
   const { data, loading, error } = usePalette(imageUrl, 2, 'rgbArray', {
     crossOrigin: 'Anonymous',
   });
 
   const containerStyle = {
     backgroundColor: `rgb(${backgroundColor[0]},${backgroundColor[1]},${backgroundColor[2]},0.4)`,
+  };
+
+  const fetchRatingData = async (productId) => {
+    try {
+      const response = await RatingService.getAverageRating(productId);
+      setRatingData(response);
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
   };
 
   useLayoutEffect(() => {
@@ -27,6 +40,10 @@ const ProductCard = ({ product }) => {
       console.error('Error extracting color:', error);
     }
   }, [data]);
+
+  useEffect(() => {
+    fetchRatingData(productId);
+  }, []);
 
   return (
     <>
@@ -46,8 +63,18 @@ const ProductCard = ({ product }) => {
               height={200}
             />
           </div>
-          <div className=" font-fraunces font-semibold text-base">
-            {product.title}
+          <div>
+            <div className=" font-fraunces font-semibold text-base mb-2">
+              {product.title}
+            </div>
+            <StarRating
+              rating={ratingData.averageRating}
+              totalRatings={ratingData.totalRatings}
+              showTotalRating={false}
+              variant={'default'}
+              size="20"
+              className={' opacity-80 text-xs'}
+            />
           </div>
           <div className=" font-questrial text-xs">
             {truncate(product.description, 160)}

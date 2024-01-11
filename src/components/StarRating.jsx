@@ -15,8 +15,8 @@ const STAR_VARIANT = {
 };
 
 const StarRating = ({
-  rating,
-  totalRatings,
+  rating = 0,
+  totalRatings = 0,
   showTotalRating = true,
   variant = 'default',
   size = '30',
@@ -67,15 +67,14 @@ const StarRating = ({
       <div className="flex items-center gap-[2px]">
         {[...Array(maxStars)].map((_, index) => renderStar(index))}
       </div>
-      <div className={cn('ml-2 mt-1 text-gray-600', className)}>
+      <div className={cn('ml-2 text-gray-600', className)}>
         ({rating.toFixed(1)})
       </div>
       {showTotalRating && (
         <>
           <div className={cn('ml-2 mt-1 text-gray-600', className)}>•</div>
           <div className={cn('ml-2 mt-1 text-gray-600', className)}>
-            {' '}
-            {totalRatings} Ratings
+            {totalRatings > 0 ? `${totalRatings} Ratings` : 'No Ratings'}
           </div>
         </>
       )}

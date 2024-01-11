@@ -5,10 +5,11 @@ import ImageSlider from '@/components/ImageSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import StarRating from '@/components/StarRating';
 import { Button, buttonVariants } from '@/components/ui/button';
+import { extractRatings } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { useEffect, useState } from 'react';
 
-const ProductDetail = ({ product }) => {
+const ProductDetail = ({ product, ratingData }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [variants, setVariants] = useState([]);
@@ -84,6 +85,8 @@ const ProductDetail = ({ product }) => {
     findMatchingVariant();
   }, [selectedOptions]);
 
+  const { averageRating, totalRatings } = ratingData;
+
   const validUrls =
     product?.images?.edges?.map((image) => image?.node?.url) || [];
   return (
@@ -101,7 +104,7 @@ const ProductDetail = ({ product }) => {
               {product.title}
             </div>
             <div>
-              <StarRating rating={3.3} totalRatings={238} />
+              <StarRating rating={averageRating} totalRatings={totalRatings} />
             </div>
             <div className="mx-auto lg:hidden grid grid-cols-1 w-full">
               <div className="h-[376px] rounded-lg">

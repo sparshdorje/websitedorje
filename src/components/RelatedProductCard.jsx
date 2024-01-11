@@ -1,9 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StarRating from './StarRating';
+import { extractProductId } from '@/lib/utils';
+import RatingService from '@/services/rating';
 
 const RelatedProductCard = ({ product }) => {
+  const [ratingData, setRatingData] = useState({});
+  const productId = extractProductId(product.id);
+
+  const fetchRatingData = async (productId) => {
+    try {
+      const response = await RatingService.getAverageRating(productId);
+      setRatingData(response);
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRatingData(productId);
+  }, []);
+
   const imageUrl = product?.images?.edges?.[0]?.node?.url;
   return (
     <Link
@@ -24,8 +42,8 @@ const RelatedProductCard = ({ product }) => {
         {product.title}
       </div>
       <StarRating
-        rating={3.3}
-        totalRatings={238}
+        rating={ratingData.averageRating}
+        totalRatings={ratingData.totalRatings}
         showTotalRating={false}
         variant={'white'}
         size="20"
