@@ -3,7 +3,6 @@
 import { PRODUCT_CATEGORIES } from '@/config';
 import { useState } from 'react';
 import NavItem from './NavItem';
-import { ScrollArea } from './ui/scroll-area';
 
 const NavItems = () => {
   const [activeIndex, setActiveIndex] = useState(null);

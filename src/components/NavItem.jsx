@@ -17,9 +17,9 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
         {category?.dropdown ? (
           <Button
             className={cn(
-              '   gap-1.5 h-16 rounded-tl-md rounded-tr-md rounded-br-none rounded-bl-none font-questrial hover:bg-[#FFF5EB]',
+              '   gap-1.5 h-16  rounded-xl font-questrial hover:bg-[#FFF5EB]',
               {
-                'bg-[#FFF5EB]': isOpen,
+                'bg-[#FFF5EB] shadow-md': isOpen,
               }
             )}
             variant={'ghost'}
