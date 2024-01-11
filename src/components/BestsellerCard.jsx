@@ -2,15 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import AddToCartButton from './AddToCartButton';
-import { formatPrice, truncate } from '@/lib/utils';
+import { cn, formatPrice, truncate } from '@/lib/utils';
 
-const BestsellerCard = ({ product }) => {
+const BestsellerCard = ({ product, className, truncateLimit = 120 }) => {
   const imageUrl = product?.images?.edges?.[0]?.node?.url;
 
   return (
     <Link
       href={`/products/${product.handle}`}
-      className={`flex flex-col items-start overflow-hidden pb-2 rounded-2xl min-w-[300px] w-[300px] h-[440px] bg-white`}
+      className={cn(
+        `flex flex-col items-start overflow-hidden pb-2 rounded-2xl min-w-[300px] w-[300px] h-[440px] bg-white`,
+        className
+      )}
     >
       <div className="h-[180px] w-full mb-3">
         <Image
@@ -33,7 +36,7 @@ const BestsellerCard = ({ product }) => {
         </div>
 
         <div className="px-4 font-questrial text-sm">
-          {truncate(product.description, 120)}
+          {truncate(product.description, truncateLimit)}
         </div>
 
         <div className="px-4 w-full">
