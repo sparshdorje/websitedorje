@@ -66,7 +66,7 @@ const BrandStorySlider = ({
         {urls.map((url, i) => (
           <SwiperSlide
             key={url}
-            className="-z-10 relative !h-[535px] lg:!h-[460px] w-fill"
+            className="-z-10 relative !h-[535px] px-4 lg:px-0 lg:!h-[460px] w-fill"
           >
             <ReactPlayer
               url={url}

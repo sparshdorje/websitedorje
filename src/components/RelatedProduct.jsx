@@ -5,7 +5,7 @@ import ProductService from '../services/product';
 
 const RelatedProduct = ({
   productId,
-  classNames = 'mx-auto flex items-start justify-start overflow-x-scroll lg:justify-center gap-6',
+  classNames = 'mx-auto flex items-start justify-start overflow-x-scroll lg:justify-center gap-6 px-2.5 lg:px-0',
 }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 

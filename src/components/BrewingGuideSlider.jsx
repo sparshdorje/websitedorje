@@ -50,7 +50,7 @@ const BrewingGuideSlider = ({ productHandle }) => {
         grabCursor={true}
         spaceBetween={isMobile ? 30 : 50}
         modules={[Autoplay, Pagination, Navigation]}
-        className="flex"
+        className="flex !px-3 !lg:px-0"
       >
         {brewingGuideUrls.map((url, i) => (
           <SwiperSlide key={i} className="-z-10 relative h-full w-full">

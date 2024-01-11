@@ -24,7 +24,7 @@ const BestSellers = () => {
   }, [selectedCollectionForBestsellers]);
   return (
     <>
-      <div className="flex w-full justify-start lg:justify-center items-center gap-3 mb-3 overflow-x-scroll py-3">
+      <div className="flex px-4 lg:px-0 w-full justify-start lg:justify-center items-center gap-3 mb-3 overflow-x-scroll py-3">
         {COLLECTIONS.map((collection, idx) => (
           <div
             className="flex min-w-fit justify-center items-center px-3 cursor-pointer py-2 rounded-3xl font-questrial text-center text-xs text-primary font-bold"
@@ -48,7 +48,7 @@ const BestSellers = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-start lg:justify-center w-full items-start overflow-x-scroll gap-5">
+      <div className="flex px-4 lg:px-0 justify-start lg:justify-center w-full items-start overflow-x-scroll gap-5">
         {bestSellingProducts?.map((prod, i) => (
           <BestsellerCard product={prod.node} key={i} />
         ))}

@@ -8,7 +8,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
       return (
         <Link
           href={item.href}
-          className="w-40 h-52 lg:w-48 lg:h-56 bg-white flex flex-col items-center rounded-xl justify-center"
+          className="w-40 h-52 shadow-md lg:w-48 lg:h-56 bg-white flex flex-col items-center rounded-xl justify-center"
         >
           <div className="relative aspect-square h-24 w-24 lg:h-32 lg:w-32 overflow-hidden rounded-lg group-hover:opacity-75">
             <Image
@@ -30,7 +30,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
       return (
         <Link
           href={item.href}
-          className=" w-96 h-36 px-2 bg-white flex items-center rounded-xl gap-4"
+          className=" w-96 h-36 shadow-md px-2 bg-white flex items-center rounded-xl gap-4"
         >
           {item.newLaunch && (
             <div className="absolute top-0 right-0 py-2 px-4 bg-brand rounded-tr-xl rounded-bl-xl text-white">
