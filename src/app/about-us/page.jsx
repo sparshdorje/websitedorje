@@ -23,7 +23,6 @@ const fetchProducts = async () => {
 const page = async () => {
   const products = await fetchProducts();
 
-  console.log(products, 'products');
   return (
     <div className={'pb-0 lg:pb-52 w-full grid grid-cols-1 lg:gap-16'}>
       {/* HERO SECTION */}

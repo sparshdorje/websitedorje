@@ -41,6 +41,10 @@ export default async function sitemap() {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/about-us`,
         priority: 0.8,
       },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/make-your-own-blend`,
+        priority: 0.8,
+      },
       ...productEntries,
       ...collectionEntries,
     ];

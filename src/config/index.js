@@ -114,7 +114,7 @@ export const PRODUCT_CATEGORIES = [
         imageSrc: '/nav/icons/bestsellers.jpg',
       },
     ],
-    dropdown: true,
+    dropdown: false,
   },
   {
     label: 'LEARN MORE',
@@ -146,6 +146,6 @@ export const PRODUCT_CATEGORIES = [
         imageSrc: '/nav/icons/bestsellers.jpg',
       },
     ],
-    dropdown: true,
+    dropdown: false,
   },
 ];
