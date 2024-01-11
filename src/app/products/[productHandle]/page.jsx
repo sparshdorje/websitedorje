@@ -7,8 +7,13 @@ import ProductDetail from '@/components/ProductDetail';
 import RelatedProduct from '@/components/RelatedProduct';
 import ReviewCard from '@/components/ReviewCard';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
+import { Button } from '@/components/ui/button';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config';
+import { extractProductId } from '@/lib/utils';
+import { judgeMeInstance } from '@/services/ShopifyService';
 import ProductService from '@/services/product';
+import RatingService from '@/services/rating';
+import axios from 'axios';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
@@ -39,6 +44,24 @@ const fetchProduct = cache(async (productHandle) => {
 //   }
 // }
 
+const fetchRatingData = async (productId) => {
+  try {
+    const response = await RatingService.getAverageRating(productId);
+    return response;
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+  }
+};
+
+const fetchReviewData = async (productId) => {
+  try {
+    const response = await RatingService.getProductReview(productId);
+    return response;
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+  }
+};
+
 export async function generateMetadata({ params: { productHandle } }) {
   const product = await fetchProduct(productHandle);
   const { title, description, images } = product || {};
@@ -60,18 +83,16 @@ const Page = async ({ params }) => {
   }
 
   const product = (await fetchProduct(productHandle)) || {};
+  const productId = extractProductId(product.id);
+  const ratingData = await fetchRatingData(productId);
+  const reviewData = (await fetchReviewData(productId)) || [];
 
   // await delay(1000);
 
   return (
     <>
       <div className={'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-24'}>
-        {product && <ProductDetail product={product} />}
-
-        {/* <div
-          className="jdgm-widget jdgm-preview-badge h-[400px]"
-          data-id={'7679953076449'}
-        ></div> */}
+        {product && <ProductDetail product={product} ratingData={ratingData} />}
 
         {/* KNOW YOUR TEA */}
         <div
@@ -185,7 +206,17 @@ const Page = async ({ params }) => {
             </div>
 
             <div className="max-w-4xl mx-auto">
-              <ReviewCard />
+              {reviewData.length > 0 ? (
+                reviewData?.map((review, idx) => (
+                  <ReviewCard key={idx} review={review} />
+                ))
+              ) : (
+                <div className="flex justify-center">
+                  <Button className={'rounded-full'}>
+                    Be the first one to review
+                  </Button>
+                </div>
+              )}
             </div>
           </MaxWidthWrapper>
         </div>

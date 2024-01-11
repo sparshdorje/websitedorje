@@ -7,6 +7,7 @@ import { GoogleTagManager } from '@next/third-parties/google';
 
 import { Toaster } from 'sonner';
 import './globals.css';
+import Head from 'next/head';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -41,6 +42,19 @@ export default function RootLayout({ children }) {
           gtag('config', 'G-JBYQ4E6RK0');
         `}
       </Script>
+
+      <Script>
+        {`jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'dorjeteas.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'bpV91llnywtnrfAytVgThOndTEI';`}
+      </Script>
+
+      <Script
+        strategy="afterInteractive"
+        src="https://cdn.judge.me/widget_preloader.js"
+      />
+      <Script
+        strategy="afterInteractive"
+        src="https://cdn1.judge.me/assets/installed.js"
+      />
 
       <body
         className={cn(

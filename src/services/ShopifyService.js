@@ -58,4 +58,15 @@ export const shopifyInstance = axios.create({
   },
 });
 
+export const judgeMeInstance = axios.create({
+  baseURL: 'https://judge.me/api/v1/',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  params: {
+    api_token: process.env.JUDGE_ME_API_KEY,
+    shop_domain: process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN,
+  },
+});
+
 export default client;
