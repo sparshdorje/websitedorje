@@ -85,7 +85,7 @@ const Page = async ({ params }) => {
   const product = (await fetchProduct(productHandle)) || {};
   const productId = extractProductId(product.id);
   const ratingData = await fetchRatingData(productId);
-  const reviewData = (await fetchReviewData(productId)) || [];
+  const reviewData = await fetchReviewData(productId);
 
   // await delay(1000);
 
@@ -206,17 +206,12 @@ const Page = async ({ params }) => {
             </div>
 
             <div className="max-w-4xl mx-auto">
-              {reviewData.length > 0 ? (
-                reviewData?.map((review, idx) => (
-                  <ReviewCard key={idx} review={review} />
-                ))
-              ) : (
-                <div className="flex justify-center">
-                  <Button className={'rounded-full'}>
-                    Be the first one to review
-                  </Button>
-                </div>
-              )}
+              {reviewData?.map((review, idx) => (
+                <ReviewCard key={idx} review={review} />
+              ))}
+              <div className="flex justify-center mt-8">
+                <Button className={'rounded-full'}>Write a review</Button>
+              </div>
             </div>
           </MaxWidthWrapper>
         </div>
