@@ -45,7 +45,7 @@ const page = async () => {
 
           <div className="flex flex-col items-start gap-8 w-full lg:w-[60%] h-full">
             <Image
-              loading="lazy"
+              loading="eager"
               height={700}
               width={700}
               src={'/assets/about-us/hero-bg.webp'}

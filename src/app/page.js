@@ -1,35 +1,14 @@
-'use client';
+import BestSellers from '@/components/BestSellers';
 import BrandStorySlider from '@/components/BrandStorySlider';
-import BestsellerCard from '@/components/BestsellerCard';
 import HomePageBannerSlider from '@/components/HomePageBannerSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import HomePageVideo from '@/components/HomePageVideo';
+import TestimonialsSlider from '@/components/TestimonialsSlider';
 import { COLLECTIONS, HOME_PAGE_AS_SEEN_ON } from '@/config';
-import CollectionService from '@/services/collection';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import ReactPlayer from 'react-player';
-import TestimonialsSlider from '@/components/TestimonialsSlider';
 
 export default function Home() {
-  const [bestSellingProducts, setBestSellingProducts] = useState([]);
-  const [
-    selectedCollectionForBestsellers,
-    setSelectedCollectionForBestsellers,
-  ] = useState(COLLECTIONS[1]?.handle);
-  const getBestsellers = async () => {
-    const fetchedProducts = await CollectionService.getProductsInCollection({
-      handle: selectedCollectionForBestsellers,
-    });
-    const bestSellingProductsData =
-      fetchedProducts?.data?.data?.collection?.products?.edges?.slice(0, 3);
-    setBestSellingProducts(bestSellingProductsData);
-  };
-
-  useEffect(() => {
-    getBestsellers();
-  }, [selectedCollectionForBestsellers]);
-
   return (
     <div className={'pt-8 pb-52 w-full grid grid-cols-1 gap-16'}>
       {/* COLLECTIONS */}
@@ -103,35 +82,7 @@ export default function Home() {
               'flex flex-col justify-start items-start lg:items-center gap:10 lg:gap-12'
             }
           >
-            <div className="flex w-full justify-start lg:justify-center items-center gap-3 mb-3 overflow-x-scroll py-3">
-              {COLLECTIONS.map((collection, idx) => (
-                <div
-                  className="flex min-w-fit justify-center items-center px-3 cursor-pointer py-2 rounded-3xl font-questrial text-center text-xs text-primary font-bold"
-                  style={{
-                    border: '1px solid #14222B',
-                    background:
-                      selectedCollectionForBestsellers === collection.handle
-                        ? '#14222B'
-                        : 'transparent',
-                    color:
-                      selectedCollectionForBestsellers === collection.handle
-                        ? 'white'
-                        : '#14222B',
-                  }}
-                  key={collection.handle}
-                  onClick={() =>
-                    setSelectedCollectionForBestsellers(collection.handle)
-                  }
-                >
-                  {collection.name}
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-start lg:justify-center w-full items-start overflow-x-scroll gap-5">
-              {bestSellingProducts?.map((prod, i) => (
-                <BestsellerCard product={prod.node} key={i} />
-              ))}
-            </div>
+            <BestSellers />
           </MaxWidthWrapper>
         </div>
       </div>
@@ -182,36 +133,7 @@ export default function Home() {
           Behind the scenes
         </div>
         <div className="w-full rounded-2xl h-[216px] lg:h-[600px] bg-white overflow-hidden">
-          <ReactPlayer
-            url={'/assets/brand-story/1.mp4'}
-            height="100%"
-            width="100%"
-            className="rounded-xl overflow-hidden h-full object-fill"
-            loop
-            controls
-            playing
-            playIcon={
-              <Image
-                loading="lazy"
-                height={40}
-                width={40}
-                alt="play icon"
-                className="z-10"
-                src={'/assets/icons/play-icon.png'}
-              />
-            }
-            fallback={
-              <Image
-                loading="lazy"
-                alt="thumbnnail"
-                width={'100'}
-                height={'100'}
-                className="z-10 h-full w-full"
-                src={'/assets/brand-story/thumbnails/1.png'}
-              />
-            }
-            light={'/assets/brand-story/thumbnails/1.png'}
-          />
+          <HomePageVideo />
         </div>
       </MaxWidthWrapper>
     </div>
