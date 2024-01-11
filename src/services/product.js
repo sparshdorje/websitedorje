@@ -13,10 +13,61 @@ import { shopifyInstance } from './ShopifyService';
 // id: 7470969454817
 
 const ProductService = {
-  getAllProducts: async ({ numberOfProducts = 250 }) => {
+  getAllProducts: async () => {
     return shopifyInstance.post('/', {
       query: `query getProductsAndVariants {
-        products(first: ${numberOfProducts}) {
+        products(first: 250) {
+          edges {
+            cursor
+            node {
+              id
+              title
+              description
+              handle
+              images(first: 100) {
+                edges {
+                  node {
+                    id
+                    originalSrc
+                    altText
+                    url
+                  }
+                }
+              }
+              variants(first: 1) {
+                edges {
+                  cursor
+                  node {
+                    availableForSale
+                    selectedOptions{
+                      name
+                      value
+                    }
+                    id
+                    title
+                    image{
+                      url
+                    }
+                    price {
+                      amount
+                      currencyCode
+                    }
+                    product{
+                      title
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`,
+    });
+  },
+  getBestSellingProducts: async () => {
+    return shopifyInstance.post('/', {
+      query: `query getProductsAndVariants {
+        products(first: 5, sortKey: TITLE) {
           edges {
             cursor
             node {
