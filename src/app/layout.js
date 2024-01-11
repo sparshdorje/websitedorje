@@ -2,8 +2,12 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { cn } from '@/lib/utils';
 import { Fraunces, Quicksand } from 'next/font/google';
-import { Toaster } from 'sonner';
+import Head from 'next/head';
+import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
+
+import { Toaster } from 'sonner';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -26,23 +30,42 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full">
-      {/* <>
-        <script>
-          {`          jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN='dorjeteas.myshopify.com';jdgm.PLATFORM ='shopify';jdgm.PUBLIC_TOKEN= 'bpV91llnywtnrfAytVgThOndTEI';`}
-        </script>
-        <script
-          data-cfasync="false"
-          type="text/javascript"
-          async
-          src="https://cdn.judge.me/widget_preloader.js"
-        ></script>
-        <script
-          data-cfasync="false"
-          type="text/javascript"
-          async
-          src="https://cdn1.judge.me/assets/installed.js"
-        ></script>
-      </> */}
+      <Head>
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', 'GTM-WL5K93Z4')`}
+        </Script>
+      </Head>
+
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-WL5K93Z4"
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        ></iframe>
+      </noscript>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-JBYQ4E6RK0"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-JBYQ4E6RK0');
+        `}
+      </Script>
 
       <body
         className={cn(
@@ -51,7 +74,6 @@ export default function RootLayout({ children }) {
           questrial.variable
         )}
       >
-        <GoogleTagManager gtmId="GTM-WL5K93Z4" />
         {/* <NextTopLoader showSpinner={false} /> */}
         <main className="relative flex flex-col min-h-screen">
           <Navbar />
@@ -60,25 +82,8 @@ export default function RootLayout({ children }) {
         </main>
 
         <Toaster position="top-center" richColors />
-        {/* <Script>
-          jdgm =window.jdgm jdgm.SHOP_DOMAIN ='dorjeteas.myshopify.com'
-          jdgm.PLATFORM ='shopify' jdgm.PUBLIC_TOKEN
-          ='bpV91llnywtnrfAytVgThOndTEI'
-        </Script>
-
-        <Script
-          data-cfasync="false"
-          type="text/javascript"
-          async
-          src="https://cdn.judge.me/widget_preloader.js"
-        />
-        <Script
-          data-cfasync="false"
-          type="text/javascript"
-          async
-          src="https://cdn1.judge.me/assets/installed.js"
-        /> */}
       </body>
+      <GoogleTagManager gtmId="GTM-WL5K93Z4" />
     </html>
   );
 }
