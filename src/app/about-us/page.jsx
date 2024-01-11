@@ -1,25 +1,24 @@
+import BestsellerCard from '@/components/BestsellerCard';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import ProductService from '@/services/product';
-import BestsellerCard from '@/components/BestsellerCard';
-import { cache } from 'react';
+import Image from 'next/image';
 
 import React from 'react';
 
-const fetchProducts = cache(async () => {
+const fetchProducts = async () => {
   try {
-    const response = await ProductService.getAllProducts({
-      numberOfProducts: 5,
-    });
+    const response = await ProductService.getAllProducts();
 
-    return response?.data?.data?.products?.edges?.map((product) => {
-      return product;
-    });
+    return response?.data?.data?.products?.edges
+      ?.map((product) => {
+        return product;
+      })
+      .slice(0, 5);
   } catch (error) {
     console.error('Error fetching product:', error);
   }
-});
+};
 
 const page = async () => {
   const products = await fetchProducts();

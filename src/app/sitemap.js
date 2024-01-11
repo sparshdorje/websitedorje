@@ -37,6 +37,10 @@ export default async function sitemap() {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/sign-up`,
         priority: 0.7,
       },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/about-us`,
+        priority: 0.8,
+      },
       ...productEntries,
       ...collectionEntries,
     ];
