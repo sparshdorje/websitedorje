@@ -48,10 +48,10 @@ const KnowYourTeaSlider = ({ productHandle }) => {
         grabCursor={true}
         spaceBetween={isMobile ? 10 : 50}
         modules={[Autoplay, Pagination, Navigation]}
-        className="flex w-full h-full"
+        className="flex w-full h-full !px-3 !lg:px-0"
       >
         {knowYourTeaUrls.map((url, i) => (
-          <SwiperSlide key={i} className="-z-10 relative h-full w-full">
+          <SwiperSlide key={i} className="-z-10  relative h-full w-full">
             <Image
               fill
               loading="lazy"

@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <div className={'pt-8 pb-52 w-full grid grid-cols-1 gap-16'}>
       {/* COLLECTIONS */}
-      <MaxWidthWrapper>
-        <div className="flex items-start overflow-x-scroll justify-start lg:justify-center gap-8 pb-2">
+      <MaxWidthWrapper className={'px-0'}>
+        <div className="px-4 lg:px-0 flex items-start overflow-x-scroll justify-start lg:justify-center gap-8 pb-2">
           {COLLECTIONS.map((collection, idx) => (
             <Link
               href={collection.href}
@@ -79,7 +79,7 @@ export default function Home() {
         <div className="w-full py-6">
           <MaxWidthWrapper
             className={
-              'flex flex-col justify-start items-start lg:items-center gap:10 lg:gap-12'
+              'flex px-0 flex-col justify-start items-start lg:items-center gap:10 lg:gap-12'
             }
           >
             <BestSellers />
@@ -88,7 +88,7 @@ export default function Home() {
       </div>
 
       {/* BRAND STORY */}
-      <MaxWidthWrapper className={'mb-32 max-w-screen-xl'}>
+      <MaxWidthWrapper className={'mb-32 max-w-screen-xl px-0'}>
         <div className="text-3xl text-center mb-8 font-fraunces text-secondary font-semibold">
           At the heart of Darjeeling
         </div>
@@ -116,10 +116,10 @@ export default function Home() {
         <div className="text-base text-center mb-10 font-questrial max-w-3xl mx-auto">
           Here’s what people of the industry say about us
         </div>
-        <div className="w-full py-6">
+        <div className="w-full py-6 ">
           <MaxWidthWrapper
             className={
-              'flex flex-col justify-start items-start lg:items-center gap:10 lg:gap-12'
+              'flex flex-col px-0 max-w-screen-xl justify-start items-start lg:items-center gap:10 lg:gap-12'
             }
           >
             <TestimonialsSlider />

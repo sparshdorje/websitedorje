@@ -104,7 +104,7 @@ const Page = async ({ params }) => {
           }}
           className="py-16"
         >
-          <MaxWidthWrapper className={'max-w-screen-xl'}>
+          <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
             <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
               Know your tea
             </div>
@@ -117,11 +117,11 @@ const Page = async ({ params }) => {
 
         {/* BRAND STORY */}
         <div>
-          <MaxWidthWrapper className={'max-w-screen-xl'}>
-            <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+          <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+            <div className="text-3xl px-2 lg:px-0 text-center mb-3 font-fraunces text-primary font-semibold">
               What makes Dorje Special
             </div>
-            <div className="text-base text-center mb-10 font-questrial">
+            <div className="text-base px-2 lg:px-0 text-center mb-10 font-questrial">
               Learn the story behind the brewing of the wonderful Himalayan tea
             </div>
             <BrandStorySlider />
@@ -163,11 +163,11 @@ const Page = async ({ params }) => {
 
         {/* BREWING GUIDE */}
         <div>
-          <MaxWidthWrapper className={'max-w-screen-xl'}>
-            <div className="text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
+          <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+            <div className="px-2.5 lg:px-0 text-3xl text-center mb-3 font-fraunces text-primary font-semibold">
               Brewing guide
             </div>
-            <div className="text-base text-center mb-10 font-questrial">
+            <div className="px-2.5 lg:px-0 text-base text-center mb-10 font-questrial">
               Learn the story behind the brewing of the wonderful Himalayan tea
             </div>
             <BrewingGuideSlider productHandle={product.handle} />
@@ -184,7 +184,7 @@ const Page = async ({ params }) => {
           }}
           className="py-16"
         >
-          <MaxWidthWrapper className={'max-w-screen-xl'}>
+          <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
             <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
               Hear what people say about us
             </div>
@@ -241,11 +241,11 @@ const Page = async ({ params }) => {
         }}
         className="py-16 mb-12 lg:mb-0"
       >
-        <MaxWidthWrapper className={'max-w-screen-xl'}>
-          <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
+        <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+          <div className="text-3xl px-2.5 lg:px-0 text-center mb-3 font-fraunces text-white font-semibold">
             Related products
           </div>
-          <div className="text-base text-center mb-10 font-questrial text-white ">
+          <div className="text-base px-2.5 lg:px-0 text-center mb-10 font-questrial text-white ">
             People also bought...
           </div>
           <RelatedProduct productId={product.id} />

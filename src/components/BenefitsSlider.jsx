@@ -28,10 +28,10 @@ const BenefitsSlider = ({
   ];
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden w-full">
       <Swiper
         onSwiper={(swiper) => setSwiper(swiper)}
-        slidesPerView={isMobile ? 1.2 : 4}
+        slidesPerView={isMobile ? 1.3 : 4}
         navigation={{ prevEl: 'prev-arrow', nextEl: 'next-arrow' }}
         freeMode={true}
         grabCursor={true}
@@ -40,7 +40,10 @@ const BenefitsSlider = ({
         className="flex h-full w-full"
       >
         {benefits.map((benefit, i) => (
-          <SwiperSlide key={i} className="relative !h-[230px] w-full">
+          <SwiperSlide
+            key={i}
+            className="relative px-4 lg:px-0 !h-[230px] w-full"
+          >
             <div
               className="h-full w-full flex flex-col items-start gap-2 justify-start p-6 rounded-xl"
               style={{

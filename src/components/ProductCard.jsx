@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
   });
 
   const containerStyle = {
-    backgroundColor: `rgb(${backgroundColor[0]},${backgroundColor[1]},${backgroundColor[2]},0.4)`,
+    backgroundColor: `rgba(${backgroundColor[0]},${backgroundColor[1]},${backgroundColor[2]},0.25)`,
   };
 
   const fetchRatingData = async (productId) => {
@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
       {!loading && (
         <Link
           href={`/products/${product.handle}`}
-          className={`flex flex-col items-start justify-between p-4 rounded-2xl min-w-[300px] w-[300px] h-[480px] gap-2`}
+          className={`flex flex-col items-start shadow-md justify-between p-4 rounded-2xl min-w-[300px] w-[300px] h-[480px] gap-2`}
           style={containerStyle}
         >
           <div className="h-[200px] w-full rounded-lg">

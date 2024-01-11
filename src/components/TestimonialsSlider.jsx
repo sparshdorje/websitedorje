@@ -42,7 +42,7 @@ const TestimonialsSlider = () => {
 
   return (
     <div className="relative lg:px-10 overflow-hidden aspect-[16/8] lg:aspect-video w-full">
-      <div className="hidden lg:block absolute inset-0 transition">
+      <div className="hidden lg:block absolute inset-0 transition ">
         <RightArrow
           activeStyles={activeStyles}
           inactiveStyles={inactiveStyles}
@@ -66,17 +66,19 @@ const TestimonialsSlider = () => {
         grabCursor={true}
         spaceBetween={isMobile ? 10 : 50}
         modules={[Autoplay, Pagination, Navigation]}
-        className="flex w-full h-full"
+        className="flex w-full h-full !px-3 !lg:px-0"
       >
         {urls.map((url, i) => (
           <SwiperSlide key={i} className="-z-10 relative h-full w-full">
-            <Image
-              fill
-              loading="lazy"
-              className="h-full w-full object-cover object-center rounded-xl"
-              src={url}
-              alt="Testimonial image"
-            />
+            <div className="w-full h-full">
+              <Image
+                fill
+                loading="lazy"
+                className="h-full w-full object-cover object-center rounded-xl"
+                src={url}
+                alt="Testimonial image"
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
