@@ -2,7 +2,7 @@
 
 import { toast } from 'sonner';
 import { Button } from '../components/ui/button';
-import { Textarea } from '../components/ui/Textarea';
+import { Textarea } from '../components/ui/textarea';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
