@@ -9,7 +9,7 @@ import { extractRatings } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { useEffect, useState } from 'react';
 
-const ProductDetail = ({ product, ratingData }) => {
+const ProductDetail = ({ product, ratingData, user }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [variants, setVariants] = useState([]);
@@ -85,7 +85,7 @@ const ProductDetail = ({ product, ratingData }) => {
     findMatchingVariant();
   }, [selectedOptions]);
 
-  const { averageRating, totalRatings } = ratingData;
+  const { averageRating, totalRatings } = ratingData || {};
 
   const validUrls =
     product?.images?.edges?.map((image) => image?.node?.url) || [];
