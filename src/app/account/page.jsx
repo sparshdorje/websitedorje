@@ -13,11 +13,6 @@ import {
 } from '@/components/ui/table';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'My Account',
-  description: 'Dorje Teas | The Original Taste of Darjeeling ',
-};
-
 const page = async () => {
   const nextCookies = cookies();
   const user = await getServerSideUser(nextCookies);
@@ -35,7 +30,7 @@ const page = async () => {
             Name
           </div>
           <div className="text-questrial text-primary text-lg font-semobold">
-            {user.displayName}
+            {user?.displayName}
           </div>
         </div>
 
@@ -44,20 +39,22 @@ const page = async () => {
             Email
           </div>
           <div className="text-questrial text-primary text-lg font-semobold">
-            {user.email}
+            {user?.email}
           </div>
         </div>
 
-        <div>
-          <div className="font-fraunces text-primary text-xl font-semibold mb-2">
-            Default Shipping Address
+        {user?.defaultAddress && (
+          <div>
+            <div className="font-fraunces text-primary text-xl font-semibold mb-2">
+              Default Shipping Address
+            </div>
+            <div className="text-questrial text-primary text-lg font-semobold">
+              {user.defaultAddress.address1} <br /> {user.defaultAddress.city},
+              {user.defaultAddress.country}, ({user.defaultAddress.zip}) <br />
+              {user.defaultAddress.phone}
+            </div>
           </div>
-          <div className="text-questrial text-primary text-lg font-semobold">
-            {user.defaultAddress.address1} <br /> {user.defaultAddress.city},
-            {user.defaultAddress.country}, ({user.defaultAddress.zip}) <br />
-            {user.defaultAddress.phone}
-          </div>
-        </div>
+        )}
       </div>
 
       <div>
@@ -65,11 +62,12 @@ const page = async () => {
           Orders
         </div>
         <Table>
-          {!orders && (
-            <TableCaption className="font-fraunces font-semibold text-lg">
-              No Orders Yet
-            </TableCaption>
-          )}
+          {!orders ||
+            (orders.length === 0 && (
+              <TableCaption className="font-fraunces mt-12 font-semibold text-lg">
+                No Orders Yet
+              </TableCaption>
+            ))}
 
           <TableHeader>
             <TableRow>
@@ -80,7 +78,8 @@ const page = async () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orders ? (
+            {orders &&
+              orders.length > 1 &&
               orders.map((order) => (
                 <TableRow>
                   <TableCell>
@@ -102,15 +101,10 @@ const page = async () => {
                     {formatPrice(order.node.totalPrice.amount)}
                   </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <></>
-            )}
+              ))}
           </TableBody>
         </Table>
       </div>
-
-      {/* <div>{JSON.stringify(orders)}</div> */}
     </MaxWidthWrapper>
   );
 };
