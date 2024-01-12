@@ -38,6 +38,7 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
               className: 'gap-1.5 h-16  ',
               variant: 'link',
             })}
+            target={category.openInNewTab && '_blank'}
             href={category?.link ?? ''}
           >
             {category.label}
@@ -62,7 +63,7 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
           <div className="relative bg-[#FFF5EB]">
             <div className="mx-auto max-w-7xl">
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 py-16">
-                <div className="flex justify-center items-start gap-5">
+                <div className="flex flex-wrap justify-center items-start gap-5">
                   {category?.featured?.map((item) => (
                     <div
                       onClick={() => close()}

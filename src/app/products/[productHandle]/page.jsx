@@ -8,7 +8,7 @@ import RelatedProduct from '@/components/RelatedProduct';
 import ReviewCard from '@/components/ReviewCard';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import { Button } from '@/components/ui/button';
-import { HOME_PAGE_AS_SEEN_ON } from '@/config';
+import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
 import { extractProductId } from '@/lib/utils';
 import { judgeMeInstance } from '@/services/ShopifyService';
 import ProductService from '@/services/product';

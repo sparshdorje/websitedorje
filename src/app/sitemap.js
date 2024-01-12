@@ -1,5 +1,5 @@
 import ProductService from '../services/product';
-import { COLLECTIONS } from '../config/index';
+import COLLECTIONS from '../config/Collections';
 
 export default async function sitemap() {
   try {

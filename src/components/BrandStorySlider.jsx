@@ -10,27 +10,11 @@ import LeftArrow from '@/components/LeftArrow';
 import RightArrow from '@/components/RigthArrow';
 import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { VIDEO_URL, THUMBNAILS } from '@/config/BrandStory';
 import ReactPlayer from 'react-player';
 import Image from 'next/image';
 
-const BrandStorySlider = ({
-  urls = [
-    '/assets/brand-story/1.mp4',
-    '/assets/brand-story/2.mp4',
-    '/assets/brand-story/3.mp4',
-    '/assets/brand-story/4.mp4',
-    '/assets/brand-story/5.mp4',
-    '/assets/brand-story/6.mp4',
-  ],
-  thumbnails = [
-    '/assets/brand-story/thumbnails/1.png',
-    '/assets/brand-story/thumbnails/2.png',
-    '/assets/brand-story/thumbnails/3.png',
-    '/assets/brand-story/thumbnails/4.png',
-    '/assets/brand-story/thumbnails/5.png',
-    '/assets/brand-story/thumbnails/6.png',
-  ],
-}) => {
+const BrandStorySlider = ({ urls = VIDEO_URL, thumbnails = THUMBNAILS }) => {
   const isMobile = window && window.innerWidth < 768;
   const { swiper, slideConfig, setSwiper, activeStyles, inactiveStyles } =
     useSlider({ urls });

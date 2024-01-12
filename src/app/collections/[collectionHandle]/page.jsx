@@ -2,7 +2,7 @@ import BenefitsSlider from '@/components/BenefitsSlider';
 import CollectionVideo from '@/components/CollectionVideo';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductCard from '@/components/ProductCard';
-import { COLLECTIONS } from '@/config';
+import COLLECTIONS from '@/config/Collections';
 import CollectionService from '@/services/collection';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -94,19 +94,21 @@ const page = async ({ params }) => {
 
       {/* BANNER */}
 
-      <div className="w-full h-[216px] lg:h-[750px] bg-white overflow-hidden">
-        <Image
-          loading="lazy"
-          height={600}
-          width={600}
-          className="h-full w-full object-cover"
-          src={
-            collection?.image?.url
-              ? collection?.image?.url
-              : '/assets/banners/collection-fallback.png'
-          }
-        />
-      </div>
+      <MaxWidthWrapper className={'max-w-screen-xl '}>
+        <div className="w-full h-[216px] rounded-lg lg:h-[600px] bg-white overflow-hidden">
+          <Image
+            loading="lazy"
+            height={600}
+            width={600}
+            className="h-full w-full object-cover"
+            src={
+              collection?.image?.url
+                ? collection?.image?.url
+                : '/assets/banners/collection-fallback.png'
+            }
+          />
+        </div>
+      </MaxWidthWrapper>
 
       {/* BEST SELLERS */}
       {bestSellingProducts.length > 0 && (

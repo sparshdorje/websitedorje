@@ -1,6 +1,6 @@
 'use client';
 
-import { PRODUCT_CATEGORIES } from '@/config';
+import MENU_ITEMS from '@/config/MenuItems';
 import { Menu, UserRound, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -78,7 +78,7 @@ const MobileNav = ({ user }) => {
               </div>
 
               <div className="flex flex-col items-start w-full">
-                {PRODUCT_CATEGORIES.map((category) =>
+                {MENU_ITEMS.map((category) =>
                   category.dropdown ? (
                     <Accordion
                       key={category.label}
@@ -105,7 +105,11 @@ const MobileNav = ({ user }) => {
                       </AccordionItem>
                     </Accordion>
                   ) : (
-                    <Link href={category?.link ?? ''} className="p-4">
+                    <Link
+                      href={category?.link ?? ''}
+                      target={category.openInNewTab && '_blank'}
+                      className="p-4"
+                    >
                       <div className="text-gray-900 border-b-2 text-base font-medium">
                         {category.label}
                       </div>

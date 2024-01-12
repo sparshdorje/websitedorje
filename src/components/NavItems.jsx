@@ -1,6 +1,6 @@
 'use client';
 
-import { PRODUCT_CATEGORIES } from '@/config';
+import MENU_ITEMS from '@/config/MenuItems';
 import { useState } from 'react';
 import NavItem from './NavItem';
 
@@ -11,7 +11,7 @@ const NavItems = () => {
 
   return (
     <div className="flex gap-4 h-full">
-      {PRODUCT_CATEGORIES.map((category, i) => {
+      {MENU_ITEMS.map((category, i) => {
         const handleOpen = () => {
           if (activeIndex === i) {
             setActiveIndex(null);

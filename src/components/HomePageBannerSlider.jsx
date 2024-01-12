@@ -10,35 +10,16 @@ import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 import Image from 'next/image';
-
-// MOBILE TESTIMONIALS IMPORT
-
-const WEB_TESTIMONIALS = [
-  '/assets/testimonials/web/anupam-web.jpg',
-  '/assets/testimonials/web/foodka-web.jpg',
-  '/assets/testimonials/web/peyush-web.jpg',
-  '/assets/testimonials/web/shivesh-web.jpg',
-  '/assets/testimonials/web/vineeta-web.jpg',
-  '/assets/testimonials/web/vir-web.jpg',
-];
-
-const MOBILE_TESTIMONIALS = [
-  '/assets/testimonials/mobile/anupam-mobile.jpg',
-  '/assets/testimonials/mobile/foodka-mobile.jpg',
-  '/assets/testimonials/mobile/peyush-mobile.jpg',
-  '/assets/testimonials/mobile/shivesh-mobile.jpg',
-  '/assets/testimonials/mobile/vineeta-mobile.jpg',
-  '/assets/testimonials/mobile/vir-mobile.jpg',
-];
+import { HOME_PAGE_BANNERS } from '@/config/HomePage';
+import Link from 'next/link';
 
 const HomePageBannerSlider = () => {
-  const isMobile = window && window.innerWidth < 768;
-  const urls = isMobile ? MOBILE_TESTIMONIALS : WEB_TESTIMONIALS;
+  const urls = HOME_PAGE_BANNERS;
   const { swiper, slideConfig, setSwiper, activeStyles, inactiveStyles } =
     useSlider({ urls });
 
   return (
-    <div className="relative overflow-hidden aspect-[16/8] h-[240px] lg:h-[750px] lg:aspect-video w-full">
+    <div className="relative overflow-hidden aspect-[16/9] h-[240px] lg:h-[800px] w-full">
       <Swiper
         pagination={{
           renderBullet: (_, className) => {
@@ -56,13 +37,15 @@ const HomePageBannerSlider = () => {
       >
         {urls.map((url, i) => (
           <SwiperSlide key={url} className="-z-10 relative h-full w-full">
-            <Image
-              fill
-              loading="eager"
-              className="h-full w-full object-cover object-center"
-              src={url}
-              alt="Testimonial image"
-            />
+            <Link href={url.href}>
+              <Image
+                fill
+                loading="eager"
+                className="h-full w-full object-cover object-top"
+                src={url.imgUrl}
+                alt="Testimonial image"
+              />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

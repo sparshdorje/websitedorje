@@ -2,6 +2,7 @@ import React from 'react';
 import MaxWidthWrapper from './MaxWidthWrapper';
 import Link from 'next/link';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
+import { APP_CONSTATNTS } from '@/config';
 
 const Footer = () => {
   return (
@@ -25,13 +26,24 @@ const Footer = () => {
               Follow us on social media
             </div>
             <div className="text-white flex items-center gap-3">
-              <Link href={''}>
+              <Link
+                target="_blank"
+                href={'https://www.instagram.com/dorjeteas/'}
+              >
                 <Instagram />
               </Link>
-              <Link href={''}>
+              <Link
+                target="_blank"
+                href={
+                  'https://www.youtube.com/channel/UCUNwm8vKpYm3tmrrnHrqiCw'
+                }
+              >
                 <Youtube />
               </Link>
-              <Link href={''}>
+              <Link
+                target="_blank"
+                href={'https://www.facebook.com/dorjeteas/'}
+              >
                 <Facebook />
               </Link>
             </div>
@@ -45,37 +57,43 @@ const Footer = () => {
             </div>
             <div className="flex flex-col items-start gap-3">
               <Link
-                href={''}
+                target="_blank"
+                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/privacy-policy`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Privacy Policy
               </Link>
               <Link
-                href={''}
+                target="_blank"
+                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/refund-policy`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Refund Policy
               </Link>
               <Link
-                href={''}
+                target="_blank"
+                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/terms-of-service`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Terms of Service
               </Link>
               <Link
-                href={''}
+                target="_blank"
+                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/shipping-policy`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Shipping Policy
               </Link>
               <Link
-                href={''}
+                target="_blank"
+                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/subscription-policy`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Subscription Policy
               </Link>
               <Link
-                href={''}
+                target="_blank"
+                href={`${APP_CONSTATNTS.SHOPYFY_URL}/pages/offline-presence`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Offline Presence
@@ -87,26 +105,29 @@ const Footer = () => {
               Quick Links
             </div>
             <div className="flex flex-col items-start gap-3">
-              <Link
+              {/* <Link
                 href={''}
                 className="font-questrial text-white font-medium text-sm"
               >
                 Tea Club
-              </Link>
+              </Link> */}
               <Link
-                href={''}
+                target="_blank"
+                href={'/collections/black-tea'}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Shop
               </Link>
               <Link
-                href={''}
+                target="_blank"
+                href={`${APP_CONSTATNTS.SHOPYFY_URL}/pages/selim-hill-collective`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Selim Hill Collective
               </Link>
               <Link
-                href={''}
+                target="_blank"
+                href={`${APP_CONSTATNTS.SHOPYFY_URL}/pages/our-farms`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Our Farms

@@ -10,29 +10,8 @@ import LeftArrow from '@/components/LeftArrow';
 import RightArrow from '@/components/RigthArrow';
 import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-
-// WEB TESTIMONIALS IMPORT
+import { MOBILE_TESTIMONIALS, WEB_TESTIMONIALS } from '@/config/Testimonials';
 import Image from 'next/image';
-
-// MOBILE TESTIMONIALS IMPORT
-
-const WEB_TESTIMONIALS = [
-  '/assets/testimonials/web/anupam-web.jpg',
-  '/assets/testimonials/web/foodka-web.jpg',
-  '/assets/testimonials/web/peyush-web.jpg',
-  '/assets/testimonials/web/shivesh-web.jpg',
-  '/assets/testimonials/web/vineeta-web.jpg',
-  '/assets/testimonials/web/vir-web.jpg',
-];
-
-const MOBILE_TESTIMONIALS = [
-  '/assets/testimonials/mobile/anupam-mobile.jpg',
-  '/assets/testimonials/mobile/foodka-mobile.jpg',
-  '/assets/testimonials/mobile/peyush-mobile.jpg',
-  '/assets/testimonials/mobile/shivesh-mobile.jpg',
-  '/assets/testimonials/mobile/vineeta-mobile.jpg',
-  '/assets/testimonials/mobile/vir-mobile.jpg',
-];
 
 const TestimonialsSlider = () => {
   const isMobile = window.innerWidth < 768;
