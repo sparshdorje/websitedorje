@@ -1,13 +1,13 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { cn } from '@/lib/utils';
+import { GoogleTagManager } from '@next/third-parties/google';
 import { Fraunces, Quicksand } from 'next/font/google';
 import Script from 'next/script';
-import { GoogleTagManager } from '@next/third-parties/google';
 
 import { Toaster } from 'sonner';
 import './globals.css';
-import Head from 'next/head';
+import { Suspense } from 'react';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -43,19 +43,6 @@ export default function RootLayout({ children }) {
         `}
       </Script>
 
-      <Script>
-        {`jdgm = window.jdgm || {};jdgm.SHOP_DOMAIN = 'dorjeteas.myshopify.com';jdgm.PLATFORM = 'shopify';jdgm.PUBLIC_TOKEN = 'bpV91llnywtnrfAytVgThOndTEI';`}
-      </Script>
-
-      <Script
-        strategy="afterInteractive"
-        src="https://cdn.judge.me/widget_preloader.js"
-      />
-      <Script
-        strategy="afterInteractive"
-        src="https://cdn1.judge.me/assets/installed.js"
-      />
-
       <body
         className={cn(
           'relative h-full font-sans antiliased',
@@ -64,11 +51,14 @@ export default function RootLayout({ children }) {
         )}
       >
         {/* <NextTopLoader showSpinner={false} /> */}
-        <main className="relative flex flex-col min-h-screen">
-          <Navbar />
-          <div className="flex-grow flex-1">{children}</div>
-          <Footer />
-        </main>
+
+        <Suspense>
+          <main className="relative flex flex-col min-h-screen">
+            <Navbar />
+            <div className="flex-grow flex-1">{children}</div>
+            <Footer />
+          </main>
+        </Suspense>
 
         <Toaster position="top-center" richColors />
       </body>
