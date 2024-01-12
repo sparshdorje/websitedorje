@@ -3,19 +3,19 @@ import { ASSETS } from './index';
 export const HOME_PAGE_BANNERS = [
   {
     imgUrl: `${ASSETS.HOME_PAGE_BANNERS}/selim-hill.webp`,
-    href: '/collections/darjeeling-tea',
+    href: '/collections/black-tea',
   },
   {
     imgUrl: `${ASSETS.HOME_PAGE_BANNERS}/first-flush.webp`,
-    href: '/collections/darjeeling-tea',
+    href: '/collections/wellness-range',
   },
   {
     imgUrl: `${ASSETS.HOME_PAGE_BANNERS}/autumn-harvest.webp`,
-    href: '/collections/darjeeling-tea',
+    href: '/collections/offers',
   },
   {
     imgUrl: `${ASSETS.HOME_PAGE_BANNERS}/wellness-range.webp`,
-    href: '/collections/wellness-range',
+    href: '/collections/gift-boxes',
   },
 ];
 

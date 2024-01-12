@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player';
 
 const CollectionVideo = () => {
   return (
-    <>
+    <div className="w-full rounded-2xl h-[216px] lg:h-[600px] bg-white overflow-hidden">
       <ReactPlayer
         url={'/assets/brand-story/1.mp4'}
         height="100%"
@@ -37,7 +37,7 @@ const CollectionVideo = () => {
         }
         light={'/assets/brand-story/thumbnails/1.png'}
       />
-    </>
+    </div>
   );
 };
 

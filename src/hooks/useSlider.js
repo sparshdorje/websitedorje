@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { KNOW_YOUR_TEA_IMAGES } from '@/config/knowYourTea';
 import { BREWING_GUIDE_URLS } from '@/config/BrewingGuide';
+import { COLLECTION_BENEFITS } from '@/config/Collections';
 
-const useSlider = ({ urls, productHandle }) => {
+const useSlider = ({ urls, productHandle, collectionHandle }) => {
   const [swiper, setSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -32,11 +33,28 @@ const useSlider = ({ urls, productHandle }) => {
 
   const knowYourTeaUrls = getKnowYourTeaUrls();
 
+  // ONLY FOR COLLECTION BENEFITS
+  const getCollectionBenfitsUrls = () => {
+    const collectionBenefitsUrl = COLLECTION_BENEFITS[collectionHandle];
+
+    if (collectionBenefitsUrl) {
+      return collectionBenefitsUrl;
+    } else {
+      return COLLECTION_BENEFITS['default'];
+    }
+  };
+
+  const collectionBenefitsUrl = getCollectionBenfitsUrls();
+
   const [slideConfig, setSlideConfig] = useState({
     isBeginning: true,
     isEnd:
       activeIndex ===
-      (urls?.length || brewingGuideUrls?.length || knowYourTeaUrls?.length) - 1,
+      (urls?.length ||
+        brewingGuideUrls?.length ||
+        knowYourTeaUrls?.length ||
+        collectionBenefitsUrl.length) -
+        1,
   });
 
   useEffect(() => {
@@ -48,7 +66,8 @@ const useSlider = ({ urls, productHandle }) => {
           activeIndex ===
           (urls?.length ||
             brewingGuideUrls?.length ||
-            knowYourTeaUrls?.length) -
+            knowYourTeaUrls?.length ||
+            collectionBenefitsUrl.length) -
             1,
       });
     });
@@ -67,6 +86,7 @@ const useSlider = ({ urls, productHandle }) => {
     inactiveStyles,
     brewingGuideUrls,
     knowYourTeaUrls,
+    collectionBenefitsUrl,
   };
 };
 
