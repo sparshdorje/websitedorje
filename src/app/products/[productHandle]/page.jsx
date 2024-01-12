@@ -3,20 +3,21 @@ import BrewingGuideSlider from '@/components/BrewingGuideSlider';
 import Faq from '@/components/Faq';
 import KnowYourTeaSlider from '@/components/KnowYourTeaSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import WriteReview from '@/components/WriteReview';
 import ProductDetail from '@/components/ProductDetail';
 import RelatedProduct from '@/components/RelatedProduct';
 import ReviewCard from '@/components/ReviewCard';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
-import { extractProductId } from '@/lib/utils';
-import { judgeMeInstance } from '@/services/ShopifyService';
+import { extractProductId, getServerSideUser } from '@/lib/utils';
 import ProductService from '@/services/product';
 import RatingService from '@/services/rating';
-import axios from 'axios';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
 
 const fetchProduct = cache(async (productHandle) => {
   try {
@@ -76,6 +77,8 @@ export async function generateMetadata({ params: { productHandle } }) {
 }
 
 const Page = async ({ params }) => {
+  const nextCookies = cookies();
+  const user = await getServerSideUser(nextCookies);
   const { productHandle } = params;
 
   if (productHandle === 'make-your-blend') {
@@ -87,12 +90,20 @@ const Page = async ({ params }) => {
   const ratingData = await fetchRatingData(productId);
   const reviewData = await fetchReviewData(productId);
 
+  // sendReview(productId);
+
   // await delay(1000);
 
   return (
     <>
       <div className={'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-24'}>
-        {product && <ProductDetail product={product} ratingData={ratingData} />}
+        {product && (
+          <ProductDetail
+            product={product}
+            ratingData={ratingData}
+            user={user}
+          />
+        )}
 
         {/* KNOW YOUR TEA */}
         <div
@@ -210,7 +221,13 @@ const Page = async ({ params }) => {
                 <ReviewCard key={idx} review={review} />
               ))}
               <div className="flex justify-center mt-8">
-                <Button className={'rounded-full'}>Write a review</Button>
+                {user ? (
+                  <WriteReview productId={productId} />
+                ) : (
+                  <Link href={`/sign-in?origin=products/${productHandle}`}>
+                    <Button className="rounded-full">Write a Review</Button>
+                  </Link>
+                )}
               </div>
             </div>
           </MaxWidthWrapper>
