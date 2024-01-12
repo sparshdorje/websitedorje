@@ -2,7 +2,7 @@
 
 import { toast } from 'sonner';
 import { Button } from '../components/ui/button';
-// import { Textarea } from '../components/ui/textarea';
+import { Textarea } from '../components/ui/textarea';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -87,7 +87,7 @@ const WriteReview = ({ productId }) => {
             <div className="font-fraunces text-lg font-semibold text-primary">
               Write a Review
             </div>
-            <textarea
+            <Textarea
               value={reviewContent}
               onChange={handleReviewContentChange}
               placeholder="Write your review..."
