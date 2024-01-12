@@ -1,5 +1,6 @@
-import ProductService from '../services/product';
 import COLLECTIONS from '../config/Collections';
+import SHOP_BY_NEED from '../config/ShopByNeed';
+import ProductService from '../services/product';
 
 export default async function sitemap() {
   try {
@@ -21,12 +22,23 @@ export default async function sitemap() {
       };
     });
 
+    const shopByNeedEntries = SHOP_BY_NEED?.map((collection) => {
+      return {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}${collection.href}`,
+        priority: 0.8,
+      };
+    });
+
     return [
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
       },
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/collections`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/shop-by-need`,
         priority: 0.8,
       },
       {
@@ -47,6 +59,7 @@ export default async function sitemap() {
       },
       ...productEntries,
       ...collectionEntries,
+      ...shopByNeedEntries,
     ];
   } catch (error) {
     console.error('Error fetching product:', error);

@@ -1,5 +1,6 @@
 import { APP_CONSTATNTS, ASSETS } from './index';
 import COLLECTIONS from './Collections';
+import SHOP_BY_NEED from './ShopByNeed';
 
 export const MENU_ITEMS = [
   {
@@ -12,44 +13,7 @@ export const MENU_ITEMS = [
   {
     label: `SHOP BY NEED`,
     value: `shop_by_need`,
-    featured: [
-      {
-        name: `Improved Digestion`,
-        href: `/products?collection=improved-digestions`,
-        imageSrc: `${ASSETS.SHOP_BY_NEED}/improved-digestion.png`,
-        description: `An assorted range of teas, that help you improve your digestion`,
-      },
-      {
-        name: `Boost Immunity`,
-        href: `/products?collection=hangover-cure`,
-        imageSrc: `${ASSETS.SHOP_NOW}/artisanal-tea.png`,
-        description: `An assorted range of teas, that help you improve your digestion`,
-      },
-      {
-        name: `Weight Loss`,
-        href: `/products?collection=hangover-cure`,
-        imageSrc: `${ASSETS.SHOP_NOW}/artisanal-tea.png`,
-        description: `An assorted range of teas, that help you improve your digestion`,
-      },
-      {
-        name: `Improved Sleep`,
-        href: `/products?collection=hangover-cure`,
-        imageSrc: `${ASSETS.SHOP_NOW}/artisanal-tea.png`,
-        description: `An assorted range of teas, that help you improve your digestion`,
-      },
-      {
-        name: `Vitamin C`,
-        href: `/products?collection=hangover-cure`,
-        imageSrc: `${ASSETS.SHOP_NOW}/artisanal-tea.png`,
-        description: `An assorted range of teas, that help you improve your digestion`,
-      },
-      {
-        name: `Contains Antioxidants`,
-        href: `/products?collection=hangover-cure`,
-        imageSrc: `${ASSETS.SHOP_NOW}/artisanal-tea.png`,
-        description: `An assorted range of teas, that help you improve your digestion`,
-      },
-    ],
+    featured: SHOP_BY_NEED,
     dropdown: true,
     cardType: `collection-card`,
   },
