@@ -1,8 +1,10 @@
 import BestsellerCard from '@/components/BestsellerCard';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import { Button } from '@/components/ui/button';
+import { APP_CONSTATNTS } from '@/config';
 import ProductService from '@/services/product';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import React from 'react';
 
@@ -40,7 +42,12 @@ const page = async () => {
               This is a subtitle for this particular section that explains more
               about Darjeeling and Dorje.
             </div>
-            <Button className={'rounded-full'}>Read More</Button>
+            <Link
+              target="_blank"
+              href={`${APP_CONSTATNTS.SHOPYFY_URL}/pages/our-farms`}
+            >
+              <Button className={'rounded-full'}>Read More</Button>
+            </Link>
           </div>
 
           <div className="flex flex-col items-start gap-8 w-full lg:w-[60%] h-full">
@@ -81,7 +88,12 @@ const page = async () => {
               enim ad minim veniam. Duis aute irure dolor in reprehenderit in
               voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             </div>
-            <Button className={'rounded-full'}>Read More</Button>
+            <Link
+              target="_blank"
+              href={`${APP_CONSTATNTS.SHOPYFY_URL}/pages/our-story`}
+            >
+              <Button className={'rounded-full'}>Read More</Button>
+            </Link>
           </div>
         </MaxWidthWrapper>
       </div>
@@ -128,17 +140,20 @@ const page = async () => {
               enim ad minim veniam. Duis aute irure dolor in reprehenderit in
               voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             </div>
+            <Link
+              target="_blank"
+              href={'https://maps.app.goo.gl/YyJf6zZaexiWYGZHA'}
+            ></Link>
             <Button className={'rounded-full'}>Get directions</Button>
           </div>
 
           <div className="flex flex-col items-start gap-8 w-full h-full lg:w-[50%] lg:h-[80%]">
-            <Image
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.002469406912!2d88.31649677608554!3d26.83987376321578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e437490e145cb1%3A0x223b23961dc9790c!2sDorje%20Teas!5e0!3m2!1sen!2sin!4v1705060307496!5m2!1sen!2sin"
               loading="lazy"
-              height={700}
-              width={700}
-              src={'/assets/about-us/location-bg.webp'}
               className="h-full w-full object-cover"
-            />
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </MaxWidthWrapper>
       </div>

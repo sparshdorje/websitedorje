@@ -1,6 +1,6 @@
 'use client';
 import BestsellerCard from '@/components/BestsellerCard';
-import { COLLECTIONS } from '@/config';
+import COLLECTIONS from '@/config/Collections';
 import CollectionService from '@/services/collection';
 import { useEffect, useState } from 'react';
 

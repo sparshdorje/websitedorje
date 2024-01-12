@@ -4,7 +4,8 @@ import HomePageBannerSlider from '@/components/HomePageBannerSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import HomePageVideo from '@/components/HomePageVideo';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
-import { COLLECTIONS, HOME_PAGE_AS_SEEN_ON } from '@/config';
+import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
+import COLLECTIONS from '@/config/Collections';
 import Image from 'next/image';
 import Link from 'next/link';
 

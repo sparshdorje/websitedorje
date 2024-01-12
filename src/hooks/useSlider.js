@@ -1,23 +1,6 @@
 import { useEffect, useState } from 'react';
 import { KNOW_YOUR_TEA_IMAGES } from '@/config/knowYourTea';
-
-const BREWING_GUIDE_URLS = {
-  default: [
-    '/assets/brewing-guide/normal-tea/step-1.png',
-    '/assets/brewing-guide/normal-tea/step-2.png',
-    '/assets/brewing-guide/normal-tea/step-3.png',
-    '/assets/brewing-guide/normal-tea/step-4.png',
-    '/assets/brewing-guide/normal-tea/step-5.png',
-    '/assets/brewing-guide/normal-tea/step-6.png',
-  ],
-  doodhTea: [
-    '/assets/brewing-guide/doodh-tea/step-1.png',
-    '/assets/brewing-guide/doodh-tea/step-2.png',
-    '/assets/brewing-guide/doodh-tea/step-3.png',
-    '/assets/brewing-guide/doodh-tea/step-4.png',
-    '/assets/brewing-guide/doodh-tea/step-5.png',
-  ],
-};
+import { BREWING_GUIDE_URLS } from '@/config/BrewingGuide';
 
 const useSlider = ({ urls, productHandle }) => {
   const [swiper, setSwiper] = useState(null);

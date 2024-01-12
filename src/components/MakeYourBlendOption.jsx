@@ -1,34 +1,7 @@
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { ICONS } from '../config/MakeYourBlend';
 import React from 'react';
-
-const ICONS = {
-  //Base Tea
-
-  'Green Tea': '/assets/make-your-own-blend/base-tea/green-tea.webp',
-  'Black Tea': '/assets/make-your-own-blend/base-tea/black-tea.webp',
-
-  //Primary Flavour
-  Chamomile: '/assets/make-your-own-blend/primary-flavour/chamomile.webp',
-  Jasmine: '/assets/make-your-own-blend/primary-flavour/jasmine.webp',
-  Hibiscus: '/assets/make-your-own-blend/primary-flavour/hibiscus.webp',
-  'Blue Pea': '/assets/make-your-own-blend/primary-flavour/blue-pea.webp',
-  Lavender: '/assets/make-your-own-blend/primary-flavour/lavender.webp',
-  Rose: '/assets/make-your-own-blend/primary-flavour/rose.webp',
-  Orange: '/assets/make-your-own-blend/primary-flavour/orange-peel.webp',
-  Lemon: '/assets/make-your-own-blend/primary-flavour/gondhoraj-lemon.webp',
-  Marigold: '/assets/make-your-own-blend/primary-flavour/marigold.webp',
-
-  //HERBS AND SPICES
-  'Star Anise': '/assets/make-your-own-blend/herbs-and-spices/star-anise.webp',
-  Cinnamon: '/assets/make-your-own-blend/herbs-and-spices/cinnamon.webp',
-  Saffron: '/assets/make-your-own-blend/herbs-and-spices/saffron.webp',
-  Ginger: '/assets/make-your-own-blend/herbs-and-spices/ginger.webp',
-  Cardamom: '/assets/make-your-own-blend/herbs-and-spices/green-cardamom.webp',
-  Mint: '/assets/make-your-own-blend/herbs-and-spices/peppermint.webp',
-  Stevia: '/assets/make-your-own-blend/herbs-and-spices/stevia.webp',
-  Spearmint: '/assets/make-your-own-blend/herbs-and-spices/spearmint.webp',
-};
 
 const MakeYourBlendOption = ({ name, handleSelect, selected }) => {
   return (

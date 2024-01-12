@@ -20,7 +20,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
             />
           </div>
 
-          <div className="mt-6 block font-fraunces text-small text-center lg:text-base font-bold text-brand">
+          <div className="mt-6 px-1 block font-fraunces text-small text-center lg:text-base font-bold text-brand">
             {item.name}
           </div>
         </Link>

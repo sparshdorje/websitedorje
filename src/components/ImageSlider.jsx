@@ -2,8 +2,6 @@
 
 import LeftArrow from '@/components/LeftArrow';
 import useSlider from '@/hooks/useSlider';
-import { cn } from '@/lib/utils';
-import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/pagination';
