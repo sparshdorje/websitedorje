@@ -4,7 +4,12 @@ import { extractRatings, extractReviewsInfo } from '@/lib/utils';
 const RatingService = {
   getAverageRating: async (productId) => {
     const response = await judgeMeInstance.get(
-      `widgets/preview_badge?external_id=${productId}&page=1&per_page=20&api_token=bpV91llnywtnrfAytVgThOndTEI`
+      `widgets/preview_badge?external_id=${productId}&page=1&per_page=20&api_token=bpV91llnywtnrfAytVgThOndTEI`,
+      {
+        params: {
+          info: 'PUBLIC',
+        },
+      }
     );
 
     const ratingData = response?.data?.badge || '';

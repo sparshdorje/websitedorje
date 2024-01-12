@@ -50,6 +50,8 @@ export const addToCart = async (productId, quantity = 1) => {
 
 const shopifyStoreUrl = `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN}/api/2023-10/graphql`; // Replace with your store's URL and API version
 
+// SHOPIFY INSTANCE
+
 export const shopifyInstance = axios.create({
   baseURL: shopifyStoreUrl,
   headers: {
@@ -64,9 +66,25 @@ export const judgeMeInstance = axios.create({
     'Content-Type': 'application/json',
   },
   params: {
-    api_token: process.env.JUDGE_ME_API_KEY,
+    api_token: process.env.NEXT_PUBLIC_JUDGE_ME_API_KEY,
     shop_domain: process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN,
   },
 });
+
+// JUDGE ME INSTANCE
+
+judgeMeInstance.interceptors.request.use(
+  (config) => {
+    const { params } = config;
+
+    if (params && params.info === 'PUBLIC') {
+      params.api_token = process.env.NEXT_PUBLIC_JUDGE_ME_PUBLIC_KEY;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default client;
