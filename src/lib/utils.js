@@ -111,3 +111,13 @@ export function extractReviewsInfo(html) {
 
 export const isMobileDevice = () =>
   /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+export function formatDateString(inputDateString) {
+  const date = new Date(inputDateString);
+
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}

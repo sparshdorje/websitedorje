@@ -59,11 +59,28 @@ const UserService = {
           acceptsMarketing
           defaultAddress{
             address1
-            address2
             city
+            phone
             company
             country
             zip
+          }
+          orders(first:100, sortKey: PROCESSED_AT, reverse: true) {
+            edges {
+              node {
+                id
+                name
+                orderNumber
+                processedAt
+                fulfillmentStatus
+                statusUrl
+                totalPrice{
+                  amount
+                  currencyCode
+                }
+                orderNumber
+              }
+            }
           }
         }
       }`,
