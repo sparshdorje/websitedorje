@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Accordion,
@@ -5,8 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion';
-import Image from 'next/image';
-import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const FAQs = [
   {
@@ -38,9 +38,15 @@ const Faq = () => {
         <Accordion key={idx} type="single" collapsible>
           <AccordionItem value={faq.question}>
             <AccordionTrigger>
-              <div className="border-transparent text-left font-questrial text-primary border-b-2 text-base font-bold">
+              <motion.div
+                initial={{ opacity: 0, y: 70 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
+                className="border-transparent text-left font-questrial text-primary border-b-2 text-base font-bold"
+              >
                 {faq.question}
-              </div>
+              </motion.div>
             </AccordionTrigger>
             <AccordionContent>
               <div className="border-transparent font-questrial text-primary text-base font-medium">

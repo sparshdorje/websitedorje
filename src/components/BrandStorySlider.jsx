@@ -13,6 +13,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { VIDEO_URL, THUMBNAILS } from '@/config/BrandStory';
 import ReactPlayer from 'react-player';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const BrandStorySlider = ({ urls = VIDEO_URL, thumbnails = THUMBNAILS }) => {
   const isMobile = window && window.innerWidth < 768;
@@ -20,7 +21,13 @@ const BrandStorySlider = ({ urls = VIDEO_URL, thumbnails = THUMBNAILS }) => {
     useSlider({ urls });
 
   return (
-    <div className="relative lg:px-10 overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, x: -70 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="relative lg:px-10 overflow-hidden"
+    >
       <div className="hidden lg:block absolute inset-0 transition">
         <RightArrow
           activeStyles={activeStyles}
@@ -85,7 +92,7 @@ const BrandStorySlider = ({ urls = VIDEO_URL, thumbnails = THUMBNAILS }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

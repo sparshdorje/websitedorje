@@ -1,11 +1,9 @@
-import CollectionVideo from '@/components/CollectionVideo';
 import CollectionBenefitsSlider from '@/components/CollectionBenefitsSlider';
+import CollectionsBox from '@/components/CollectionsBox';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductCard from '@/components/ProductCard';
-import COLLECTIONS from '@/config/Collections';
 import CollectionService from '@/services/collection';
 import Image from 'next/image';
-import Link from 'next/link';
 import { cache } from 'react';
 
 const getCollection = cache(async (handle) => {
@@ -37,18 +35,22 @@ const page = async ({ params }) => {
   const { collectionHandle } = params;
 
   const getProducts = async () => {
-    const fetchedProducts = await CollectionService.getProductsInCollection({
-      handle: collectionHandle,
-    });
-    const bestSellingProductsData =
-      fetchedProducts?.data?.data?.collection?.products?.edges?.slice(0, 4);
-    const allProductsData =
-      fetchedProducts?.data?.data?.collection?.products?.edges?.slice(4);
+    try {
+      const fetchedProducts = await CollectionService.getProductsInCollection({
+        handle: collectionHandle,
+      });
+      const bestSellingProductsData =
+        fetchedProducts?.data?.data?.collection?.products?.edges?.slice(0, 4);
+      const allProductsData =
+        fetchedProducts?.data?.data?.collection?.products?.edges?.slice(4);
 
-    return {
-      allProducts: allProductsData,
-      bestSellingProducts: bestSellingProductsData,
-    };
+      return {
+        allProducts: allProductsData,
+        bestSellingProducts: bestSellingProductsData,
+      };
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const collection = (await getCollection(collectionHandle)) || [];
@@ -58,38 +60,8 @@ const page = async ({ params }) => {
   return (
     <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-14 lg:gap-16'}>
       {/* COLLECTIONS MOBILE */}
-      <MaxWidthWrapper className="flex items-start px-4 lg:items-center overflow-x-scroll justify-start lg:justify-center gap-8">
-        {COLLECTIONS.map((collection, idx) => (
-          <Link
-            href={collection.href}
-            key={collection.handle}
-            className="flex flex-col items-center gap-2 lg:gap-4"
-          >
-            <div
-              className="relative aspect-square h-20 w-20 lg:h-28 lg:w-28 overflow-hidden rounded-full group-hover:opacity-75"
-              style={{
-                border:
-                  collectionHandle === collection.handle && '2px solid #40733E',
-              }}
-            >
-              <Image
-                loading="eager"
-                src={collection.imageSrc}
-                alt="product category image"
-                fill
-                className="object-contain object-center"
-              />
-            </div>
-            <div
-              className="font-questrial text-center text-xs lg:text-base text-primary font-bold"
-              style={{
-                color: collectionHandle === collection.handle && '#40733E',
-              }}
-            >
-              {collection.name}
-            </div>
-          </Link>
-        ))}
+      <MaxWidthWrapper className={'px-0'}>
+        <CollectionsBox collectionHandle={collectionHandle} />
       </MaxWidthWrapper>
 
       {/* BANNER */}

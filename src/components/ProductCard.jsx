@@ -9,6 +9,8 @@ import { cn, extractProductId, formatPrice, truncate } from '@/lib/utils';
 import RatingService from '@/services/rating';
 import StarRating from './StarRating';
 import { ASSETS } from '../config';
+import { ProductCardSkeleton } from './Skeletons';
+import { motion } from 'framer-motion';
 
 const ProductCard = ({ product, bestSeller = false }) => {
   const [ratingData, setRatingData] = useState({});
@@ -47,8 +49,13 @@ const ProductCard = ({ product, bestSeller = false }) => {
   }, []);
 
   return (
-    <>
-      {!loading && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7 }}
+    >
+      {!loading ? (
         <Link
           href={`/products/${product.handle}`}
           className={`flex flex-col relative items-start shadow-md justify-between p-4 rounded-2xl min-w-[300px] w-[300px] h-[480px] gap-2`}
@@ -89,7 +96,7 @@ const ProductCard = ({ product, bestSeller = false }) => {
           <div className=" font-questrial text-xs">
             {truncate(product.description, 160)}
           </div>
-          <div className=" font-questrial text-sm font-medium">
+          <div className=" font-questrial text-sm font-semibold">
             {formatPrice(product?.variants?.edges?.[0]?.node?.price?.amount)}
           </div>
           <div className="w-full h-8 mb-1">
@@ -103,8 +110,10 @@ const ProductCard = ({ product, bestSeller = false }) => {
             />
           </div>
         </Link>
+      ) : (
+        <ProductCardSkeleton />
       )}
-    </>
+    </motion.div>
   );
 };
 

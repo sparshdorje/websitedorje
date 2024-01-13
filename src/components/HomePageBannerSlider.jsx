@@ -11,6 +11,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 import Image from 'next/image';
 import { HOME_PAGE_BANNERS } from '@/config/HomePage';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const HomePageBannerSlider = () => {
@@ -19,7 +20,13 @@ const HomePageBannerSlider = () => {
     useSlider({ urls });
 
   return (
-    <div className="relative overflow-hidden aspect-[16/9] h-[240px] lg:h-[800px] w-full">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+      className="relative overflow-hidden aspect-[16/9] h-[250px] lg:h-[840px] w-full"
+    >
       <Swiper
         pagination={{
           renderBullet: (_, className) => {
@@ -49,7 +56,7 @@ const HomePageBannerSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

@@ -30,7 +30,7 @@ const BestsellerCard = ({ product, className, truncateLimit = 120 }) => {
     <Link
       href={`/products/${product.handle}`}
       className={cn(
-        `flex flex-col items-start overflow-hidden pb-2 rounded-2xl min-w-[300px] w-[300px] h-[440px] bg-white`,
+        `flex flex-col animate-in items-start overflow-hidden pb-2 rounded-2xl min-w-[300px] w-[300px] h-[440px] bg-white`,
         className
       )}
     >

@@ -15,7 +15,7 @@ const ImageSlider = ({ urls = [] }) => {
 
   return (
     <div className="relative bg-zinc-100 p-b-8 overflow-hidden h-full w-full rounded-xl">
-      <div className="absolute z-10 inset-0 transition">
+      <div className="absolute inset-0 transition">
         <RigthArrow
           activeStyles={activeStyles}
           inactiveStyles={inactiveStyles}

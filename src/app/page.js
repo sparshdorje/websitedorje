@@ -1,41 +1,19 @@
 import BestSellers from '@/components/BestSellers';
 import BrandStorySlider from '@/components/BrandStorySlider';
+import CollectionsBox from '@/components/CollectionsBox';
 import HomePageBannerSlider from '@/components/HomePageBannerSlider';
-import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import HomePageVideo from '@/components/HomePageVideo';
+import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
-import COLLECTIONS from '@/config/Collections';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className={'pt-8 pb-52 w-full grid grid-cols-1 gap-16'}>
+    <div className={'pt-8 pb-52 w-full grid grid-cols-1 gap-8 lg:gap-16'}>
       {/* COLLECTIONS */}
       <MaxWidthWrapper className={'px-0'}>
-        <div className="px-4 lg:px-0 flex items-start overflow-x-scroll justify-start lg:justify-center gap-8 pb-2">
-          {COLLECTIONS.map((collection, idx) => (
-            <Link
-              href={collection.href}
-              key={collection.handle}
-              className="flex flex-col items-center gap-4"
-            >
-              <div className="relative aspect-square h-20 w-20 lg:h-28 lg:w-28 overflow-hidden rounded-full group-hover:opacity-75">
-                <Image
-                  loading="lazy"
-                  src={collection.imageSrc}
-                  alt="product category image"
-                  fill
-                  className="object-contain object-center"
-                />
-              </div>
-              <div className="font-questrial text-center text-xs lg:text-base text-primary font-bold">
-                {collection.name}
-              </div>
-            </Link>
-          ))}
-        </div>
+        <CollectionsBox />
       </MaxWidthWrapper>
 
       {/* BANNER */}

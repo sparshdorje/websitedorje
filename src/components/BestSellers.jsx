@@ -1,16 +1,20 @@
 'use client';
 import BestsellerCard from '@/components/BestsellerCard';
+import { BestSellerCardSkeleton } from '@/components/Skeletons';
 import COLLECTIONS from '@/config/Collections';
 import CollectionService from '@/services/collection';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const BestSellers = () => {
   const [bestSellingProducts, setBestSellingProducts] = useState([]);
   const [
     selectedCollectionForBestsellers,
     setSelectedCollectionForBestsellers,
-  ] = useState(COLLECTIONS[1]?.handle);
+  ] = useState(COLLECTIONS[0]?.handle);
+
   const getBestsellers = async () => {
+    setBestSellingProducts([]);
     const fetchedProducts = await CollectionService.getProductsInCollection({
       handle: selectedCollectionForBestsellers,
     });
@@ -48,11 +52,27 @@ const BestSellers = () => {
           </div>
         ))}
       </div>
-      <div className="flex px-4 lg:px-0 justify-start lg:justify-center w-full items-start overflow-x-scroll gap-5">
-        {bestSellingProducts?.map((prod, i) => (
-          <BestsellerCard product={prod.node} key={i} />
-        ))}
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.3 }}
+        className="flex px-4 lg:px-0 justify-start lg:justify-center w-full items-start overflow-x-scroll gap-5"
+      >
+        {bestSellingProducts.length > 0 ? (
+          bestSellingProducts?.map((prod, i) => (
+            <>
+              <BestsellerCard product={prod.node} key={i} />
+            </>
+          ))
+        ) : (
+          <>
+            <BestSellerCardSkeleton />
+            <BestSellerCardSkeleton />
+            <BestSellerCardSkeleton />
+          </>
+        )}
+      </motion.div>
     </>
   );
 };

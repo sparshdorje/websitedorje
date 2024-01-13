@@ -11,6 +11,7 @@ import RightArrow from '@/components/RigthArrow';
 import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const BrewingGuideSlider = ({ productHandle }) => {
   const isMobile = window.innerWidth < 768;
@@ -25,7 +26,13 @@ const BrewingGuideSlider = ({ productHandle }) => {
   } = useSlider({ productHandle });
 
   return (
-    <div className="relative lg:px-10 overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, x: -70 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="relative lg:px-10 overflow-hidden"
+    >
       <div className="hidden lg:block absolute inset-0 transition">
         <RightArrow
           activeStyles={activeStyles}
@@ -64,7 +71,7 @@ const BrewingGuideSlider = ({ productHandle }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 
