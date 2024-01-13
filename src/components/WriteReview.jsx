@@ -5,12 +5,24 @@ import { Button } from '../components/ui/button';
 import { Textarea } from '../components/ui/textarea';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
 
-const WriteReview = ({ productId }) => {
+{
+  /* <Link href={`/sign-in?origin=products/${productHandle}`}>
+                    <Button className="rounded-full">Write a Review</Button>
+                  </Link> */
+}
+
+const WriteReview = ({ productId, user = {} }) => {
+  const { displayName: userName, email: userEmail } = user;
   const [rating, setRating] = useState(0);
   const [reviewContent, setReviewContent] = useState('');
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isReviewVisible, setIsReviewVisible] = useState(false);
+
+  console.log(userName, name, userEmail, email, user);
 
   const router = useRouter();
 
@@ -18,18 +30,20 @@ const WriteReview = ({ productId }) => {
     try {
       const response = await fetch('/api/review', {
         method: 'POST',
-        body: JSON.stringify({ productId, rating, review: reviewContent }),
+        body: JSON.stringify({
+          productId,
+          rating,
+          review: reviewContent,
+          name: name || userName,
+          email: email || userEmail,
+        }),
       });
 
       const responseData = await response.json();
 
       if (responseData.status === 201) {
         toast.success('Thanks for your review!');
-        // Clear the fields
-        setRating(0);
-        setReviewContent('');
-        setIsButtonDisabled(true);
-        setIsReviewVisible(false);
+        resetForm();
 
         router.refresh();
       } else {
@@ -40,19 +54,49 @@ const WriteReview = ({ productId }) => {
     }
   };
 
+  const resetForm = () => {
+    setRating(0);
+    setReviewContent('');
+    setName('');
+    setEmail('');
+    setIsButtonDisabled(true);
+    setIsReviewVisible(false);
+  };
+
   const handleRatingChange = (newRating) => {
     setRating(newRating);
-    setIsButtonDisabled(newRating === 0 || reviewContent.trim() === '');
+    updateButtonDisabledState();
+  };
+
+  const updateButtonDisabledState = () => {
+    setIsButtonDisabled(
+      rating === 0 ||
+        reviewContent.trim() === '' ||
+        name?.trim() === '' ||
+        userName?.trim() === '' ||
+        email?.trim() === '' ||
+        userEmail?.trim() === ''
+    );
+  };
+
+  const handleWriteReviewClick = () => {
+    setIsReviewVisible(true);
   };
 
   const handleReviewContentChange = (event) => {
     const content = event.target.value;
     setReviewContent(content);
-    setIsButtonDisabled(rating === 0 || content.trim() === '');
+    updateButtonDisabledState();
   };
-
-  const handleWriteReviewClick = () => {
-    setIsReviewVisible(true);
+  const handleNameChange = (event) => {
+    const userName = event.target.value;
+    setName(userName);
+    updateButtonDisabledState();
+  };
+  const handleEmailChange = (event) => {
+    const userEmail = event.target.value;
+    setEmail(userEmail);
+    updateButtonDisabledState();
   };
 
   const renderStars = () => {
@@ -62,7 +106,7 @@ const WriteReview = ({ productId }) => {
         <span
           key={i}
           onClick={() => handleRatingChange(i)}
-          className="text-xl"
+          className="text-2xl"
           style={{ cursor: 'pointer', color: i <= rating ? '#14222B' : 'gray' }}
         >
           ★
@@ -77,14 +121,41 @@ const WriteReview = ({ productId }) => {
       {isReviewVisible ? (
         <div className="flex flex-col items-center w-full gap-6">
           <div className="flex flex-col items-center gap-2">
-            <div className="font-fraunces text-lg font-semibold text-primary">
-              Rating
+            <div className="font-questrial text-lg font-semibold text-primary">
+              Your Rating
             </div>
             <div className="flex items-center gap-3">{renderStars()}</div>
           </div>
 
-          <div className="flex flex-col items-center  gap-4 w-full">
-            <div className="font-fraunces text-lg font-semibold text-primary">
+          {!user ||
+            (Object.keys(user).length === 0 && (
+              <div className="flex items-start gap-2 w-full">
+                <div className="flex-1">
+                  <div className="font-questrial text-lg font-semibold text-primary">
+                    Name
+                  </div>
+                  <Input
+                    type="text"
+                    className="bg-white"
+                    onChange={handleNameChange}
+                  />
+                </div>
+
+                <div className="flex-1">
+                  <div className="font-questrial text-lg font-semibold text-primary">
+                    Email
+                  </div>
+                  <Input
+                    type="email"
+                    className="bg-white"
+                    onChange={handleEmailChange}
+                  />
+                </div>
+              </div>
+            ))}
+
+          <div className="flex flex-col items-start  gap-2 w-full">
+            <div className="font-questrial text-lg font-semibold text-primary">
               Write a Review
             </div>
             <Textarea

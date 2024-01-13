@@ -18,6 +18,7 @@ import { redirect } from 'next/navigation';
 import { cache } from 'react';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import StarRating from '@/components/StarRating';
 
 const fetchProduct = cache(async (productHandle) => {
   try {
@@ -89,6 +90,8 @@ const Page = async ({ params }) => {
   const productId = extractProductId(product.id);
   const ratingData = await fetchRatingData(productId);
   const reviewData = await fetchReviewData(productId);
+
+  const { averageRating, totalRatings } = ratingData || {};
 
   // sendReview(productId);
 
@@ -217,18 +220,19 @@ const Page = async ({ params }) => {
             </div>
 
             <div className="max-w-4xl mx-auto">
+              <div className="flex flex-col items-center gap-8 mb-8">
+                <div className="flex flex-col items-center gap-2">
+                  <StarRating showTotalRating={false} rating={averageRating} />
+                  <div className="font-questrial text-gray-800 text-base">
+                    Based on {totalRatings} reviews
+                  </div>
+                </div>
+
+                {<WriteReview productId={productId} user={user} />}
+              </div>
               {reviewData?.map((review, idx) => (
                 <ReviewCard key={idx} review={review} />
               ))}
-              <div className="flex justify-center mt-8">
-                {user ? (
-                  <WriteReview productId={productId} />
-                ) : (
-                  <Link href={`/sign-in?origin=products/${productHandle}`}>
-                    <Button className="rounded-full">Write a Review</Button>
-                  </Link>
-                )}
-              </div>
             </div>
           </MaxWidthWrapper>
         </div>
