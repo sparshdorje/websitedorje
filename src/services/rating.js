@@ -16,9 +16,14 @@ const RatingService = {
 
     return extractRatings(ratingData);
   },
-  getProductReview: async (productId) => {
+  getProductReview: async ({ productId, pageNumber = 1, perPage = 10 }) => {
     const response = await judgeMeInstance.get(
-      `/widgets/product_review?external_id=${productId}&page=1&per_page=10`
+      `/widgets/product_review?external_id=${productId}&page=${pageNumber}&per_page=${perPage}`,
+      {
+        params: {
+          info: 'PUBLIC',
+        },
+      }
     );
 
     const reviewData = response?.data?.widget || '';

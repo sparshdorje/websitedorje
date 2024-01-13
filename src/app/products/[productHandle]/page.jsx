@@ -6,7 +6,7 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import WriteReview from '@/components/WriteReview';
 import ProductDetail from '@/components/ProductDetail';
 import RelatedProduct from '@/components/RelatedProduct';
-import ReviewCard from '@/components/ReviewCard';
+import ReviewsDisplay from '@/components/ReviewsDisplay';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
@@ -57,7 +57,7 @@ const fetchRatingData = async (productId) => {
 
 const fetchReviewData = async (productId) => {
   try {
-    const response = await RatingService.getProductReview(productId);
+    const response = await RatingService.getProductReview({ productId });
     return response;
   } catch (error) {
     console.error('Error fetching reviews:', error);
@@ -230,9 +230,11 @@ const Page = async ({ params }) => {
 
                 {<WriteReview productId={productId} user={user} />}
               </div>
-              {reviewData?.map((review, idx) => (
-                <ReviewCard key={idx} review={review} />
-              ))}
+              <ReviewsDisplay
+                reviewData={reviewData}
+                productId={productId}
+                totalReviews={totalRatings}
+              />
             </div>
           </MaxWidthWrapper>
         </div>

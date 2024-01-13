@@ -22,8 +22,6 @@ const WriteReview = ({ productId, user = {} }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isReviewVisible, setIsReviewVisible] = useState(false);
 
-  console.log(userName, name, userEmail, email, user);
-
   const router = useRouter();
 
   const sendReview = async () => {
