@@ -76,7 +76,7 @@ const BestsellerCard = ({ product, className, truncateLimit = 120 }) => {
           </div>
         </Link>
 
-        <div className="px-4 z-50 w-full">
+        <div className="px-4 w-full">
           <AddToCartButton
             product={product?.variants?.edges?.[0]?.node}
             quantity={1}
