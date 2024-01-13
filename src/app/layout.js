@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import Loading from './loading';
 import { cn } from '@/lib/utils';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Fraunces, Quicksand } from 'next/font/google';
@@ -8,6 +9,7 @@ import Script from 'next/script';
 import { Toaster } from 'sonner';
 import './globals.css';
 import { Suspense } from 'react';
+import NextTopLoader from 'nextjs-toploader';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -50,15 +52,15 @@ export default function RootLayout({ children }) {
           questrial.variable
         )}
       >
-        {/* <NextTopLoader showSpinner={false} /> */}
+        <NextTopLoader showSpinner={false} crawl={true} />
 
-        <Suspense>
-          <main className="relative flex flex-col min-h-screen">
-            <Navbar />
+        <main className="relative flex flex-col min-h-screen">
+          <Navbar />
+          <Suspense fallback={<Loading />}>
             <div className="flex-grow flex-1">{children}</div>
-            <Footer />
-          </main>
-        </Suspense>
+          </Suspense>
+          <Footer />
+        </main>
 
         <Toaster position="top-center" richColors />
       </body>

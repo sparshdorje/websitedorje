@@ -19,7 +19,7 @@ const HomePageBannerSlider = () => {
     useSlider({ urls });
 
   return (
-    <div className="relative overflow-hidden aspect-[16/9] h-[240px] lg:h-[800px] w-full">
+    <div className="relative overflow-hidden aspect-[16/9] h-[250px] lg:h-[840px] w-full">
       <Swiper
         pagination={{
           renderBullet: (_, className) => {

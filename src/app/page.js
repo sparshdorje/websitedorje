@@ -11,10 +11,10 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className={'pt-8 pb-52 w-full grid grid-cols-1 gap-16'}>
+    <div className={'pt-8 pb-52 w-full grid grid-cols-1 gap-8 lg:gap-16'}>
       {/* COLLECTIONS */}
       <MaxWidthWrapper className={'px-0'}>
-        <div className="px-4 lg:px-0 flex items-start overflow-x-scroll justify-start lg:justify-center gap-8 pb-2">
+        <div className="px-4 lg:px-0 flex items-start overflow-x-scroll justify-start lg:justify-center gap-8">
           {COLLECTIONS.map((collection, idx) => (
             <Link
               href={collection.href}

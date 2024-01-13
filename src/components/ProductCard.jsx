@@ -89,7 +89,7 @@ const ProductCard = ({ product, bestSeller = false }) => {
           <div className=" font-questrial text-xs">
             {truncate(product.description, 160)}
           </div>
-          <div className=" font-questrial text-sm font-medium">
+          <div className=" font-questrial text-sm font-semibold">
             {formatPrice(product?.variants?.edges?.[0]?.node?.price?.amount)}
           </div>
           <div className="w-full h-8 mb-1">

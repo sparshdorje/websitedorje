@@ -7,6 +7,7 @@ import CollectionService from '@/services/collection';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cache } from 'react';
+import { ProductCardSkeleton } from '@/components/Skeletons';
 
 const getCollection = cache(async (handle) => {
   const fetchedProducts = await CollectionService.getCollectionByHandle({
@@ -36,24 +37,33 @@ export async function generateMetadata({ params: { collectionHandle } }) {
 const page = async ({ params }) => {
   const { collectionHandle } = params;
 
-  const getProducts = async () => {
-    const fetchedProducts = await CollectionService.getProductsInCollection({
-      handle: collectionHandle,
-    });
-    const bestSellingProductsData =
-      fetchedProducts?.data?.data?.collection?.products?.edges?.slice(0, 4);
-    const allProductsData =
-      fetchedProducts?.data?.data?.collection?.products?.edges?.slice(4);
+  let isLoading = true;
 
-    return {
-      allProducts: allProductsData,
-      bestSellingProducts: bestSellingProductsData,
-    };
+  const getProducts = async () => {
+    try {
+      const fetchedProducts = await CollectionService.getProductsInCollection({
+        handle: collectionHandle,
+      });
+      const bestSellingProductsData =
+        fetchedProducts?.data?.data?.collection?.products?.edges?.slice(0, 4);
+      const allProductsData =
+        fetchedProducts?.data?.data?.collection?.products?.edges?.slice(4);
+
+      return {
+        allProducts: allProductsData,
+        bestSellingProducts: bestSellingProductsData,
+      };
+    } catch (e) {
+      console.log(e);
+      isLoading = false;
+    }
   };
 
   const collection = (await getCollection(collectionHandle)) || [];
   const { allProducts = [], bestSellingProducts = [] } =
     (await getProducts()) || {};
+
+  isLoading = false;
 
   return (
     <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-14 lg:gap-16'}>
@@ -118,13 +128,21 @@ const page = async ({ params }) => {
             {collection.title} Bestsellers
           </div>
           <div className="px-4 lg:px-0 flex lg:grid grid-cols-1 overflow-x-scroll py-2 lg:grid-cols-4 gap-5">
-            {bestSellingProducts?.map((prod) => (
-              <ProductCard
-                bestSeller={true}
-                product={prod.node}
-                key={prod.node.id}
-              />
-            ))}
+            {!isLoading ? (
+              bestSellingProducts?.map((prod) => (
+                <ProductCard
+                  bestSeller={true}
+                  product={prod.node}
+                  key={prod.node.id}
+                />
+              ))
+            ) : (
+              <>
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+              </>
+            )}
           </div>
         </MaxWidthWrapper>
       )}
@@ -157,9 +175,17 @@ const page = async ({ params }) => {
             All {collection.title} Products
           </div>
           <div className="px-4 lg:px-0 flex grid-cols-4 overflow-x-scroll lg:grid gap-5 py-2">
-            {allProducts?.map((prod) => (
-              <ProductCard product={prod.node} key={prod.node.id} />
-            ))}
+            {!isLoading ? (
+              allProducts?.map((prod) => (
+                <ProductCard product={prod.node} key={prod.node.id} />
+              ))
+            ) : (
+              <>
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+                <ProductCardSkeleton />
+              </>
+            )}
           </div>
         </MaxWidthWrapper>
       )}

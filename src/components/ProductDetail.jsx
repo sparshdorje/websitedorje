@@ -5,7 +5,7 @@ import ImageSlider from '@/components/ImageSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import StarRating from '@/components/StarRating';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { extractRatings } from '@/lib/utils';
+import { extractRatings, formatPrice } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { useEffect, useState } from 'react';
 
@@ -150,6 +150,16 @@ const ProductDetail = ({ product, ratingData, user }) => {
                 </div>
               </div>
             ))}
+
+            <div>
+              <div className="font-questrial text-primary mb-1">Price</div>
+              <div className="font-questrial font-semibold text-lg  text-primary">
+                {formatPrice(selectedVariant?.price?.amount)}
+                <span className="text-xs font-questrial text-gray-600 ml-2">
+                  (Tax Included)
+                </span>
+              </div>
+            </div>
 
             <div>
               <div className="font-questrial text-primary mb-3">Quantity</div>
