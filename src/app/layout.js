@@ -52,7 +52,7 @@ export default function RootLayout({ children }) {
           questrial.variable
         )}
       >
-        {/* <NextTopLoader showSpinner={false} crawl={true} /> */}
+        <NextTopLoader color="#B3C8C7" showSpinner={false} crawl={true} />
 
         <main className="relative flex flex-col min-h-screen">
           <Navbar />
