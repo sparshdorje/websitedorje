@@ -61,7 +61,10 @@ const page = async ({ params }) => {
     <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-14 lg:gap-16'}>
       {/* COLLECTIONS MOBILE */}
       <MaxWidthWrapper className={'px-0'}>
-        <CollectionsBox collectionHandle={collectionHandle} />
+        <CollectionsBox
+          collectionHandle={collectionHandle}
+          showTransition={false}
+        />
       </MaxWidthWrapper>
 
       {/* BANNER */}
