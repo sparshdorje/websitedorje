@@ -6,7 +6,7 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import WriteReview from '@/components/WriteReview';
 import ProductDetail from '@/components/ProductDetail';
 import RelatedProduct from '@/components/RelatedProduct';
-import ReviewCard from '@/components/ReviewCard';
+import ReviewsDisplay from '@/components/ReviewsDisplay';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
@@ -18,6 +18,7 @@ import { redirect } from 'next/navigation';
 import { cache } from 'react';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import StarRating from '@/components/StarRating';
 
 const fetchProduct = cache(async (productHandle) => {
   try {
@@ -56,7 +57,7 @@ const fetchRatingData = async (productId) => {
 
 const fetchReviewData = async (productId) => {
   try {
-    const response = await RatingService.getProductReview(productId);
+    const response = await RatingService.getProductReview({ productId });
     return response;
   } catch (error) {
     console.error('Error fetching reviews:', error);
@@ -89,6 +90,8 @@ const Page = async ({ params }) => {
   const productId = extractProductId(product.id);
   const ratingData = await fetchRatingData(productId);
   const reviewData = await fetchReviewData(productId);
+
+  const { averageRating, totalRatings } = ratingData || {};
 
   // sendReview(productId);
 
@@ -217,18 +220,21 @@ const Page = async ({ params }) => {
             </div>
 
             <div className="max-w-4xl mx-auto">
-              {reviewData?.map((review, idx) => (
-                <ReviewCard key={idx} review={review} />
-              ))}
-              <div className="flex justify-center mt-8">
-                {user ? (
-                  <WriteReview productId={productId} />
-                ) : (
-                  <Link href={`/sign-in?origin=products/${productHandle}`}>
-                    <Button className="rounded-full">Write a Review</Button>
-                  </Link>
-                )}
+              <div className="flex flex-col items-center gap-8 mb-8">
+                <div className="flex flex-col items-center gap-2">
+                  <StarRating showTotalRating={false} rating={averageRating} />
+                  <div className="font-questrial text-gray-800 text-base">
+                    Based on {totalRatings} reviews
+                  </div>
+                </div>
+
+                {<WriteReview productId={productId} user={user} />}
               </div>
+              <ReviewsDisplay
+                reviewData={reviewData}
+                productId={productId}
+                totalReviews={totalRatings}
+              />
             </div>
           </MaxWidthWrapper>
         </div>

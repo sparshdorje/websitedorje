@@ -7,15 +7,9 @@ import { motion } from 'framer-motion';
 
 import Image from 'next/image';
 
-const CollectionsBox = ({ collectionHandle = '' }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.3 }}
-      className="flex items-start px-4 lg:items-center overflow-x-scroll justify-start lg:justify-center gap-8"
-    >
+const CollectionsBox = ({ collectionHandle = '', showTransition = true }) => {
+  const renderContent = () => (
+    <div className="flex items-start px-4 lg:items-center overflow-x-scroll justify-start lg:justify-center gap-8">
       {COLLECTIONS.map((collection, idx) => (
         <Link
           href={collection.href}
@@ -47,7 +41,19 @@ const CollectionsBox = ({ collectionHandle = '' }) => {
           </div>
         </Link>
       ))}
+    </div>
+  );
+  return showTransition ? (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+    >
+      {renderContent()}
     </motion.div>
+  ) : (
+    renderContent()
   );
 };
 

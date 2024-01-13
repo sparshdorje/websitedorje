@@ -7,7 +7,7 @@ import { SignUpValidator } from '../../../lib/validators/accountCredentialsValid
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '../../../lib/utils';
@@ -19,6 +19,8 @@ import { toast } from 'sonner';
 const page = () => {
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -29,6 +31,7 @@ const page = () => {
 
   const signUp = async ({ email, password, firstName, lastName }) => {
     try {
+      setIsLoading(true);
       const res = await UserService.createUser({
         email,
         password,
@@ -48,7 +51,10 @@ const page = () => {
       } else {
         toast.error(customerError.message);
       }
+      setIsLoading(false);
     } catch (e) {
+      setIsLoading(false);
+
       toast.error(e);
     }
   };
@@ -80,7 +86,7 @@ const page = () => {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     {...register('email')}
-                    className={cn({
+                    className={cn('bg-white', {
                       'focus-visible:ring-red-500': errors.email,
                     })}
                     placeholder="you@example.com"
@@ -97,7 +103,7 @@ const page = () => {
                   <Input
                     {...register('firstName')}
                     type="text"
-                    className={cn({
+                    className={cn('bg-white', {
                       'focus-visible:ring-red-500': errors.firstName,
                     })}
                     placeholder="First Name"
@@ -114,7 +120,7 @@ const page = () => {
                   <Input
                     {...register('lastName')}
                     type="text"
-                    className={cn({
+                    className={cn('bg-white', {
                       'focus-visible:ring-red-500': errors.lastName,
                     })}
                     placeholder="Last Name"
@@ -131,7 +137,7 @@ const page = () => {
                   <Input
                     {...register('password')}
                     type="password"
-                    className={cn({
+                    className={cn('bg-white', {
                       'focus-visible:ring-red-500': errors.password,
                     })}
                     placeholder="Password"
@@ -143,7 +149,9 @@ const page = () => {
                   )}
                 </div>
 
-                <Button>Sign Up</Button>
+                <Button>
+                  {isLoading ? 'Verifying Details...' : 'Sign Up'}
+                </Button>
               </div>
             </form>
 

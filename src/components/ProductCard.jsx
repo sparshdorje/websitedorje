@@ -56,9 +56,8 @@ const ProductCard = ({ product, bestSeller = false }) => {
       transition={{ duration: 0.7 }}
     >
       {!loading ? (
-        <Link
-          href={`/products/${product.handle}`}
-          className={`flex flex-col relative items-start shadow-md justify-between p-4 rounded-2xl min-w-[300px] w-[300px] h-[480px] gap-2`}
+        <div
+          className={`flex flex-col relative items-start shadow-md justify-between p-4 rounded-2xl min-w-[300px] w-[300px] h-[480px] gap-3`}
           style={containerStyle}
         >
           {bestSeller && (
@@ -66,39 +65,44 @@ const ProductCard = ({ product, bestSeller = false }) => {
               alt="Best seller"
               width={100}
               height={100}
-              className="h-9 w-9 object-contain absolute top-6 right-6 "
+              className="h-9 w-9 object-contain absolute top-6 z-10 right-6 "
               src={`${ASSETS.ICONS}/best-seller.png`}
             />
           )}
-          <div className="h-[200px] w-full rounded-lg">
-            <Image
-              loading="lazy"
-              alt="product image"
-              src={imageUrl}
-              className="w-full h-[200px] object-cover rounded-2xl"
-              width={100}
-              height={200}
-            />
-          </div>
-          <div>
-            <div className=" font-fraunces font-semibold text-base mb-2">
-              {product.title}
+          <Link
+            className="flex flex-col relative items-start justify-between h-full w-full"
+            href={`/products/${product.handle}`}
+          >
+            <div className="h-[200px] w-full rounded-lg">
+              <Image
+                loading="lazy"
+                alt="product image"
+                src={imageUrl}
+                className="w-full h-[200px] object-cover rounded-2xl"
+                width={100}
+                height={200}
+              />
             </div>
-            <StarRating
-              rating={ratingData.averageRating}
-              totalRatings={ratingData.totalRatings}
-              showTotalRating={false}
-              variant={'default'}
-              size="20"
-              className={' opacity-80 text-xs'}
-            />
-          </div>
-          <div className=" font-questrial text-xs">
-            {truncate(product.description, 160)}
-          </div>
-          <div className=" font-questrial text-sm font-semibold">
-            {formatPrice(product?.variants?.edges?.[0]?.node?.price?.amount)}
-          </div>
+            <div>
+              <div className=" font-fraunces font-semibold text-base mb-2">
+                {product.title}
+              </div>
+              <StarRating
+                rating={ratingData.averageRating}
+                totalRatings={ratingData.totalRatings}
+                showTotalRating={false}
+                variant={'default'}
+                size="20"
+                className={' opacity-80 text-xs'}
+              />
+            </div>
+            <div className=" font-questrial text-xs">
+              {truncate(product.description, 160)}
+            </div>
+            <div className=" font-questrial text-sm font-semibold">
+              {formatPrice(product?.variants?.edges?.[0]?.node?.price?.amount)}
+            </div>
+          </Link>
           <div className="w-full h-8 mb-1">
             <AddToCartButton
               product={product?.variants?.edges?.[0]?.node}
@@ -109,7 +113,7 @@ const ProductCard = ({ product, bestSeller = false }) => {
               variant="default"
             />
           </div>
-        </Link>
+        </div>
       ) : (
         <ProductCardSkeleton />
       )}

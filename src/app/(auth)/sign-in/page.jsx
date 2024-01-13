@@ -7,7 +7,7 @@ import { AuthCredentialValidator } from '../../../lib/validators/accountCredenti
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { cn, setCookie } from '../../../lib/utils';
@@ -22,6 +22,8 @@ const page = () => {
   const router = useRouter();
   const origin = searchParams.get('origin');
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -32,6 +34,7 @@ const page = () => {
 
   const signIn = async ({ email, password }) => {
     try {
+      setIsLoading(true);
       const res = await UserService.getAccessToken({
         email,
         password,
@@ -60,7 +63,10 @@ const page = () => {
 
         router.push('/');
         router.refresh();
+
+        setIsLoading(false);
       } else {
+        setIsLoading(false);
         if (accessTokenError.code === 'UNIDENTIFIED_CUSTOMER') {
           toast.error('User does not exist or verified');
         } else {
@@ -68,6 +74,7 @@ const page = () => {
         }
       }
     } catch (e) {
+      setIsLoading(false);
       toast.error(e);
     }
   };
@@ -99,7 +106,7 @@ const page = () => {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     {...register('email')}
-                    className={cn({
+                    className={cn('bg-white', {
                       'focus-visible:ring-red-500': errors.email,
                     })}
                     placeholder="you@example.com"
@@ -116,7 +123,7 @@ const page = () => {
                   <Input
                     {...register('password')}
                     type="password"
-                    className={cn({
+                    className={cn('bg-white', {
                       'focus-visible:ring-red-500': errors.password,
                     })}
                     placeholder="Password"
@@ -128,7 +135,9 @@ const page = () => {
                   )}
                 </div>
 
-                <Button>Sign in</Button>
+                <Button>
+                  {isLoading ? 'Verifying Details...' : 'Sign in'}
+                </Button>
               </div>
             </form>
 
