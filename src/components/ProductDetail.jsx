@@ -8,6 +8,7 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { extractRatings, formatPrice } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const ProductDetail = ({ product, ratingData, user }) => {
   const [quantity, setQuantity] = useState(1);
@@ -90,7 +91,12 @@ const ProductDetail = ({ product, ratingData, user }) => {
   const validUrls =
     product?.images?.edges?.map((image) => image?.node?.url) || [];
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+    >
       <MaxWidthWrapper className="lg:grid lg:grid-cols-2 lg:gap-8 lg:justify-between px-4 max-w-screen-xl">
         <div className="hidden lg:block col-6">
           <div className="h-[600px] w-[520px] rounded-lg">
@@ -152,7 +158,7 @@ const ProductDetail = ({ product, ratingData, user }) => {
             ))}
 
             <div>
-              <div className="font-questrial text-primary mb-1">Price</div>
+              <div className="font-questrial text-primary">Price</div>
               <div className="font-questrial font-semibold text-lg  text-primary">
                 {formatPrice(selectedVariant?.price?.amount)}
                 <span className="text-xs font-questrial text-gray-600 ml-2">
@@ -202,7 +208,7 @@ const ProductDetail = ({ product, ratingData, user }) => {
       </MaxWidthWrapper>
 
       {/* BUY AND ADD TO CART MOBILE*/}
-      <div className="z-50 fixed bottom-0 bg-background p-2 flex lg:hidden justify-center gap-3 w-screen">
+      <div className="z-30 fixed bottom-0 bg-background p-2 flex lg:hidden justify-center gap-3 w-screen">
         <Button
           onClick={() => handleBuyNow()}
           className="border border-secondary bg-secondary text-white flex-1 lg:text-lg py-6"
@@ -211,7 +217,7 @@ const ProductDetail = ({ product, ratingData, user }) => {
         </Button>
         <AddToCartButton product={selectedVariant} quantity={quantity} />
       </div>
-    </>
+    </motion.div>
   );
 };
 

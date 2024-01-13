@@ -11,6 +11,7 @@ import RightArrow from '@/components/RigthArrow';
 import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { MOBILE_TESTIMONIALS, WEB_TESTIMONIALS } from '@/config/Testimonials';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const TestimonialsSlider = () => {
@@ -20,7 +21,13 @@ const TestimonialsSlider = () => {
     useSlider({ urls });
 
   return (
-    <div className="relative lg:px-10 overflow-hidden aspect-[16/8] lg:aspect-video w-full">
+    <motion.div
+      initial={{ opacity: 0, y: 70 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="relative lg:px-10 overflow-hidden aspect-[16/8] lg:aspect-video w-full"
+    >
       <div className="hidden lg:block absolute inset-0 transition ">
         <RightArrow
           activeStyles={activeStyles}
@@ -61,7 +68,7 @@ const TestimonialsSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

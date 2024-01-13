@@ -10,6 +10,7 @@ import LeftArrow from '@/components/LeftArrow';
 import RightArrow from '@/components/RigthArrow';
 import useSlider from '@/hooks/useSlider';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 const CollectionBenefitsSlider = ({ collectionHandle }) => {
@@ -23,7 +24,13 @@ const CollectionBenefitsSlider = ({ collectionHandle }) => {
     collectionBenefitsUrl,
   } = useSlider({ collectionHandle });
   return (
-    <div className="relative aspect-[16/8] w-full h-full">
+    <motion.div
+      initial={{ opacity: 0, x: -70 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="relative aspect-[16/8] w-full h-full"
+    >
       <div className="hidden lg:block absolute inset-0 transition">
         <RightArrow
           activeStyles={activeStyles}
@@ -64,7 +71,7 @@ const CollectionBenefitsSlider = ({ collectionHandle }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

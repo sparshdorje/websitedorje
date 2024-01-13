@@ -1,13 +1,10 @@
-import CollectionVideo from '@/components/CollectionVideo';
 import CollectionBenefitsSlider from '@/components/CollectionBenefitsSlider';
+import CollectionsBox from '@/components/CollectionsBox';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductCard from '@/components/ProductCard';
-import COLLECTIONS from '@/config/Collections';
 import CollectionService from '@/services/collection';
 import Image from 'next/image';
-import Link from 'next/link';
 import { cache } from 'react';
-import { ProductCardSkeleton } from '@/components/Skeletons';
 
 const getCollection = cache(async (handle) => {
   const fetchedProducts = await CollectionService.getCollectionByHandle({
@@ -37,8 +34,6 @@ export async function generateMetadata({ params: { collectionHandle } }) {
 const page = async ({ params }) => {
   const { collectionHandle } = params;
 
-  let isLoading = true;
-
   const getProducts = async () => {
     try {
       const fetchedProducts = await CollectionService.getProductsInCollection({
@@ -55,7 +50,6 @@ const page = async ({ params }) => {
       };
     } catch (e) {
       console.log(e);
-      isLoading = false;
     }
   };
 
@@ -63,43 +57,11 @@ const page = async ({ params }) => {
   const { allProducts = [], bestSellingProducts = [] } =
     (await getProducts()) || {};
 
-  isLoading = false;
-
   return (
     <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-14 lg:gap-16'}>
       {/* COLLECTIONS MOBILE */}
-      <MaxWidthWrapper className="flex items-start px-4 lg:items-center overflow-x-scroll justify-start lg:justify-center gap-8">
-        {COLLECTIONS.map((collection, idx) => (
-          <Link
-            href={collection.href}
-            key={collection.handle}
-            className="flex flex-col items-center gap-2 lg:gap-4"
-          >
-            <div
-              className="relative aspect-square h-20 w-20 lg:h-28 lg:w-28 overflow-hidden rounded-full group-hover:opacity-75"
-              style={{
-                border:
-                  collectionHandle === collection.handle && '2px solid #40733E',
-              }}
-            >
-              <Image
-                loading="eager"
-                src={collection.imageSrc}
-                alt="product category image"
-                fill
-                className="object-contain object-center"
-              />
-            </div>
-            <div
-              className="font-questrial text-center text-xs lg:text-base text-primary font-bold"
-              style={{
-                color: collectionHandle === collection.handle && '#40733E',
-              }}
-            >
-              {collection.name}
-            </div>
-          </Link>
-        ))}
+      <MaxWidthWrapper className={'px-0'}>
+        <CollectionsBox collectionHandle={collectionHandle} />
       </MaxWidthWrapper>
 
       {/* BANNER */}
@@ -128,21 +90,13 @@ const page = async ({ params }) => {
             {collection.title} Bestsellers
           </div>
           <div className="px-4 lg:px-0 flex lg:grid grid-cols-1 overflow-x-scroll py-2 lg:grid-cols-4 gap-5">
-            {!isLoading ? (
-              bestSellingProducts?.map((prod) => (
-                <ProductCard
-                  bestSeller={true}
-                  product={prod.node}
-                  key={prod.node.id}
-                />
-              ))
-            ) : (
-              <>
-                <ProductCardSkeleton />
-                <ProductCardSkeleton />
-                <ProductCardSkeleton />
-              </>
-            )}
+            {bestSellingProducts?.map((prod) => (
+              <ProductCard
+                bestSeller={true}
+                product={prod.node}
+                key={prod.node.id}
+              />
+            ))}
           </div>
         </MaxWidthWrapper>
       )}
@@ -175,17 +129,9 @@ const page = async ({ params }) => {
             All {collection.title} Products
           </div>
           <div className="px-4 lg:px-0 flex grid-cols-4 overflow-x-scroll lg:grid gap-5 py-2">
-            {!isLoading ? (
-              allProducts?.map((prod) => (
-                <ProductCard product={prod.node} key={prod.node.id} />
-              ))
-            ) : (
-              <>
-                <ProductCardSkeleton />
-                <ProductCardSkeleton />
-                <ProductCardSkeleton />
-              </>
-            )}
+            {allProducts?.map((prod) => (
+              <ProductCard product={prod.node} key={prod.node.id} />
+            ))}
           </div>
         </MaxWidthWrapper>
       )}
