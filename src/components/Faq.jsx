@@ -7,29 +7,7 @@ import {
   AccordionTrigger,
 } from './ui/accordion';
 import { motion } from 'framer-motion';
-
-const FAQs = [
-  {
-    question: 'Where does my tea come from?',
-    answer:
-      'We are based out of Second Chance House at Selim Hill Tea Garden. Selim Hill is a 1,000 acre heritage tea estate bordering the town of Kurseong. Established in 1871, tea is grown at an altitude of 500-4,000ft.',
-  },
-  {
-    question: 'What are the conditions of the people growing my tea?',
-    answer:
-      'We are based out of Second Chance House at Selim Hill Tea Garden. Selim Hill is a 1,000 acre heritage tea estate bordering the town of Kurseong. Established in 1871, tea is grown at an altitude of 500-4,000ft.',
-  },
-  {
-    question: 'How fresh is my tea?',
-    answer:
-      'We are based out of Second Chance House at Selim Hill Tea Garden. Selim Hill is a 1,000 acre heritage tea estate bordering the town of Kurseong. Established in 1871, tea is grown at an altitude of 500-4,000ft.',
-  },
-  {
-    question: 'Is my tea organic?',
-    answer:
-      'We are based out of Second Chance House at Selim Hill Tea Garden. Selim Hill is a 1,000 acre heritage tea estate bordering the town of Kurseong. Established in 1871, tea is grown at an altitude of 500-4,000ft.',
-  },
-];
+import { FAQs } from '../config/FAQs';
 
 const Faq = () => {
   return (

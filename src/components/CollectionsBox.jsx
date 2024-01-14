@@ -4,16 +4,27 @@ import React from 'react';
 import COLLECTIONS from '../config/Collections';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 import Image from 'next/image';
 
 const CollectionsBox = ({ collectionHandle = '', showTransition = true }) => {
+  const sendViewCategoryEvent = ({ collectionHandle }) => {
+    sendGTMEvent({
+      event: 'ViewCategory',
+      content_category: collectionHandle,
+    });
+  };
+
   const renderContent = () => (
     <div className="flex items-start px-4 lg:items-center overflow-x-scroll justify-start lg:justify-center gap-8">
       {COLLECTIONS.map((collection, idx) => (
         <Link
           href={collection.href}
           key={collection.handle}
+          onClick={() =>
+            sendViewCategoryEvent({ collectionHandle: collection.handle })
+          }
           className="flex flex-col items-center gap-2 lg:gap-4"
         >
           <div
