@@ -28,6 +28,12 @@ export async function generateMetadata({ params: { collectionHandle } }) {
   return {
     title,
     description,
+    openGraph: {
+      title,
+      description,
+      url: `https://dorjeteas.com/collections/${collectionHandle}`,
+      siteName: 'Dorje Teas',
+    },
   };
 }
 

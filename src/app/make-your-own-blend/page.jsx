@@ -1,7 +1,37 @@
 import { Button } from '@/components/ui/button';
+import ProductService from '@/services/product';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { cache } from 'react';
+
+const fetchProduct = cache(async (productHandle) => {
+  try {
+    const response = await ProductService.getProductByHandle({
+      productHandle,
+    });
+
+    return response.data.data.product;
+  } catch (error) {
+    console.error('Error fetching product:', error);
+  }
+});
+
+export async function generateMetadata() {
+  const product = await fetchProduct('make-your-blend');
+  const { title, description, images } = product || {};
+
+  return {
+    title,
+    description,
+    openGraph: {
+      images: [{ url: images?.edges?.[0]?.node?.url }],
+      title,
+      description,
+      url: `https://dorjeteas.com/make-your-own-blend`,
+      siteName: 'Dorje Teas',
+    },
+  };
+}
 
 const page = () => {
   return (

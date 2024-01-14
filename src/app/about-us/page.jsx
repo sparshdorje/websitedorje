@@ -20,6 +20,26 @@ const fetchProducts = async () => {
   }
 };
 
+export async function generateMetadata() {
+  return {
+    title: 'About Us',
+    description:
+      'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+    openGraph: {
+      title: 'About Us',
+      description:
+        'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+      url: `https://dorjeteas.com/about-us`,
+      siteName: 'Dorje Teas',
+      images: [
+        {
+          url: `${ASSETS.ICONS}/dorje-logo.png`, // Must be an absolute URL
+        },
+      ],
+    },
+  };
+}
+
 const page = async () => {
   const products = await fetchProducts();
 

@@ -26,6 +26,12 @@ export async function generateMetadata({ params: { collectionHandle } }) {
   return {
     title,
     description,
+    openGraph: {
+      title,
+      description,
+      url: `https://dorjeteas.com/shop-by-need/${collectionHandle}`,
+      siteName: 'Dorje Teas',
+    },
   };
 }
 

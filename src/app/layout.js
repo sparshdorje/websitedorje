@@ -10,6 +10,7 @@ import { Toaster } from 'sonner';
 import './globals.css';
 import { Suspense } from 'react';
 import NextTopLoader from 'nextjs-toploader';
+import { ASSETS } from '@/config';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -25,7 +26,24 @@ export const metadata = {
     default: 'Dorje Teas | The Original Taste of Darjeeling',
     template: '%s | Dorje Teas | The Original Taste of Darjeeling',
   },
-  description: 'Dorje Teas | The Original Taste of Darjeeling ',
+  description:
+    'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+  openGraph: {
+    title: {
+      default: 'Dorje Teas | The Original Taste of Darjeeling',
+      template: '%s | Dorje Teas | The Original Taste of Darjeeling',
+    },
+    description:
+      'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+    url: 'https://dorjeteas.com',
+    siteName: 'Dorje Teas',
+    images: [
+      {
+        url: `${ASSETS.ICONS}/dorje-logo.png`, // Must be an absolute URL
+      },
+    ],
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }) {
