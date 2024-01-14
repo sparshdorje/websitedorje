@@ -104,7 +104,7 @@ const Page = async ({ params }) => {
           <ProductDetail
             product={product}
             ratingData={ratingData}
-            user={user}
+            productId={productId}
           />
         )}
 

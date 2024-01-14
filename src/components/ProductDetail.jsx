@@ -9,8 +9,9 @@ import { extractRatings, formatPrice } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { sendGTMEvent } from '@next/third-parties/google';
 
-const ProductDetail = ({ product, ratingData, user }) => {
+const ProductDetail = ({ product, ratingData, productId }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [variants, setVariants] = useState([]);
@@ -79,6 +80,14 @@ const ProductDetail = ({ product, ratingData, user }) => {
 
     product?.options?.map((option, optionIdx) => {
       handleOptionSelect(optionIdx, option.name, option.values?.[0]);
+    });
+
+    sendGTMEvent({
+      event: 'ViewContent',
+      currency: 'INR',
+      content_name: product.title,
+      content_ids: productId,
+      value: product.title,
     });
   }, []);
 
