@@ -14,6 +14,23 @@ const fetchProduct = cache(async (productHandle) => {
   }
 });
 
+export async function generateMetadata() {
+  const product = await fetchProduct('make-your-blend');
+  const { title, description, images } = product || {};
+
+  return {
+    title,
+    description,
+    openGraph: {
+      images: [{ url: images?.edges?.[0]?.node?.url }],
+      title,
+      description,
+      url: `https://dorjeteas.com/make-your-own-blend/start`,
+      siteName: 'Dorje Teas',
+    },
+  };
+}
+
 const page = async () => {
   const product = await fetchProduct('make-your-blend');
 

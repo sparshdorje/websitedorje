@@ -73,6 +73,10 @@ export async function generateMetadata({ params: { productHandle } }) {
     description,
     openGraph: {
       images: [{ url: images?.edges?.[0]?.node?.url }],
+      title,
+      description,
+      url: `https://dorjeteas.com/products/${productHandle}`,
+      siteName: 'Dorje Teas',
     },
   };
 }

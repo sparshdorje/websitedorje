@@ -18,6 +18,9 @@ import { toast } from 'sonner';
 
 const page = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const origin = searchParams.get('origin');
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,8 +49,13 @@ const page = () => {
         res?.data?.data?.customerCreate?.customerUserErrors?.[0] || {};
 
       if (customerData && Object.keys(customerData).length > 0) {
-        toast.success(`Verification email sent to ${email}.`);
-        router.push('/verify-email?to=' + email);
+        toast.success(`Account Created! Please Sign In to continue.`);
+        if (origin) {
+          router.push(`/sign-in/${origin}`);
+          return;
+        }
+
+        router.push('/sign-in');
       } else {
         toast.error(customerError.message);
       }
