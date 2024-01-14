@@ -13,7 +13,7 @@ import CartItem from '@/components/CartItem';
 import { buttonVariants } from './ui/button';
 import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
-import { formatPrice } from '@/lib/utils';
+import { extractProductId, formatPrice } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import CartService from '@/services/cart';
@@ -23,15 +23,29 @@ import CartService from '@/services/cart';
 import { useEffect, useState } from 'react';
 import { useCart } from '@/hooks/useCart';
 import { useRouter } from 'next/navigation';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 const Cart = () => {
   const { items } = useCart();
   const itemCount = items.length;
 
+  // FOR GTM DATA LAYER //
+  const contents = items.map((item) => item?.product?.product?.title);
+  const content_ids = items.map((item) => {
+    const productId = extractProductId(item.product.id);
+    return productId;
+  });
+  // FOR GTM DATA LAYER //
+
   const router = useRouter();
 
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const cartTotal = items.reduce(
+    (total, { product }) => total + product.price.amount * product.quantity,
+    0
+  );
 
   const continueToCheckout = async () => {
     try {
@@ -41,6 +55,15 @@ const Cart = () => {
           quantity: item.product.quantity,
           merchandiseId: item.product.id,
         };
+      });
+
+      sendGTMEvent({
+        event: 'InitiateCheckout',
+        num_items: itemCount,
+        currency: 'INR',
+        content_ids,
+        contents,
+        value: cartTotal,
       });
 
       const cartResponse = await CartService.createCartWithLineItems(lineItems);
@@ -57,24 +80,32 @@ const Cart = () => {
     }
   };
 
+  const sendViewCartEvent = () => {
+    sendGTMEvent({
+      event: 'ViewCart',
+      currency: 'INR',
+      content_ids,
+      contents,
+      value: cartTotal,
+    });
+  };
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const cartTotal = items.reduce(
-    (total, { product }) => total + product.price.amount * product.quantity,
-    0
-  );
-
   return (
     <Sheet>
-      <SheetTrigger className="group -m-2 flex items-center p-2">
+      <SheetTrigger
+        onClick={sendViewCartEvent}
+        className="group -m-2 flex items-center p-2"
+      >
         <ShoppingCart
           aria-hidden="true"
           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
         />
         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-          {isMounted ? itemCount : 0}
+          ({isMounted ? itemCount : 0})
         </span>
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col lg:pr-0 sm:max-w-lg">
