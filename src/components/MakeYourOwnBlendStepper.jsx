@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Button } from './ui/button';
-import MaxWidthWrapper from './MaxWidthWrapper';
-import MakeYourBlendOption from './MakeYourBlendOption';
+import { extractProductId } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
+import { sendGTMEvent } from '@next/third-parties/google';
+import React, { useState } from 'react';
 import { toast } from 'sonner';
+import MakeYourBlendOption from './MakeYourBlendOption';
+import MaxWidthWrapper from './MaxWidthWrapper';
+import { Button } from './ui/button';
 
 const MakeYourOwnBlendStepper = ({ product }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -53,6 +55,17 @@ const MakeYourOwnBlendStepper = ({ product }) => {
     if (matchingVariant) {
       const checkoutUrl = await addToCart(matchingVariant.id, 1);
       if (checkoutUrl) {
+        sendGTMEvent({
+          event: 'InitiateCheckout',
+          num_items: 1,
+          content_type: 'product_group',
+          currency: 'INR',
+          content_ids: [extractProductId(matchingVariant.id)],
+          contents: [{ id: extractProductId(matchingVariant.id), quantity: 1 }],
+          value: matchingVariant?.price?.amount,
+          variantName: matchingVariant?.title,
+        });
+
         window.location.href = checkoutUrl;
       } else {
         setProcessingOrder(false);
