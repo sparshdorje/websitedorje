@@ -1,6 +1,7 @@
-import { APP_CONSTATNTS, ASSETS } from './index';
 import COLLECTIONS from './Collections';
+import NEWLY_LAUNCHED from './NewlyLaunched';
 import SHOP_BY_NEED from './ShopByNeed';
+import { APP_CONSTATNTS } from './index';
 
 export const MENU_ITEMS = [
   {
@@ -18,17 +19,9 @@ export const MENU_ITEMS = [
     cardType: `collection-card`,
   },
   {
-    label: `NEW: ORIGINAL CHAI`,
+    label: `NEWLY LAUNCHED`,
     value: `new_original_chai`,
-    featured: [
-      {
-        name: `The Original Chai`,
-        href: `/products/original-chai`,
-        imageSrc: `${ASSETS.NEW_LAUNCH}/original-chai.png`,
-        newLaunch: true,
-        description: `Original Chai is a premium Chai prepared with Gently Rolled Aromatic CTC leaves. Made by a special process, it is a rich, creamy & aromatic doodh Chai. `,
-      },
-    ],
+    featured: NEWLY_LAUNCHED,
     dropdown: true,
     cardType: `rectangle-card`,
   },
