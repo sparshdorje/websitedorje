@@ -28,7 +28,7 @@ export default function Home() {
         }
       >
         {NEWLY_LAUNCHED.map((item) => (
-          <NewlyLaunchedCard item={item} />
+          <NewlyLaunchedCard key={item.name} item={item} />
         ))}
       </MaxWidthWrapper>
 
@@ -49,6 +49,7 @@ export default function Home() {
                 src={imgSrc}
                 width={100}
                 height={100}
+                alt="logo"
                 loading="lazy"
                 className="h-[30px] lg:h-[60px] lg:!w-[200px] object-contain"
               />

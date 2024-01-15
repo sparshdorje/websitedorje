@@ -82,6 +82,7 @@ const page = async ({ params }) => {
               loading="lazy"
               height={600}
               width={600}
+              alt="banner"
               className="h-full w-full object-cover"
               src={collection?.image?.url}
             />

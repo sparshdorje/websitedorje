@@ -46,6 +46,7 @@ const page = () => {
           height={700}
           width={700}
           loading="lazy"
+          alt="banner"
           className="h-full w-full object-cover"
         />
 

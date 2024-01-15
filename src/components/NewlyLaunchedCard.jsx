@@ -38,7 +38,7 @@ const NewlyLaunchedCard = ({ item }) => {
         className="min-w-[300px] min-h-[180px] lg:w-[400px] lg:h-[200px] flex items-end justify-center rounded-xl pb-4"
         style={{
           background:
-            'linear-gradient(180deg, rgba(113, 61, 34, 0.00) 6%, #713D22 76.04%)',
+            'linear-gradient(180deg, rgba(113, 61, 34, 0.00) 0%, #000000 100%)',
         }}
       >
         <div className=" font-fraunces text-white text-lg ">{item.name}</div>

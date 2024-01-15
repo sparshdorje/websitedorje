@@ -58,7 +58,7 @@ const CollectionBenefitsSlider = ({ collectionHandle }) => {
         className="flex w-full !px-2.5 !lg:px-0 h-full"
       >
         {collectionBenefitsUrl.map((url, i) => (
-          <SwiperSlide key={i} className="-z-10 h-full w-full">
+          <SwiperSlide key={url} className="-z-10 h-full w-full">
             <div>
               <Image
                 fill
