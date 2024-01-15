@@ -41,6 +41,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
       return (
         <Link
           href={item.href}
+          onClick={() => sendViewCategoryEvent()}
           className=" w-96 h-36 shadow-md px-2 bg-white flex items-center rounded-xl gap-4"
         >
           {item.newLaunch && (

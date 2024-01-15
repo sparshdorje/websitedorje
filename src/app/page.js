@@ -4,8 +4,10 @@ import CollectionsBox from '@/components/CollectionsBox';
 import HomePageBannerSlider from '@/components/HomePageBannerSlider';
 import HomePageVideo from '@/components/HomePageVideo';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import NewlyLaunchedCard from '@/components/NewlyLaunchedCard';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
+import NEWLY_LAUNCHED from '@/config/NewlyLaunched';
 import Image from 'next/image';
 
 export default function Home() {
@@ -18,6 +20,17 @@ export default function Home() {
 
       {/* BANNER */}
       <HomePageBannerSlider />
+
+      {/* NEWLY LAUNCHED */}
+      <MaxWidthWrapper
+        className={
+          'flex items-center justify-start gap-6 overflow-x-scroll py-4 px-6 lg:justify-center lg:gap-12 max-w-screen-xl'
+        }
+      >
+        {NEWLY_LAUNCHED.map((item) => (
+          <NewlyLaunchedCard item={item} />
+        ))}
+      </MaxWidthWrapper>
 
       {/* AS SEEN ON */}
       <div>
