@@ -24,7 +24,7 @@ export default function Home() {
       {/* NEWLY LAUNCHED */}
       <MaxWidthWrapper
         className={
-          'flex items-center justify-start gap-6 overflow-x-scroll py-4 px-6 lg:justify-center lg:gap-12 max-w-screen-xl'
+          'flex items-center justify-start gap-6 overflow-x-scroll py-8 px-6 lg:justify-center lg:gap-12 max-w-screen-xl'
         }
       >
         {NEWLY_LAUNCHED.map((item) => (
