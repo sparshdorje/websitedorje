@@ -43,7 +43,7 @@ const HomePageBannerSlider = () => {
         className="flex w-full h-full"
       >
         {urls.map((url, i) => (
-          <SwiperSlide key={url} className="-z-10 relative h-full w-full">
+          <SwiperSlide key={url.href} className="-z-10 relative h-full w-full">
             <Link href={url.href}>
               <Image
                 fill

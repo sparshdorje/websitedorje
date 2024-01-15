@@ -77,18 +77,30 @@ const page = async ({ params }) => {
 
       <MaxWidthWrapper className={'max-w-screen-xl '}>
         <div className="w-full h-[216px] rounded-lg lg:h-[600px] bg-white overflow-hidden">
-          <Image
-            loading="lazy"
-            height={600}
-            width={600}
-            className="h-full w-full object-cover"
-            src={
-              collection?.image?.url
-                ? collection?.image?.url
-                : '/assets/banners/collection-fallback.png'
-            }
-            alt="Collection Banner"
-          />
+          {collection?.image?.url ? (
+            <Image
+              loading="lazy"
+              height={600}
+              width={600}
+              alt="banner"
+              className="h-full w-full object-cover"
+              src={collection?.image?.url}
+            />
+          ) : (
+            <div
+              className="h-full w-ful"
+              style={{
+                background: `url('/assets/banners/collection-fallback.webp')`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="h-full w-full bg-black bg-opacity-60 flex items-center justify-center text-white font-fraunces text-2xl lg:text-5xl">
+                {collection.title}
+              </div>
+            </div>
+          )}
         </div>
       </MaxWidthWrapper>
 

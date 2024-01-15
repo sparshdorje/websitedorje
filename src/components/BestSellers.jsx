@@ -43,7 +43,7 @@ const BestSellers = () => {
                   ? 'white'
                   : '#14222B',
             }}
-            key={collection.handle}
+            key={collection.href}
             onClick={() =>
               setSelectedCollectionForBestsellers(collection.handle)
             }
@@ -61,9 +61,7 @@ const BestSellers = () => {
       >
         {bestSellingProducts.length > 0 ? (
           bestSellingProducts?.map((prod, i) => (
-            <>
-              <BestsellerCard product={prod.node} key={i} />
-            </>
+            <BestsellerCard product={prod.node} key={prod.node.id} />
           ))
         ) : (
           <>

@@ -18,6 +18,7 @@ const MakeYourBlendOption = ({ name, handleSelect, selected }) => {
           src={'/assets/icons/check-circle.png'}
           height={100}
           width={100}
+          alt="check"
           className="h-8 w-8 absolute -top-3 -right-3 object-contain"
         />
       )}

@@ -165,13 +165,14 @@ const Page = async ({ params }) => {
                 'flex items-center justify-between lg:justify-center lg:gap-12 max-w-screen-xl'
               }
             >
-              {HOME_PAGE_AS_SEEN_ON.map((imgSrc, idx) => (
+              {[0, 0, 0].map((imgSrc, idx) => (
                 <Image
                   key={imgSrc}
                   src={'/assets/icons/shark-tank.png'}
                   width={100}
                   height={100}
                   loading="lazy"
+                  alt="shark tank logo"
                   className="h-[80px] lg:h-[100px] object-contain"
                 />
               ))}

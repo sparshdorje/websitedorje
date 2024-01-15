@@ -24,11 +24,11 @@ export default function Home() {
       {/* NEWLY LAUNCHED */}
       <MaxWidthWrapper
         className={
-          'flex items-center justify-start gap-6 overflow-x-scroll py-4 px-6 lg:justify-center lg:gap-12 max-w-screen-xl'
+          'flex items-center justify-start gap-6 overflow-x-scroll py-8 px-6 lg:justify-center lg:gap-12 max-w-screen-xl'
         }
       >
         {NEWLY_LAUNCHED.map((item) => (
-          <NewlyLaunchedCard item={item} />
+          <NewlyLaunchedCard key={item.name} item={item} />
         ))}
       </MaxWidthWrapper>
 
@@ -49,6 +49,7 @@ export default function Home() {
                 src={imgSrc}
                 width={100}
                 height={100}
+                alt="logo"
                 loading="lazy"
                 className="h-[30px] lg:h-[60px] lg:!w-[200px] object-contain"
               />

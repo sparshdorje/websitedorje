@@ -73,6 +73,7 @@ const page = async () => {
               loading="eager"
               height={700}
               width={700}
+              alt="background image"
               src={`${ASSETS.ABOUT_US}/hero-bg.webp`}
               className="h-full w-full object-cover"
             />
@@ -92,6 +93,7 @@ const page = async () => {
               loading="lazy"
               height={700}
               width={700}
+              alt="background image"
               src={`${ASSETS.ABOUT_US}/about-bg.webp`}
               className="h-full w-full object-cover"
             />

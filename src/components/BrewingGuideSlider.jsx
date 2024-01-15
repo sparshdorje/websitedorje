@@ -66,6 +66,7 @@ const BrewingGuideSlider = ({ productHandle }) => {
               height="360"
               loading="lazy"
               className="object-cover object-center rounded-3xl"
+              alt="brewing guide"
               src={url}
             />
           </SwiperSlide>
