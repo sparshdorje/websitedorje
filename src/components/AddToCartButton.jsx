@@ -20,7 +20,7 @@ const AddToCartButton = ({
     sendGTMEvent({
       event: 'AddToCart',
       quantity,
-      productName: product.product.title,
+      product_name: product.product.title,
       price: product.price.amount,
       variant: product.title,
       value: product?.product?.title,

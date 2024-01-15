@@ -5,11 +5,11 @@ import ImageSlider from '@/components/ImageSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import StarRating from '@/components/StarRating';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { extractRatings, formatPrice } from '@/lib/utils';
+import { extractProductId, formatPrice } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import { sendGTMEvent } from '@next/third-parties/google';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const ProductDetail = ({ product, ratingData, productId }) => {
   const [quantity, setQuantity] = useState(1);
@@ -64,6 +64,17 @@ const ProductDetail = ({ product, ratingData, productId }) => {
     const checkoutUrl = await addToCart(selectedVariant.id, quantity);
 
     if (checkoutUrl) {
+      sendGTMEvent({
+        event: 'InitiateCheckout',
+        num_items: quantity,
+        content_type: 'product_group',
+        currency: 'INR',
+        content_ids: [extractProductId(selectedVariant.id)],
+        contents: [{ id: extractProductId(selectedVariant.id), quantity }],
+        value: selectedVariant?.price?.amount,
+        variant_names: [selectedVariant?.title],
+      });
+
       window.location.href = checkoutUrl;
       // Redirect to the checkout page
     } else {
@@ -86,8 +97,15 @@ const ProductDetail = ({ product, ratingData, productId }) => {
       event: 'ViewContent',
       currency: 'INR',
       content_name: product.title,
-      content_ids: productId,
-      value: product.title,
+      content_ids: [productId],
+      content_type: 'product_group',
+      contents: product?.variants?.edges?.map((variant) => {
+        return {
+          id: extractProductId(variant?.node?.id),
+          quantity: 1,
+        };
+      }),
+      value: product?.priceRange?.minVariantPrice?.amount,
     });
   }, []);
 

@@ -30,7 +30,15 @@ const Cart = () => {
   const itemCount = items.length;
 
   // FOR GTM DATA LAYER //
-  const contents = items.map((item) => item?.product?.product?.title);
+  const contents = items.map((item) => {
+    return {
+      id: extractProductId(item.product.id),
+      quantity: item.product.quantity,
+    };
+  });
+  const variant_names = items.map((item) => {
+    return item?.product?.title;
+  });
   const content_ids = items.map((item) => {
     const productId = extractProductId(item.product.id);
     return productId;
@@ -60,10 +68,12 @@ const Cart = () => {
       sendGTMEvent({
         event: 'InitiateCheckout',
         num_items: itemCount,
+        content_type: 'product_group',
         currency: 'INR',
         content_ids,
         contents,
         value: cartTotal,
+        variant_names,
       });
 
       const cartResponse = await CartService.createCartWithLineItems(lineItems);
@@ -86,6 +96,7 @@ const Cart = () => {
       currency: 'INR',
       content_ids,
       contents,
+      content_type: 'product_group',
       value: cartTotal,
     });
   };

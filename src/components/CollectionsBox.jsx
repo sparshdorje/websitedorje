@@ -9,10 +9,10 @@ import { sendGTMEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 
 const CollectionsBox = ({ collectionHandle = '', showTransition = true }) => {
-  const sendViewCategoryEvent = ({ collectionHandle }) => {
+  const sendViewCategoryEvent = ({ href }) => {
     sendGTMEvent({
       event: 'ViewCategory',
-      content_category: collectionHandle,
+      content_category: href,
     });
   };
 
@@ -22,9 +22,7 @@ const CollectionsBox = ({ collectionHandle = '', showTransition = true }) => {
         <Link
           href={collection.href}
           key={collection.handle}
-          onClick={() =>
-            sendViewCategoryEvent({ collectionHandle: collection.handle })
-          }
+          onClick={() => sendViewCategoryEvent({ href: collection.href })}
           className="flex flex-col items-center gap-2 lg:gap-4"
         >
           <div

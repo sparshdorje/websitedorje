@@ -6,10 +6,10 @@ import React from 'react';
 import { sendGTMEvent } from '@next/third-parties/google';
 
 const NavCards = ({ item, variant = 'collection-card' }) => {
-  const sendViewCategoryEvent = ({ collectionHandle }) => {
+  const sendViewCategoryEvent = () => {
     sendGTMEvent({
       event: 'ViewCategory',
-      content_category: collectionHandle,
+      content_category: item?.href,
     });
   };
 
@@ -18,9 +18,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
       return (
         <Link
           href={item.href}
-          onClick={() =>
-            sendViewCategoryEvent({ collectionHandle: item?.handle })
-          }
+          onClick={() => sendViewCategoryEvent()}
           className="w-40 h-52 shadow-md lg:w-48 lg:h-56 bg-white flex flex-col items-center rounded-xl justify-center"
         >
           <div className="relative aspect-square h-24 w-24 lg:h-32 lg:w-32 overflow-hidden rounded-lg group-hover:opacity-75">
