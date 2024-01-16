@@ -60,7 +60,7 @@ const page = async ({ params }) => {
     (await getProducts()) || {};
 
   return (
-    <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-10 lg:gap-12'}>
+    <div className={'pt-8 pb-24 px-0 w-full grid grid-cols-1 gap-10 lg:gap-12'}>
       {/* COLLECTIONS */}
       <MaxWidthWrapper className={'px-0'}>
         <CollectionsBox
