@@ -8,7 +8,7 @@ export function cn(...inputs) {
 }
 
 export function formatPrice(price, options = {}) {
-  const { currency = 'INR', notation = 'compact' } = options;
+  const { currency = 'INR' } = options;
 
   const numericPrice = typeof price === 'string' ? price : price;
 
