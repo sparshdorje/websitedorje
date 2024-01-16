@@ -1,3 +1,4 @@
+import AsSeenOnStrip from '@/components/AsSeenOnStrip';
 import BestSellers from '@/components/BestSellers';
 import BrandStorySlider from '@/components/BrandStorySlider';
 import CollectionsBox from '@/components/CollectionsBox';
@@ -8,6 +9,7 @@ import NewlyLaunchedCard from '@/components/NewlyLaunchedCard';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
 import NEWLY_LAUNCHED from '@/config/NewlyLaunched';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 export default function Home() {
@@ -38,23 +40,7 @@ export default function Home() {
           As seen on
         </div>
         <div className="w-full bg-white py-6">
-          <MaxWidthWrapper
-            className={
-              'flex items-center justify-between lg:justify-center lg:gap-12 max-w-screen-xl'
-            }
-          >
-            {HOME_PAGE_AS_SEEN_ON.map((imgSrc, idx) => (
-              <Image
-                key={imgSrc}
-                src={imgSrc}
-                width={100}
-                height={100}
-                alt="logo"
-                loading="lazy"
-                className="h-[30px] lg:h-[60px] lg:!w-[200px] object-contain"
-              />
-            ))}
-          </MaxWidthWrapper>
+          <AsSeenOnStrip />
         </div>
       </div>
 
