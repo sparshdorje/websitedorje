@@ -24,6 +24,8 @@ import { useCart } from '@/hooks/useCart';
 import { sendGTMEvent } from '@next/third-parties/google';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import RelatedProduct from './RelatedProduct';
+import { ASSETS } from '@/config';
 
 const Cart = () => {
   const { items } = useCart();
@@ -106,7 +108,7 @@ const Cart = () => {
   }, []);
 
   return (
-    <Sheet>
+    <Sheet className="max-h-screen ">
       <SheetTrigger
         onClick={sendViewCartEvent}
         className="group -m-2 flex items-center p-2"
@@ -119,14 +121,14 @@ const Cart = () => {
           ({isMounted ? itemCount : 0})
         </span>
       </SheetTrigger>
-      <SheetContent className="flex w-full flex-col lg:pr-0 sm:max-w-lg">
-        <SheetHeader className="space-y-2.5 pr-6">
+      <SheetContent className="flex w-full flex-col lg:pr-0 sm:max-w-lg overflow-y-scroll px-0">
+        <SheetHeader className="space-y-2.5 pr-6 pl-2 lg:pl-4">
           <SheetTitle>Cart ({isMounted ? itemCount : 0})</SheetTitle>
         </SheetHeader>
 
         {itemCount > 0 ? (
           <>
-            <div className="flex w-full flex-col pr-6">
+            <div className="flex w-full flex-col pr-6 pl-2 lg:pl-4">
               <ScrollArea>
                 {items.map(({ product }) => (
                   <CartItem product={product} key={product.id} />
@@ -134,7 +136,7 @@ const Cart = () => {
               </ScrollArea>
             </div>
 
-            <div className="space-y-4 pr-6">
+            <div className="space-y-4 pr-6 pl-2 lg:pl-4">
               <Separator />
               <div className="space-y-1.5 text-sm">
                 <div className="flex">
@@ -146,14 +148,31 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <SheetFooter>
-              <div
-                onClick={continueToCheckout}
-                className={buttonVariants({
-                  className: 'w-full cursor-pointer',
-                })}
-              >
-                {isLoading ? 'Processing...' : 'Continue to Checkout'}
+            <SheetFooter
+              className={'lg:pr-2 flex !flex-col items-start w-full gap-6'}
+            >
+              <div className="w-full px-2">
+                <div
+                  onClick={continueToCheckout}
+                  className={buttonVariants({
+                    className: 'w-full cursor-pointer',
+                  })}
+                >
+                  {isLoading ? 'Processing...' : 'Continue to Checkout'}
+                </div>
+              </div>
+
+              <div className="flex flex-col items-start w-full">
+                <div className="text-lg px-2 lg:pl-4 text-center mb-4 font-fraunces text-primary font-semibold">
+                  People also bought...
+                </div>
+                <div className="w-full lg:pl-4">
+                  <RelatedProduct
+                    productId={items?.[0]?.product?.product?.id}
+                    className="flex items-start justify-start overflow-x-scroll lg:overflow-x-auto lg:justify-between lg:flex-wrap gap-6 px-2.5 lg:px-0 lg:pr-4"
+                    ratingCardVariant="dark"
+                  />
+                </div>
               </div>
             </SheetFooter>
           </>
@@ -162,9 +181,14 @@ const Cart = () => {
             <div className="flex h-full flex-col items-center justify-center space-y-1">
               <div
                 aria-hidden="true"
-                className="relative mb-4 h-60 w-60 text-muted-foreground"
+                className="relative mb-4 h-40 w-40 text-muted-foreground"
               >
-                <Image loading="lazy" src="/" fill alt="empty shopping cart" />
+                <Image
+                  loading="lazy"
+                  src={`${ASSETS.ICONS}/dorje-logo.png`}
+                  fill
+                  alt="empty shopping cart"
+                />
               </div>
               <div className="text-xl font-semibold">Your cart is empty</div>
               <SheetTrigger asChild>

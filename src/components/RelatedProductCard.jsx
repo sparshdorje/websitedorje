@@ -5,7 +5,22 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import StarRating from './StarRating';
 
-const RelatedProductCard = ({ product }) => {
+const RELATED_CARD_VARIANT = {
+  titleStyles: {
+    default: 'text-left font-fraunces font-semibold text-base text-white',
+    dark: 'text-left font-fraunces font-semibold text-base text-primary',
+  },
+  ratingStarColor: {
+    default: 'white',
+    dark: 'default',
+  },
+  ratingStarTextColor: {
+    default: 'text-white opacity-60 text-xs',
+    dark: 'text-primary',
+  },
+};
+
+const RelatedProductCard = ({ product, variant = 'default' }) => {
   const [ratingData, setRatingData] = useState({});
   const productId = extractProductId(product.id);
 
@@ -38,16 +53,16 @@ const RelatedProductCard = ({ product }) => {
           height={100}
         />
       </div>
-      <div className="text-left font-fraunces font-semibold text-base text-white">
+      <div className={RELATED_CARD_VARIANT.titleStyles[variant]}>
         {product.title}
       </div>
       <StarRating
         rating={ratingData.averageRating}
         totalRatings={ratingData.totalRatings}
         showTotalRating={false}
-        variant={'white'}
+        variant={RELATED_CARD_VARIANT.ratingStarColor[variant]}
         size="20"
-        className={'text-white opacity-60 text-xs'}
+        className={RELATED_CARD_VARIANT.ratingStarTextColor[variant]}
       />
     </Link>
   );

@@ -54,6 +54,7 @@ const ProductService = {
                     }
                     product{
                       title
+                      id
                     }
                   }
                 }
@@ -105,6 +106,7 @@ const ProductService = {
                     }
                     product{
                       title
+                      id
                     }
                   }
                 }
@@ -177,6 +179,7 @@ const ProductService = {
                 }
                 product{
                   title
+                  id
                 }
               }
             }

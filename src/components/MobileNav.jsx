@@ -116,6 +116,11 @@ const MobileNav = ({ user }) => {
                     </Link>
                   )
                 )}
+                <Link href={'/make-your-own-blend'} className="p-4">
+                  <div className="text-gray-900 border-b-2 text-base font-medium">
+                    MAKE YOUR OWN BLEND
+                  </div>
+                </Link>
               </div>
             </div>
 

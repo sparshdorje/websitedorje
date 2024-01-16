@@ -20,8 +20,9 @@ const CartItem = ({ product }) => {
                 loading="lazy"
                 src={image.url}
                 alt={product.product.title}
-                fill
-                className="absolute object-cover"
+                width={300}
+                height={300}
+                className="h-full w-full absolute object-cover"
               />
             ) : (
               <div className="flex h-full items-center justify-center bg-secondary">
