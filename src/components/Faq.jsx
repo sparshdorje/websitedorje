@@ -1,13 +1,12 @@
 'use client';
-import React from 'react';
+import { motion } from 'framer-motion';
+import { FAQs } from '../config/FAQs';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion';
-import { motion } from 'framer-motion';
-import { FAQs } from '../config/FAQs';
 
 const Faq = () => {
   return (

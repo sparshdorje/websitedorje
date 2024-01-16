@@ -1,11 +1,17 @@
 'use client';
 
 import SHOP_BY_NEED from '@/config/ShopByNeed';
+import { sendGTMEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 const ShopByNeedBoxes = ({ collectionHandle = '' }) => {
+  const sendViewCategoryEvent = ({ href }) => {
+    sendGTMEvent({
+      event: 'ViewCategory',
+      content_category: href,
+    });
+  };
   return (
     <div className="flex items-start px-4 lg:items-center overflow-x-scroll justify-start lg:justify-center gap-8">
       {SHOP_BY_NEED.map((collection, idx) => (

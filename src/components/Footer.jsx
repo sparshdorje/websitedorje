@@ -1,12 +1,11 @@
-import React from 'react';
-import MaxWidthWrapper from './MaxWidthWrapper';
-import Link from 'next/link';
-import { Facebook, Instagram, Youtube } from 'lucide-react';
 import { APP_CONSTATNTS } from '@/config';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
+import Link from 'next/link';
+import MaxWidthWrapper from './MaxWidthWrapper';
 
 const Footer = () => {
   return (
-    <div className="w-full bg-primary">
+    <div className="w-full bg-primary pb-24 lg:pb-0">
       <MaxWidthWrapper
         className={'py-12 flex flex-col lg:flex-row justify-between gap-12'}
       >

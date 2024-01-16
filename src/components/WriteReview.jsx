@@ -1,17 +1,11 @@
 'use client';
 
+import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '../components/ui/button';
 import { Textarea } from '../components/ui/textarea';
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Input } from '@/components/ui/input';
-
-{
-  /* <Link href={`/sign-in?origin=products/${productHandle}`}>
-                    <Button className="rounded-full">Write a Review</Button>
-                  </Link> */
-}
 
 const WriteReview = ({ productId, user = {} }) => {
   const { displayName: userName, email: userEmail } = user;

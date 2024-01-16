@@ -1,6 +1,6 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import ShopByNeedBox from '@/components/ShopByNeedBox';
 import ProductCard from '@/components/ProductCard';
+import ShopByNeedBox from '@/components/ShopByNeedBox';
 import { ASSETS } from '@/config';
 import CollectionService from '@/services/collection';
 import Image from 'next/image';
@@ -60,7 +60,7 @@ const page = async ({ params }) => {
     (await getProducts()) || {};
 
   return (
-    <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-14 lg:gap-16'}>
+    <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-10 lg:gap-12'}>
       {/* COLLECTIONS MOBILE */}
       <MaxWidthWrapper className={'px-0'}>
         <ShopByNeedBox collectionHandle={collectionHandle} />

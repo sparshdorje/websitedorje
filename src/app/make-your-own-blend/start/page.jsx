@@ -1,5 +1,5 @@
-import ProductService from '@/services/product';
 import MakeYourOwnBlendStepper from '@/components/MakeYourOwnBlendStepper';
+import ProductService from '@/services/product';
 import { cache } from 'react';
 
 const fetchProduct = cache(async (productHandle) => {

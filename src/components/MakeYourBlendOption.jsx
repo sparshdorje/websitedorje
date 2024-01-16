@@ -1,7 +1,6 @@
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { ICONS } from '../config/MakeYourBlend';
-import React from 'react';
 
 const MakeYourBlendOption = ({ name, handleSelect, selected }) => {
   return (

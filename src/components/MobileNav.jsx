@@ -1,20 +1,19 @@
 'use client';
 
-import MENU_ITEMS from '@/config/MenuItems';
-import { Menu, UserRound, X } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Button, buttonVariants } from './ui/button';
+import MENU_ITEMS from '@/config/MenuItems';
 import { useAuth } from '@/hooks/useAuth';
+import { Menu, UserRound, X } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import NavCards from './NavCards';
+import { Button } from './ui/button';
 
 const MobileNav = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,6 +96,7 @@ const MobileNav = ({ user }) => {
                             {category.featured.map((item) => (
                               <NavCards
                                 item={item}
+                                key={item.name}
                                 variant={'collection-card'}
                               />
                             ))}

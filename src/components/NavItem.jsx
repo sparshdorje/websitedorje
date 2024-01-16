@@ -1,10 +1,8 @@
-import React from 'react';
-import { Button, buttonVariants } from './ui/button';
-import { ChevronDown } from 'lucide-react';
-import Image from 'next/image';
-import NavCards from './NavCards';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import NavCards from './NavCards';
+import { Button, buttonVariants } from './ui/button';
 
 const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
   return (

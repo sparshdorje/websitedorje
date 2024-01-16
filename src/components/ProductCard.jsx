@@ -1,16 +1,16 @@
 'use client';
 
-import Link from 'next/link';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import AddToCartButton from './AddToCartButton';
-import { usePalette } from 'color-thief-react';
-import Image from 'next/image';
-import { cn, extractProductId, formatPrice, truncate } from '@/lib/utils';
+import { extractProductId, formatPrice, truncate } from '@/lib/utils';
 import RatingService from '@/services/rating';
-import StarRating from './StarRating';
-import { ASSETS } from '../config';
-import { ProductCardSkeleton } from './Skeletons';
+import { usePalette } from 'color-thief-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { ASSETS } from '../config';
+import AddToCartButton from './AddToCartButton';
+import { ProductCardSkeleton } from './Skeletons';
+import StarRating from './StarRating';
 
 const ProductCard = ({ product, bestSeller = false }) => {
   const [ratingData, setRatingData] = useState({});

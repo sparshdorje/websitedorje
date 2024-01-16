@@ -14,7 +14,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className={'pt-8 pb-52 w-full grid grid-cols-1 gap-8 lg:gap-16'}>
+    <div className={'pt-8 pb-24 w-full grid grid-cols-1 gap-8 lg:gap-14'}>
       {/* COLLECTIONS */}
       <MaxWidthWrapper className={'px-0'}>
         <CollectionsBox />
@@ -46,7 +46,7 @@ export default function Home() {
 
       {/* BEST SELLERS */}
       <div
-        className="text-3xl py-16 text-center mb-3 font-fraunces text-secondary font-semibold"
+        className="text-3xl py-12 text-center mb-3 font-fraunces text-secondary font-semibold"
         style={{
           width: '100%',
           height: '100%', // Set your desired height
@@ -67,11 +67,11 @@ export default function Home() {
       </div>
 
       {/* BRAND STORY */}
-      <MaxWidthWrapper className={'mb-32 max-w-screen-xl px-0'}>
-        <div className="text-3xl text-center mb-8 font-fraunces text-secondary font-semibold">
+      <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+        <div className="px-2.5 text-3xl text-center mb-8 font-fraunces text-secondary font-semibold">
           At the heart of Darjeeling
         </div>
-        <div className="text-base text-center mb-10 font-questrial max-w-3xl mx-auto">
+        <div className="text-base px-2.5 text-center mb-10 font-questrial max-w-3xl mx-auto">
           Dorje Teas, in Darjeeling's Selim Hills, offers authentic black tea,
           meticulously crafted on our estate. Experience the essence of
           Darjeeling in every sip – where passion meets perfection.

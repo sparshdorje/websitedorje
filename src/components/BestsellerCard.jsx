@@ -1,12 +1,12 @@
 'use client';
 
+import { cn, extractProductId, formatPrice, truncate } from '@/lib/utils';
+import RatingService from '@/services/rating';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddToCartButton from './AddToCartButton';
-import { cn, extractProductId, formatPrice, truncate } from '@/lib/utils';
 import StarRating from './StarRating';
-import RatingService from '@/services/rating';
 
 const BestsellerCard = ({
   product,

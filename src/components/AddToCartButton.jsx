@@ -1,10 +1,10 @@
 'use client';
 
 import { useCart } from '@/hooks/useCart';
-import { useEffect, useState } from 'react';
-import { Button } from './ui/button';
 import { cn, extractProductId } from '@/lib/utils';
 import { sendGTMEvent } from '@next/third-parties/google';
+import { useEffect, useState } from 'react';
+import { Button } from './ui/button';
 
 const AddToCartButton = ({
   product,

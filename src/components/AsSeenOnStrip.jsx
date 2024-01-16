@@ -2,7 +2,6 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import React from 'react';
 
 const AsSeenOnStrip = () => {
   return (

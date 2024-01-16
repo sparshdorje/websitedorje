@@ -3,7 +3,7 @@
 import { extractProductId } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { sendGTMEvent } from '@next/third-parties/google';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import MakeYourBlendOption from './MakeYourBlendOption';
 import MaxWidthWrapper from './MaxWidthWrapper';

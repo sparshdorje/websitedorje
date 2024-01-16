@@ -3,18 +3,18 @@
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { SignUpValidator } from '../../../lib/validators/accountCredentialsValidator';
+import UserService from '@/services/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { cn } from '../../../lib/utils';
-import DorjeLogo from '../../../../public/assets/icons/dorje-logo.png';
 import Image from 'next/image';
-import UserService from '@/services/user';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import DorjeLogo from '../../../../public/assets/icons/dorje-logo.png';
+import { cn } from '../../../lib/utils';
+import { SignUpValidator } from '../../../lib/validators/accountCredentialsValidator';
 
 const page = () => {
   const router = useRouter();

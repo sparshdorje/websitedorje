@@ -9,9 +9,9 @@ import 'swiper/css/pagination';
 import useSlider from '@/hooks/useSlider';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
-import Image from 'next/image';
 import { HOME_PAGE_BANNERS } from '@/config/HomePage';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const HomePageBannerSlider = () => {

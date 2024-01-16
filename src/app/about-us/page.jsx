@@ -44,7 +44,7 @@ const page = async () => {
   const products = await fetchProducts();
 
   return (
-    <div className={'pb-0 lg:pb-52 w-full grid grid-cols-1 lg:gap-16'}>
+    <div className={'pb-0 w-full grid grid-cols-1 lg:gap-12'}>
       {/* HERO SECTION */}
       <div className="bg-[#679FA1] bg-opacity-50 w-full h-[700px]">
         <div
@@ -120,7 +120,7 @@ const page = async () => {
       </div>
 
       {/* OUR PRODUCTS */}
-      <div className="bg-[#EFE1D4] w-screen h-[700px] mb-12 lg:mb-0">
+      <div className="bg-[#EFE1D4] py-8 lg:py-16 w-screen h-fit mb-12 lg:mb-0">
         <MaxWidthWrapper
           className={
             'flex items-center px-0 justify-start lg:justify-center w-full h-full gap-8'
@@ -167,18 +167,12 @@ const page = async () => {
             <Link
               target="_blank"
               href={'https://maps.app.goo.gl/YyJf6zZaexiWYGZHA'}
-            ></Link>
-            <Button className={'rounded-full'}>Get directions</Button>
+            >
+              <Button className={'rounded-full'}>Get directions</Button>
+            </Link>
           </div>
 
           <div className="flex flex-col lg:rounded-md overflow-hidden items-start gap-8 w-full h-full lg:w-[50%] lg:h-[80%]">
-            {/* <Image
-              loading="lazy"
-              height={700}
-              width={700}
-              src={'/assets/about-us/location-bg.webp'}
-              className="h-full w-full object-cover"
-            /> */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4371.200948763955!2d88.31649677608554!3d26.83987376321578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e437490e145cb1%3A0x223b23961dc9790c!2sDorje%20Teas!5e1!3m2!1sen!2sin!4v1705064139622!5m2!1sen!2sin"
               allowfullscreen=""

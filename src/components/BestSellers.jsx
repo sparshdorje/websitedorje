@@ -3,8 +3,8 @@ import BestsellerCard from '@/components/BestsellerCard';
 import { BestSellerCardSkeleton } from '@/components/Skeletons';
 import COLLECTIONS from '@/config/Collections';
 import CollectionService from '@/services/collection';
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const BestSellers = () => {
   const [bestSellingProducts, setBestSellingProducts] = useState([]);

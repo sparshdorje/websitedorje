@@ -100,7 +100,11 @@ const Page = async ({ params }) => {
 
   return (
     <>
-      <div className={'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-24'}>
+      <div
+        className={
+          'mx-auto pt-8 pb-20 w-full grid grid-cols-1 gap-12 lg:gap-20'
+        }
+      >
         {product && (
           <ProductDetail
             product={product}
@@ -272,7 +276,7 @@ const Page = async ({ params }) => {
           background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
           backgroundSize: 'cover',
         }}
-        className="py-16 mb-12 lg:mb-0"
+        className="py-12 mb-12 lg:mb-0"
       >
         <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
           <div className="text-3xl px-2.5 lg:px-0 text-center mb-3 font-fraunces text-white font-semibold">

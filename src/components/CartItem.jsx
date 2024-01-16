@@ -3,7 +3,7 @@ import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/lib/utils';
 import { ImageIcon, X } from 'lucide-react';
 import Image from 'next/image';
-import { Button, buttonVariants } from './ui/button';
+import { Button } from './ui/button';
 
 const CartItem = ({ product }) => {
   const { image } = product;

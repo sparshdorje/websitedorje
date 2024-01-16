@@ -5,8 +5,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import LeftArrow from '@/components/LeftArrow';
-import RightArrow from '@/components/RigthArrow';
 
 const BenefitsSlider = ({
   benefits = [

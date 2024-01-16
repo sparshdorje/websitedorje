@@ -1,6 +1,5 @@
-import React from 'react';
-import { cn } from '../lib/utils';
 import { ChevronLeft } from 'lucide-react';
+import { cn } from '../lib/utils';
 
 const LeftArrow = ({
   swiper,

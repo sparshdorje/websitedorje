@@ -1,7 +1,7 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import RelatedProductCard from './RelatedProductCard';
+import { useEffect, useState } from 'react';
 import ProductService from '../services/product';
+import RelatedProductCard from './RelatedProductCard';
 
 const RelatedProduct = ({
   productId,

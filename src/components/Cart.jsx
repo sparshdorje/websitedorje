@@ -1,6 +1,14 @@
 'use client';
 
+import CartItem from '@/components/CartItem';
+import { extractProductId, formatPrice } from '@/lib/utils';
+import CartService from '@/services/cart';
 import { ShoppingCart } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { buttonVariants } from './ui/button';
+import { ScrollArea } from './ui/scroll-area';
+import { Separator } from './ui/separator';
 import {
   Sheet,
   SheetContent,
@@ -9,21 +17,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from './ui/sheet';
-import CartItem from '@/components/CartItem';
-import { buttonVariants } from './ui/button';
-import { ScrollArea } from './ui/scroll-area';
-import { Separator } from './ui/separator';
-import { extractProductId, formatPrice } from '@/lib/utils';
-import Image from 'next/image';
-import Link from 'next/link';
-import CartService from '@/services/cart';
 
 // import { ScrollArea } from './ui/scroll-area';
 // import CartItem from './CartItem';
-import { useEffect, useState } from 'react';
 import { useCart } from '@/hooks/useCart';
-import { useRouter } from 'next/navigation';
 import { sendGTMEvent } from '@next/third-parties/google';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const Cart = () => {
   const { items } = useCart();
