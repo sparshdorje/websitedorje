@@ -1,5 +1,6 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductCard from '@/components/ProductCard';
+import { ASSETS } from '@/config';
 import CollectionService from '@/services/collection';
 import Image from 'next/image';
 import { cache } from 'react';
@@ -73,16 +74,16 @@ const page = async ({ params }) => {
               src={collection?.image?.url}
             />
           ) : (
-            <div
-              className="h-full w-ful"
-              style={{
-                background: `url('/assets/banners/collection-fallback.webp')`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              <div className="h-full w-full bg-black bg-opacity-60 flex items-center justify-center text-white font-fraunces text-2xl lg:text-5xl">
+            <div className="h-full w-full relative">
+              <Image
+                loading="eager"
+                src={`${ASSETS.BANNERS}/collection-fallback.webp`}
+                width={800}
+                height={800}
+                alt={collection.title}
+                className="h-full w-full absolute object-cover object-center z-10"
+              />
+              <div className="absolute z-30 h-full w-full bg-black bg-opacity-60 flex items-center justify-center text-white font-fraunces text-2xl lg:text-5xl">
                 {collection.title}
               </div>
             </div>

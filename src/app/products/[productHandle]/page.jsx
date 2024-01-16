@@ -1,24 +1,21 @@
+import AsSeenOnStrip from '@/components/AsSeenOnStrip';
 import BrandStorySlider from '@/components/BrandStorySlider';
 import BrewingGuideSlider from '@/components/BrewingGuideSlider';
 import Faq from '@/components/Faq';
 import KnowYourTeaSlider from '@/components/KnowYourTeaSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import WriteReview from '@/components/WriteReview';
 import ProductDetail from '@/components/ProductDetail';
 import RelatedProduct from '@/components/RelatedProduct';
 import ReviewsDisplay from '@/components/ReviewsDisplay';
+import StarRating from '@/components/StarRating';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
+import WriteReview from '@/components/WriteReview';
 import { extractProductId, getServerSideUser } from '@/lib/utils';
 import ProductService from '@/services/product';
 import RatingService from '@/services/rating';
-import Image from 'next/image';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
-import { cookies } from 'next/headers';
-import Link from 'next/link';
-import StarRating from '@/components/StarRating';
 
 const fetchProduct = cache(async (productHandle) => {
   try {
@@ -147,7 +144,15 @@ const Page = async ({ params }) => {
         </div>
 
         {/* AS SEEN ON */}
-        <div
+        <div>
+          <div className="text-3xl text-center mb-8 font-fraunces text-primary font-semibold">
+            As seen on
+          </div>
+          <div className="w-full bg-white py-6">
+            <AsSeenOnStrip />
+          </div>
+        </div>
+        {/* <div
           style={{
             width: '100%',
             height: '100%', // Set your desired height
@@ -178,7 +183,7 @@ const Page = async ({ params }) => {
               ))}
             </MaxWidthWrapper>
           </div>
-        </div>
+        </div> */}
 
         {/* BREWING GUIDE */}
         <div>
