@@ -2,13 +2,23 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { ICONS } from '../config/MakeYourBlend';
 
-const MakeYourBlendOption = ({ name, handleSelect, selected }) => {
+const MakeYourBlendOption = ({
+  name,
+  handleSelect,
+  selected,
+  clickable = true,
+}) => {
   return (
     <div
-      onClick={() => handleSelect(name)}
+      onClick={() => {
+        if (clickable) {
+          handleSelect(name);
+        }
+      }}
       className={cn(
-        'bg-white w-[30%] lg:w-[160px] relative rounded-md h-[130px] lg:h-[160px] p-2 gap-3 flex flex-col items-center lg:justify-center cursor-pointer',
-        selected && 'border-2 border-secondary'
+        'bg-white w-[30%] lg:w-[160px] relative rounded-md h-[130px] lg:h-[160px] p-2 gap-3 flex flex-col items-center lg:justify-center',
+        selected && 'border-2 border-secondary',
+        clickable ? 'cursor-pointer' : 'cursor-not-allowed'
       )}
     >
       {selected && (
