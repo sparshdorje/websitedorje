@@ -17,15 +17,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from './ui/sheet';
-
-// import { ScrollArea } from './ui/scroll-area';
-// import CartItem from './CartItem';
+import { ASSETS } from '@/config';
 import { useCart } from '@/hooks/useCart';
 import { sendGTMEvent } from '@next/third-parties/google';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useLayoutEffect, useState } from 'react';
 import RelatedProduct from './RelatedProduct';
-import { ASSETS } from '@/config';
 
 const Cart = () => {
   const { items } = useCart();
@@ -48,9 +45,13 @@ const Cart = () => {
   // FOR GTM DATA LAYER //
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [sheetKey, setSheetKey] = useState(0); // Add sheetKey state
 
   const cartTotal = items.reduce(
     (total, { product }) => total + product.price.amount * product.quantity,
@@ -103,14 +104,23 @@ const Cart = () => {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsMounted(true);
-  }, []);
+
+    if (searchParams.get('openCart') === 'true') {
+      setIsSheetOpen(true);
+      router.replace(pathname, { scroll: false });
+      setSheetKey((prevKey) => prevKey + 1);
+    }
+  }, [searchParams, pathname]);
 
   return (
-    <Sheet className="max-h-screen ">
+    <Sheet key={sheetKey} defaultOpen={isSheetOpen} className="max-h-screen ">
       <SheetTrigger
-        onClick={sendViewCartEvent}
+        onClick={() => {
+          sendViewCartEvent();
+          setIsSheetOpen(true);
+        }}
         className="group -m-2 flex items-center p-2"
       >
         <ShoppingCart
@@ -122,7 +132,7 @@ const Cart = () => {
         </span>
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col lg:pr-0 sm:max-w-lg overflow-y-scroll px-0">
-        <SheetHeader className="space-y-2.5 pr-6 pl-2 lg:pl-4">
+        <SheetHeader className="space-y-2.5 pr-6 pl-2 lg:pl-4 ">
           <SheetTitle>Cart ({isMounted ? itemCount : 0})</SheetTitle>
         </SheetHeader>
 
@@ -131,7 +141,13 @@ const Cart = () => {
             <div className="flex w-full flex-col pr-6 pl-2 lg:pl-4">
               <ScrollArea>
                 {items.map(({ product }) => (
-                  <CartItem product={product} key={product.id} />
+                  <CartItem
+                    product={product}
+                    key={product.id}
+                    setIsSheetOpen={setIsSheetOpen}
+                    setSheetKey={setSheetKey}
+                    sheetKey={sheetKey}
+                  />
                 ))}
               </ScrollArea>
             </div>

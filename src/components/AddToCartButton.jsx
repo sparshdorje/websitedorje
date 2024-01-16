@@ -3,6 +3,7 @@
 import { useCart } from '@/hooks/useCart';
 import { cn, extractProductId } from '@/lib/utils';
 import { sendGTMEvent } from '@next/third-parties/google';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 
@@ -14,6 +15,7 @@ const AddToCartButton = ({
 }) => {
   const { addItem } = useCart();
   const [isSuccess, setIsSuccess] = useState(false);
+  const router = useRouter();
 
   const sendAddToCartEvent = () => {
     const productId = extractProductId(product.id) || '';
@@ -26,6 +28,10 @@ const AddToCartButton = ({
       value: product?.product?.title,
       productId,
     });
+  };
+
+  const openCart = () => {
+    router.replace(`?openCart=true`, { scroll: false });
   };
 
   useEffect(() => {
@@ -43,6 +49,7 @@ const AddToCartButton = ({
         addItem({ ...product, quantity });
         sendAddToCartEvent();
         setIsSuccess(true);
+        openCart();
       }}
       variant={variant}
       className={cn(

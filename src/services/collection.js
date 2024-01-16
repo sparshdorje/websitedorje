@@ -87,6 +87,7 @@ const CollectionService = {
                       product{
                         title
                         id
+                        handle
                       }
                     }
                   }
