@@ -109,7 +109,7 @@ export default function Home() {
 
       {/* SPOTIFY PLAYLIST */}
       <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
-        <div className="text-3xl text-center mb-8 lg:mb-14 font-fraunces text-secondary font-semibold">
+        <div className="text-3xl px-2.5 text-center mb-8 lg:mb-14 font-fraunces text-secondary font-semibold">
           Special Playlists Curated for You
         </div>
         <div className="w-full h-[100px] lg:h-[400px]">
