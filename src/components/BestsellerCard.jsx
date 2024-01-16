@@ -8,7 +8,12 @@ import { cn, extractProductId, formatPrice, truncate } from '@/lib/utils';
 import StarRating from './StarRating';
 import RatingService from '@/services/rating';
 
-const BestsellerCard = ({ product, className, truncateLimit = 120 }) => {
+const BestsellerCard = ({
+  product,
+  className,
+  truncateLimit = 120,
+  variantTruncateLimit = 30,
+}) => {
   const [ratingData, setRatingData] = useState({});
   const productId = extractProductId(product.id);
   const imageUrl = product?.images?.edges?.[0]?.node?.url;
@@ -29,29 +34,29 @@ const BestsellerCard = ({ product, className, truncateLimit = 120 }) => {
   return (
     <div
       className={cn(
-        `flex flex-col animate-in items-start overflow-hidden pb-2 rounded-2xl min-w-[300px] w-[300px] h-[440px] bg-white`,
+        `flex flex-col animate-in items-start overflow-hidden pb-2 rounded-2xl min-w-[300px] w-[300px] h-[460px] bg-white`,
         className
       )}
     >
       <Link className="w-full" href={`/products/${product.handle}`}>
-        <div className="h-[180px] w-full mb-3">
+        <div className="h-[200px] w-full mb-3">
           <Image
             alt="product image"
             src={imageUrl}
             loading="lazy"
-            className="w-full h-[180px] object-cover"
-            width={100}
-            height={100}
+            className="w-full h-[200px] object-cover"
+            width={400}
+            height={400}
           />
         </div>
       </Link>
 
       <div className="flex flex-col w-full items-start justify-between h-full gap-6">
         <Link
-          className="flex flex-col w-full items-start justify-between h-full"
+          className="flex px-4 flex-col w-full items-start justify-between h-full"
           href={`/products/${product.handle}`}
         >
-          <div className="px-4 flex gap-3 justify-between items-start w-full">
+          <div className=" flex gap-3 justify-between items-start w-full">
             <div>
               <div className="text-left font-fraunces font-semibold text-base text-secondary">
                 {product.title}
@@ -65,14 +70,22 @@ const BestsellerCard = ({ product, className, truncateLimit = 120 }) => {
                 className={' opacity-60 text-xs'}
               />
             </div>
-
-            <div className="font-questrial text-sm font-bold text-secondary">
-              {formatPrice(product?.variants?.edges?.[0]?.node?.price?.amount)}
-            </div>
           </div>
 
-          <div className="px-4 font-questrial text-sm">
+          <div className="font-questrial text-sm text-left">
             {truncate(product.description, truncateLimit)}
+          </div>
+
+          <div className="font-questrial text-left text-sm font-bold text-secondary flex items-center gap-2">
+            {formatPrice(product?.variants?.edges?.[0]?.node?.price?.amount)}
+            <span className="text-gray-600 text-xs font-medium">
+              (
+              {truncate(
+                product?.variants?.edges?.[0]?.node?.title,
+                variantTruncateLimit
+              )}
+              )
+            </span>
           </div>
         </Link>
 

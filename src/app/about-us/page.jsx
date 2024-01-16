@@ -135,8 +135,9 @@ const page = async () => {
                 <BestsellerCard
                   product={prod.node}
                   key={i}
-                  className={'min-w-[250px] w-[250px] h-[390px]'}
+                  className={'min-w-[250px] w-[250px] h-[420px]'}
                   truncateLimit={60}
+                  variantTruncateLimit={20}
                 />
               ))}
             </div>

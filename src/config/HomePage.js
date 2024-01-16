@@ -24,3 +24,9 @@ export const HOME_PAGE_AS_SEEN_ON = [
   `${ASSETS.ICONS}/times.png`,
   `${ASSETS.ICONS}/gq.png`,
 ];
+
+export const HOME_PAGE_AVAILABLE_ON = [
+  `${ASSETS.ICONS}/bloomberg.png`,
+  `${ASSETS.ICONS}/times.png`,
+  `${ASSETS.ICONS}/gq.png`,
+];

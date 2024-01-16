@@ -14,7 +14,7 @@ const Loading = () => {
         className=" animate-pulse h-28 w-28 mb-6"
       />
       <div className="font-fraunces animate-pulse text-primary font-semibold">
-        Loading...
+        Brewing...
       </div>
     </div>
   );
