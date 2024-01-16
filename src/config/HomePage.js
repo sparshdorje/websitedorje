@@ -11,7 +11,7 @@ export const HOME_PAGE_BANNERS = [
   },
   {
     imgUrl: `${ASSETS.HOME_PAGE_BANNERS}/autumn-harvest.webp`,
-    href: '/collections/offers',
+    href: '/collections/seasonal-subscription',
   },
   {
     imgUrl: `${ASSETS.HOME_PAGE_BANNERS}/wellness-range.webp`,

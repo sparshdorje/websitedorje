@@ -27,8 +27,8 @@ const COLLECTIONS = [
   },
   {
     name: 'Special Offers',
-    href: '/collections/offers',
-    handle: 'offers',
+    href: '/collections/seasonal-subscription',
+    handle: 'seasonal-subscription',
     imageSrc: `${ASSETS.SHOP_NOW}/special-offers.png`,
   },
   {
@@ -75,7 +75,7 @@ export const COLLECTION_BENEFITS = {
     `${ASSETS.COLLECTION_BENEFITS}/moonlight-tea/4.webp`,
     `${ASSETS.COLLECTION_BENEFITS}/moonlight-tea/5.webp`,
   ],
-  offers: [
+  'seasonal-subscription': [
     `${ASSETS.COLLECTION_BENEFITS}/black-tea/1.webp`,
     `${ASSETS.COLLECTION_BENEFITS}/black-tea/2.webp`,
     `${ASSETS.COLLECTION_BENEFITS}/black-tea/3.webp`,
