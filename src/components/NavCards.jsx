@@ -1,9 +1,8 @@
 'use client';
 
+import { sendGTMEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import { sendGTMEvent } from '@next/third-parties/google';
 
 const NavCards = ({ item, variant = 'collection-card' }) => {
   const sendViewCategoryEvent = () => {

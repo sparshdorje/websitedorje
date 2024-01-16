@@ -3,9 +3,10 @@ import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/lib/utils';
 import { ImageIcon, X } from 'lucide-react';
 import Image from 'next/image';
-import { Button, buttonVariants } from './ui/button';
+import { Button } from './ui/button';
+import Link from 'next/link';
 
-const CartItem = ({ product }) => {
+const CartItem = ({ product, setIsSheetOpen, sheetKey, setSheetKey }) => {
   const { image } = product;
 
   const { removeItem, increaseQuantity, decreaseQuantity } = useCart();
@@ -15,22 +16,31 @@ const CartItem = ({ product }) => {
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-start space-x-4">
           <div className="relative aspect-square h-16 w-16 min-w-fit overflow-hidden rounded">
-            {image?.url ? (
-              <Image
-                loading="lazy"
-                src={image.url}
-                alt={product.product.title}
-                fill
-                className="absolute object-cover"
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center bg-secondary">
-                <ImageIcon
-                  aria-hidden="true"
-                  className="h-4 w-4 text-muted-foreground"
+            <Link
+              href={`/products/${product?.product?.handle}`}
+              onClick={() => {
+                setIsSheetOpen(false);
+                setSheetKey(sheetKey + 1);
+              }}
+            >
+              {image?.url ? (
+                <Image
+                  loading="lazy"
+                  src={image.url}
+                  alt={product.product.title}
+                  width={300}
+                  height={300}
+                  className="h-full w-full absolute object-cover"
                 />
-              </div>
-            )}
+              ) : (
+                <div className="flex h-full items-center justify-center bg-secondary">
+                  <ImageIcon
+                    aria-hidden="true"
+                    className="h-4 w-4 text-muted-foreground"
+                  />
+                </div>
+              )}
+            </Link>
           </div>
 
           <div className="flex flex-col self-start">

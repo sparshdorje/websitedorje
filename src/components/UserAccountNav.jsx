@@ -1,4 +1,5 @@
 'use client';
+import { useAuth } from '@/hooks/useAuth';
 import { UserRound } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from './ui/button';
@@ -8,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { useAuth } from '@/hooks/useAuth';
 
 const UserAccountNav = () => {
   const { signOut } = useAuth();

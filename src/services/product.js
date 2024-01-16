@@ -54,6 +54,8 @@ const ProductService = {
                     }
                     product{
                       title
+                      id
+                      handle
                     }
                   }
                 }
@@ -105,6 +107,8 @@ const ProductService = {
                     }
                     product{
                       title
+                      id
+                      handle
                     }
                   }
                 }
@@ -177,6 +181,8 @@ const ProductService = {
                 }
                 product{
                   title
+                  id
+                  handle
                 }
               }
             }

@@ -9,8 +9,8 @@ import 'swiper/css/pagination';
 import LeftArrow from '@/components/LeftArrow';
 import RightArrow from '@/components/RigthArrow';
 import useSlider from '@/hooks/useSlider';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 const CollectionBenefitsSlider = ({ collectionHandle }) => {

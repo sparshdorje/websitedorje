@@ -1,7 +1,6 @@
 'use client';
-import { BadgeCheck, CircleUserRound } from 'lucide-react';
-import React from 'react';
 import { motion } from 'framer-motion';
+import { BadgeCheck, CircleUserRound } from 'lucide-react';
 
 const ReviewCard = ({ review }) => {
   const { reviewerName, reviewContent, rating, timestamp } = review || {};

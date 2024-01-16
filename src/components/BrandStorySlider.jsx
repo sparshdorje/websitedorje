@@ -8,12 +8,12 @@ import 'swiper/css/pagination';
 
 import LeftArrow from '@/components/LeftArrow';
 import RightArrow from '@/components/RigthArrow';
+import { THUMBNAILS, VIDEO_URL } from '@/config/BrandStory';
 import useSlider from '@/hooks/useSlider';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { VIDEO_URL, THUMBNAILS } from '@/config/BrandStory';
-import ReactPlayer from 'react-player';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import ReactPlayer from 'react-player';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 const BrandStorySlider = ({ urls = VIDEO_URL, thumbnails = THUMBNAILS }) => {
   const isMobile = window && window.innerWidth < 768;

@@ -9,9 +9,9 @@ import 'swiper/css/pagination';
 import LeftArrow from '@/components/LeftArrow';
 import RightArrow from '@/components/RigthArrow';
 import useSlider from '@/hooks/useSlider';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 const BrewingGuideSlider = ({ productHandle }) => {
   const isMobile = window.innerWidth < 768;

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import ProductService from '@/services/product';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { cache } from 'react';
+import { cache } from 'react';
 
 const fetchProduct = cache(async (productHandle) => {
   try {

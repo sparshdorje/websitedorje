@@ -1,17 +1,15 @@
-import Link from 'next/link';
-import React from 'react';
-import { buttonVariants } from './ui/button';
-import MaxWidthWrapper from './MaxWidthWrapper';
-import NavItems from './NavItems';
-import MobileNav from './MobileNav';
-import DorjeLogo from '../../public/assets/icons/dorje-logo.png';
-import Image from 'next/image';
-import Cart from './Cart';
-import { UserRound } from 'lucide-react';
 import { getServerSideUser } from '@/lib/utils';
+import { UserRound } from 'lucide-react';
 import { cookies } from 'next/headers';
-import UserAccountNav from './UserAccountNav';
+import Image from 'next/image';
+import Link from 'next/link';
+import DorjeLogo from '../../public/assets/icons/dorje-logo.png';
+import Cart from './Cart';
+import MaxWidthWrapper from './MaxWidthWrapper';
+import MobileNav from './MobileNav';
+import NavItems from './NavItems';
 import Ticker from './Ticker';
+import UserAccountNav from './UserAccountNav';
 
 const Navbar = async () => {
   const nextCookies = cookies();

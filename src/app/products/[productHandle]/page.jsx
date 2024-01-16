@@ -1,4 +1,5 @@
 import AsSeenOnStrip from '@/components/AsSeenOnStrip';
+import AvailableOnStrip from '@/components/AvailableOnStrip';
 import BrandStorySlider from '@/components/BrandStorySlider';
 import BrewingGuideSlider from '@/components/BrewingGuideSlider';
 import Faq from '@/components/Faq';
@@ -28,20 +29,6 @@ const fetchProduct = cache(async (productHandle) => {
     console.error('Error fetching product:', error);
   }
 });
-
-// export async function generateStaticParams() {
-//   try {
-//     const response = await ProductService.getAllProducts();
-
-//     return response?.data?.data?.products?.edges
-//       ?.map((product) => {
-//         return product?.node?.handle;
-//       })
-//       .slice(0, 20);
-//   } catch (error) {
-//     console.error('Error fetching product:', error);
-//   }
-// }
 
 const fetchRatingData = async (productId) => {
   try {
@@ -100,7 +87,11 @@ const Page = async ({ params }) => {
 
   return (
     <>
-      <div className={'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-24'}>
+      <div
+        className={
+          'mx-auto pt-8 pb-20 w-full grid grid-cols-1 gap-12 lg:gap-20'
+        }
+      >
         {product && (
           <ProductDetail
             product={product}
@@ -152,38 +143,6 @@ const Page = async ({ params }) => {
             <AsSeenOnStrip />
           </div>
         </div>
-        {/* <div
-          style={{
-            width: '100%',
-            height: '100%', // Set your desired height
-            background: `url(/assets/svg/ProductPageAsSeenOnBG.svg) no-repeat`,
-            backgroundSize: 'cover',
-          }}
-          className="py-16"
-        >
-          <div className="text-3xl text-center mb-8 font-fraunces text-white font-semibold">
-            As seen on
-          </div>
-          <div className="w-ful py-6">
-            <MaxWidthWrapper
-              className={
-                'flex items-center justify-between lg:justify-center lg:gap-12 max-w-screen-xl'
-              }
-            >
-              {[0, 0, 0].map((imgSrc, idx) => (
-                <Image
-                  key={imgSrc}
-                  src={'/assets/icons/shark-tank.png'}
-                  width={100}
-                  height={100}
-                  loading="lazy"
-                  alt="shark tank logo"
-                  className="h-[80px] lg:h-[100px] object-contain"
-                />
-              ))}
-            </MaxWidthWrapper>
-          </div>
-        </div> */}
 
         {/* BREWING GUIDE */}
         <div>
@@ -196,6 +155,16 @@ const Page = async ({ params }) => {
             </div>
             <BrewingGuideSlider productHandle={product.handle} />
           </MaxWidthWrapper>
+        </div>
+
+        {/* AVAILABLE ON */}
+        <div>
+          <div className="text-3xl text-center mb-8 font-fraunces text-primary font-semibold">
+            Available On
+          </div>
+          <div className="w-full bg-white py-6">
+            <AvailableOnStrip />
+          </div>
         </div>
 
         {/* TESTIMONIALS */}
@@ -272,7 +241,7 @@ const Page = async ({ params }) => {
           background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
           backgroundSize: 'cover',
         }}
-        className="py-16 mb-12 lg:mb-0"
+        className="py-12 mb-12 lg:mb-0"
       >
         <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
           <div className="text-3xl px-2.5 lg:px-0 text-center mb-3 font-fraunces text-white font-semibold">

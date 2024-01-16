@@ -39,7 +39,7 @@ const SHOP_BY_NEED = [
   {
     name: `Contains Antioxidants`,
     href: `/shop-by-need/rich-in-antioxidants`,
-    handle: '',
+    handle: 'rich-in-antioxidants',
     imageSrc: `${ASSETS.SHOP_BY_NEED}/contains-antioxidants.webp`,
     description: `An assorted range of teas, that help you improve your digestion`,
   },

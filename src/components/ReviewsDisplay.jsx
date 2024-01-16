@@ -2,9 +2,9 @@
 
 import ReviewCard from '../components/ReviewCard';
 
-import React, { useEffect, useState } from 'react';
-import { Button } from './ui/button';
 import RatingService from '@/services/rating';
+import { useState } from 'react';
+import { Button } from './ui/button';
 
 const ReviewsDisplay = ({ reviewData = [], productId, totalReviews }) => {
   const [isLoading, setIsLoading] = useState(false);

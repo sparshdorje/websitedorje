@@ -1,6 +1,3 @@
-import React from 'react';
-import { cookies } from 'next/headers';
-import { formatDateString, formatPrice, getServerSideUser } from '@/lib/utils';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import {
   Table,
@@ -11,7 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { formatDateString, formatPrice, getServerSideUser } from '@/lib/utils';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
+import React from 'react';
 
 const page = async () => {
   const nextCookies = cookies();

@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
-import COLLECTIONS from '../config/Collections';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { sendGTMEvent } from '@next/third-parties/google';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import COLLECTIONS from '../config/Collections';
 
 import Image from 'next/image';
 

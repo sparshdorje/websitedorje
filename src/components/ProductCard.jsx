@@ -1,16 +1,16 @@
 'use client';
 
-import Link from 'next/link';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import AddToCartButton from './AddToCartButton';
-import { usePalette } from 'color-thief-react';
-import Image from 'next/image';
-import { cn, extractProductId, formatPrice, truncate } from '@/lib/utils';
+import { extractProductId, formatPrice, truncate } from '@/lib/utils';
 import RatingService from '@/services/rating';
-import StarRating from './StarRating';
-import { ASSETS } from '../config';
-import { ProductCardSkeleton } from './Skeletons';
+import { usePalette } from 'color-thief-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { ASSETS } from '../config';
+import AddToCartButton from './AddToCartButton';
+import { ProductCardSkeleton } from './Skeletons';
+import StarRating from './StarRating';
 
 const ProductCard = ({ product, bestSeller = false }) => {
   const [ratingData, setRatingData] = useState({});
@@ -63,8 +63,8 @@ const ProductCard = ({ product, bestSeller = false }) => {
           {bestSeller && (
             <Image
               alt="Best seller"
-              width={100}
-              height={100}
+              width={200}
+              height={200}
               className="h-9 w-9 object-contain absolute top-6 z-10 right-6 "
               src={`${ASSETS.ICONS}/best-seller.png`}
             />
@@ -79,8 +79,8 @@ const ProductCard = ({ product, bestSeller = false }) => {
                 alt="product image"
                 src={imageUrl}
                 className="w-full h-[200px] object-cover rounded-2xl"
-                width={100}
-                height={200}
+                width={500}
+                height={500}
               />
             </div>
             <div>
@@ -99,8 +99,11 @@ const ProductCard = ({ product, bestSeller = false }) => {
             <div className=" font-questrial text-xs">
               {truncate(product.description, 160)}
             </div>
-            <div className=" font-questrial text-sm font-semibold">
+            <div className=" font-questrial text-sm font-semibold flex items-center gap-2">
               {formatPrice(product?.variants?.edges?.[0]?.node?.price?.amount)}
+              <span className="text-gray-600 text-xs font-medium">
+                ({product?.variants?.edges?.[0]?.node?.title})
+              </span>
             </div>
           </Link>
           <div className="w-full h-8 mb-1">

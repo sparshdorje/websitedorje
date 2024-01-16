@@ -1,5 +1,7 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductCard from '@/components/ProductCard';
+import ShopByNeedBox from '@/components/ShopByNeedBox';
+import SpotifyPlaylistSlider from '@/components/SpotifyPlaylistSlider';
 import { ASSETS } from '@/config';
 import CollectionService from '@/services/collection';
 import Image from 'next/image';
@@ -13,12 +15,6 @@ const getCollection = cache(async (handle) => {
 
   return collection;
 });
-
-// export async function generateStaticParams() {
-//   return COLLECTIONS.map((collection) => {
-//     return collection.handle;
-//   });
-// }
 
 export async function generateMetadata({ params: { collectionHandle } }) {
   const collection = await getCollection(collectionHandle);
@@ -59,7 +55,11 @@ const page = async ({ params }) => {
     (await getProducts()) || {};
 
   return (
-    <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-14 lg:gap-16'}>
+    <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-10 lg:gap-12'}>
+      {/* COLLECTIONS MOBILE */}
+      <MaxWidthWrapper className={'px-0'}>
+        <ShopByNeedBox collectionHandle={collectionHandle} />
+      </MaxWidthWrapper>
       {/* BANNER */}
 
       <MaxWidthWrapper className={'max-w-screen-xl '}>
@@ -119,6 +119,16 @@ const page = async ({ params }) => {
           </div>
         </MaxWidthWrapper>
       )}
+
+      {/* SPOTIFY PLAYLIST */}
+      <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+        <div className="px-4 lg:px-0 font-fraunces font-semibold text-xl mb-4 text-primary">
+          Special Playlists Curated for You
+        </div>
+        <div className="w-full h-[100px] lg:h-[400px]">
+          <SpotifyPlaylistSlider />
+        </div>
+      </MaxWidthWrapper>
     </div>
   );
 };

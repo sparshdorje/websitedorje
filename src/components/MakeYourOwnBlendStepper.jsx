@@ -3,7 +3,7 @@
 import { extractProductId } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { sendGTMEvent } from '@next/third-parties/google';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import MakeYourBlendOption from './MakeYourBlendOption';
 import MaxWidthWrapper from './MaxWidthWrapper';
@@ -13,6 +13,7 @@ const MakeYourOwnBlendStepper = ({ product }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [processingOrder, setProcessingOrder] = useState(false);
+  const [showBlendPreview, setShowBlendPreview] = useState(false);
 
   const steps = product?.options?.map((option) => {
     return {
@@ -24,6 +25,8 @@ const MakeYourOwnBlendStepper = ({ product }) => {
   const variants = product?.variants?.edges?.map((variant) => {
     return variant.node;
   });
+
+  const allStepsCompleted = selectedOptions.length === steps.length;
 
   const handlePlaceOrder = async () => {
     let matchingVariant = null;
@@ -90,8 +93,10 @@ const MakeYourOwnBlendStepper = ({ product }) => {
       if (currentStep < steps.length - 1) {
         setCurrentStep(currentStep + 1);
       } else {
-        // Last step reached, perform the action or show the "Place Order" button
-        handlePlaceOrder();
+        if (allStepsCompleted) {
+          // Show the preview
+          setShowBlendPreview(true);
+        }
       }
     } else {
       alert('Please select an option before proceeding!');
@@ -100,7 +105,11 @@ const MakeYourOwnBlendStepper = ({ product }) => {
 
   const handleBack = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      if (showBlendPreview) {
+        setShowBlendPreview(false);
+      } else {
+        setCurrentStep(currentStep - 1);
+      }
     }
   };
 
@@ -111,25 +120,47 @@ const MakeYourOwnBlendStepper = ({ product }) => {
           'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-16 max-w-4xl'
         }
       >
-        <div className="flex justify-between items-center">
-          <div className="font-fraunces text-xl text-primary font-semibold">
-            {steps[currentStep].title}
-          </div>
-          <div className="font-questrial text-base text-primary opacity-75 font-medium">
-            step {currentStep + 1}/{steps.length}
-          </div>
-        </div>
-
-        <div className="flex gap-4 flex-wrap">
-          {steps[currentStep].options.map((option, index) => (
-            <MakeYourBlendOption
-              name={option}
-              key={index}
-              selected={selectedOptions[currentStep]?.value === option}
-              handleSelect={handleOptionSelect}
-            />
-          ))}
-        </div>
+        {!showBlendPreview ? (
+          <>
+            <div className="flex justify-between items-center">
+              <div className="font-fraunces text-xl text-primary font-semibold">
+                {steps[currentStep].title}
+              </div>
+              <div className="font-questrial text-base text-primary opacity-75 font-medium">
+                step {currentStep + 1}/{steps.length}
+              </div>
+            </div>
+            <div className="flex gap-4 flex-wrap">
+              {steps[currentStep].options.map((option, index) => (
+                <MakeYourBlendOption
+                  name={option}
+                  key={index}
+                  selected={selectedOptions[currentStep]?.value === option}
+                  handleSelect={handleOptionSelect}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          // BLEND PREVIEW
+          <>
+            <h2 className="font-fraunces text-xl text-primary font-semibold">
+              Your Blend Preview
+            </h2>
+            <div className="flex gap-4 flex-wrap">
+              {selectedOptions.map((option, index) => (
+                <div key={index}>
+                  <MakeYourBlendOption
+                    name={option.value}
+                    key={index}
+                    selected={true}
+                    clickable={false}
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </MaxWidthWrapper>
       <div className="fixed bottom-0 p-4 border-t-2 border-[#F2E2D4] w-full bg-background">
         <MaxWidthWrapper
@@ -147,17 +178,23 @@ const MakeYourOwnBlendStepper = ({ product }) => {
             >
               Back
             </Button>
-            <Button
-              className="flex-1"
-              onClick={handleNext}
-              disabled={!selectedOptions[currentStep]}
-            >
-              {currentStep === steps.length - 1
-                ? processingOrder
-                  ? 'Processing...'
-                  : 'Place Order'
-                : 'Next'}
-            </Button>
+            {!showBlendPreview ? (
+              <Button
+                className="flex-1"
+                onClick={handleNext}
+                disabled={!selectedOptions[currentStep]}
+              >
+                Next
+              </Button>
+            ) : (
+              <Button
+                className="flex-1"
+                onClick={handlePlaceOrder}
+                disabled={!selectedOptions[currentStep]}
+              >
+                {processingOrder ? 'Processing...' : 'Place Order'}
+              </Button>
+            )}
           </div>
         </MaxWidthWrapper>
       </div>
