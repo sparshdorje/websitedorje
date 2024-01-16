@@ -149,14 +149,12 @@ const MakeYourOwnBlendStepper = ({ product }) => {
             </h2>
             <div className="flex gap-4 flex-wrap">
               {selectedOptions.map((option, index) => (
-                <div key={index}>
-                  <MakeYourBlendOption
-                    name={option.value}
-                    key={index}
-                    selected={true}
-                    clickable={false}
-                  />
-                </div>
+                <MakeYourBlendOption
+                  name={option.value}
+                  key={index}
+                  selected={true}
+                  clickable={false}
+                />
               ))}
             </div>
           </>
