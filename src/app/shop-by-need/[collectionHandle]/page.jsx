@@ -1,3 +1,4 @@
+import CollectionBenefitsSlider from '@/components/CollectionBenefitsSlider';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductCard from '@/components/ProductCard';
 import ShopByNeedBox from '@/components/ShopByNeedBox';
@@ -55,7 +56,7 @@ const page = async ({ params }) => {
     (await getProducts()) || {};
 
   return (
-    <div className={'pt-8 pb-52 px-0 w-full grid grid-cols-1 gap-10 lg:gap-12'}>
+    <div className={'pt-8 pb-24 px-0 w-full grid grid-cols-1 gap-10 lg:gap-12'}>
       {/* COLLECTIONS MOBILE */}
       <MaxWidthWrapper className={'px-0'}>
         <ShopByNeedBox collectionHandle={collectionHandle} />
@@ -63,12 +64,12 @@ const page = async ({ params }) => {
       {/* BANNER */}
 
       <MaxWidthWrapper className={'max-w-screen-xl '}>
-        <div className="w-full h-[216px] rounded-lg lg:h-[600px] bg-white overflow-hidden">
+        <div className="w-full h-[220px] rounded-lg lg:h-[750px] bg-white overflow-hidden">
           {collection?.image?.url ? (
             <Image
               loading="lazy"
-              height={600}
-              width={600}
+              height={800}
+              width={800}
               alt="banner"
               className="h-full w-full object-cover"
               src={collection?.image?.url}
@@ -105,8 +106,17 @@ const page = async ({ params }) => {
         </MaxWidthWrapper>
       )}
 
-      {/* ALL PRODUCTS */}
+      {/* BENEFITS */}
+      <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+        <div className="px-4 lg:px-0 font-fraunces font-semibold text-xl mb-4 text-primary">
+          Benefits of this Collection
+        </div>
+        <div className="w-full h-[200px] lg:h-[750px]">
+          <CollectionBenefitsSlider collectionHandle={'wellness-range'} />
+        </div>
+      </MaxWidthWrapper>
 
+      {/* ALL PRODUCTS */}
       {allProducts.length > 0 && (
         <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
           <div className="px-4 lg:px-0 font-fraunces font-semibold text-xl mb-4 text-primary">

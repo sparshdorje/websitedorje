@@ -72,12 +72,12 @@ const page = async ({ params }) => {
       {/* BANNER */}
 
       <MaxWidthWrapper className={'max-w-screen-xl '}>
-        <div className="w-full h-[216px] rounded-lg lg:h-[600px] bg-white overflow-hidden">
+        <div className="w-full h-[220px] rounded-lg lg:h-[750px] bg-white overflow-hidden">
           {collection?.image?.url ? (
             <Image
               loading="lazy"
-              height={600}
-              width={600}
+              height={800}
+              width={800}
               alt="banner"
               className="h-full w-full object-cover object-top"
               src={collection?.image?.url}
