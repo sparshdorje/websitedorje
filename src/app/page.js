@@ -6,6 +6,7 @@ import HomePageBannerSlider from '@/components/HomePageBannerSlider';
 import HomePageVideo from '@/components/HomePageVideo';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import NewlyLaunchedCard from '@/components/NewlyLaunchedCard';
+import SpotifyPlaylistSlider from '@/components/SpotifyPlaylistSlider';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import { HOME_PAGE_AS_SEEN_ON } from '@/config/HomePage';
 import NEWLY_LAUNCHED from '@/config/NewlyLaunched';
@@ -106,7 +107,17 @@ export default function Home() {
         </div>
       </div>
 
-      {/* VIDEO */}
+      {/* SPOTIFY PLAYLIST */}
+      <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+        <div className="text-3xl text-center mb-8 lg:mb-14 font-fraunces text-secondary font-semibold">
+          Special Playlists Curated for You
+        </div>
+        <div className="w-full h-[100px] lg:h-[400px]">
+          <SpotifyPlaylistSlider />
+        </div>
+      </MaxWidthWrapper>
+
+      {/* BEHIND THE SCENES */}
       <MaxWidthWrapper className={'max-w-screen-xl'}>
         <div className="text-3xl text-center mb-8 lg:mb-14 font-fraunces text-secondary font-semibold">
           Behind the scenes

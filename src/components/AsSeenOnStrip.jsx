@@ -22,7 +22,7 @@ const AsSeenOnStrip = () => {
           height={100}
           alt="logo"
           loading="lazy"
-          className="h-[30px] w-[30%] lg:h-[50px] lg:!w-fit object-contain"
+          className="h-[30px] w-[30%] lg:h-[60px] lg:!w-fit object-contain"
         />
       ))}
     </MaxWidthWrapper>

@@ -7,7 +7,7 @@ const Ticker = () => {
       <MaxWidthWrapper
         className={'flex items-center justify-center gap-4 lg:gap-3'}
       >
-        <div className="h-10 w-10 lg:h-8 lg:w-8">
+        {/* <div className="h-10 w-10 lg:h-8 lg:w-8">
           <Image
             src={'/assets/icons/announcement.png'}
             className="h-full w-full object-contain"
@@ -16,8 +16,8 @@ const Ticker = () => {
             alt="announcement icon"
             loading="eager"
           />
-        </div>
-        <div className="text-white font-questrial text-xs lg:text-base">
+        </div> */}
+        <div className="text-white font-medium text-center font-questrial text-sm lg:text-base">
           Use BFS25 to get 25% off on orders above Rs. 749 | LIMITED TIME OFFER
         </div>
       </MaxWidthWrapper>

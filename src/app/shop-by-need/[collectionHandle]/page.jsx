@@ -1,6 +1,7 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductCard from '@/components/ProductCard';
 import ShopByNeedBox from '@/components/ShopByNeedBox';
+import SpotifyPlaylistSlider from '@/components/SpotifyPlaylistSlider';
 import { ASSETS } from '@/config';
 import CollectionService from '@/services/collection';
 import Image from 'next/image';
@@ -124,6 +125,16 @@ const page = async ({ params }) => {
           </div>
         </MaxWidthWrapper>
       )}
+
+      {/* SPOTIFY PLAYLIST */}
+      <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+        <div className="px-4 lg:px-0 font-fraunces font-semibold text-xl mb-4 text-primary">
+          Special Playlists Curated for You
+        </div>
+        <div className="w-full h-[100px] lg:h-[400px]">
+          <SpotifyPlaylistSlider />
+        </div>
+      </MaxWidthWrapper>
     </div>
   );
 };
