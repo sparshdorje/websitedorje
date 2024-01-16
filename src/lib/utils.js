@@ -10,13 +10,12 @@ export function cn(...inputs) {
 export function formatPrice(price, options = {}) {
   const { currency = 'INR', notation = 'compact' } = options;
 
-  const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
+  const numericPrice = typeof price === 'string' ? price : price;
 
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency,
-    notation,
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 0,
   }).format(numericPrice);
 }
 
