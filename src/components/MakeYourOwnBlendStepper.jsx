@@ -105,9 +105,11 @@ const MakeYourOwnBlendStepper = ({ product }) => {
 
   const handleBack = () => {
     if (currentStep > 0) {
-      setShowBlendPreview(false);
-
-      setCurrentStep(currentStep - 1);
+      if (showBlendPreview) {
+        setShowBlendPreview(false);
+      } else {
+        setCurrentStep(currentStep - 1);
+      }
     }
   };
 
