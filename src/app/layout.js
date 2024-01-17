@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import WhatsappChat from '@/components/WhatsappChat';
 import Loading from './loading';
 import { cn } from '@/lib/utils';
 import { GoogleTagManager } from '@next/third-parties/google';
@@ -78,6 +79,7 @@ export default function RootLayout({ children }) {
             <div className="flex-grow flex-1">{children}</div>
           </Suspense>
           <Footer />
+          <WhatsappChat />
         </main>
 
         <Toaster position="top-center" richColors />

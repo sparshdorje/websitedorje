@@ -55,7 +55,7 @@ const SpotifyPlaylistSlider = () => {
         className="flex w-full !px-2.5 !lg:px-0 h-full"
       >
         {SPOTIFY_PLAYLIST.map((playlist, i) => (
-          <SwiperSlide key={url} className="-z-10 h-full w-full">
+          <SwiperSlide key={playlist.url} className="-z-10 h-full w-full">
             <Link target="_blank" href={playlist.url} className="h-full w-full">
               <Image
                 width={600}
