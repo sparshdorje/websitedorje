@@ -18,14 +18,14 @@ export default async function sitemap() {
     const collectionEntries = COLLECTIONS.map((collection) => {
       return {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}${collection.href}`,
-        priority: 0.8,
+        priority: 0.9,
       };
     });
 
     const shopByNeedEntries = SHOP_BY_NEED?.map((collection) => {
       return {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}${collection.href}`,
-        priority: 0.8,
+        priority: 0.9,
       };
     });
 
@@ -35,11 +35,15 @@ export default async function sitemap() {
       },
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/collections`,
-        priority: 0.8,
+        priority: 0.9,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/collections/shop-all`,
+        priority: 0.9,
       },
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/shop-by-need`,
-        priority: 0.8,
+        priority: 0.9,
       },
       {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/sign-in`,

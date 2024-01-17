@@ -62,13 +62,19 @@ const page = () => {
           Welcome to darjeeling, we allow <br /> you to prepare your own blend.
         </div>
         <div className="font-questrial text-primary text-opacity-70 font-semibold text-base">
-          Make your blend by choosing <br /> different flavours of tea
+          Make your blend by choosing <br /> different flavours of tea.
         </div>
         <Link href={'/make-your-own-blend/start'}>
           <Button className="py-6 px-16">
             <div className="text-xl w-52 ">Start</div>
           </Button>
         </Link>
+        <div className="w-full h-fit py-3 px-3 text-center bg-[#f1ddcc] flex items-center justify-center flex-wrap">
+          <div className="font-questrial text-primary font-semibold text-sm lg:text-base">
+            NOTE: All your Teas are being freshly blended. It will be dispatched
+            in 3-4 days of us receiving your order.
+          </div>
+        </div>
       </div>
     </div>
   );

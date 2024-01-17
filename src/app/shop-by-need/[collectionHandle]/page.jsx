@@ -43,7 +43,9 @@ const page = async ({ params }) => {
     const bestSellingProductsData =
       fetchedProducts?.data?.data?.collection?.products?.edges?.slice(0, 4);
     const allProductsData =
-      fetchedProducts?.data?.data?.collection?.products?.edges?.slice(4);
+      fetchedProducts?.data?.data?.collection?.products?.edges
+        ?.slice(4)
+        .concat(bestSellingProductsData);
 
     return {
       allProducts: allProductsData,
@@ -118,11 +120,11 @@ const page = async ({ params }) => {
 
       {/* ALL PRODUCTS */}
       {allProducts.length > 0 && (
-        <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
-          <div className="px-4 lg:px-0 font-fraunces font-semibold text-xl mb-4 text-primary">
+        <MaxWidthWrapper className={'max-w-screen-xl px-0 py-6 lg:py-0'}>
+          <div className="px-4 lg:px-0 font-fraunces text-center lg:text-left  font-semibold text-xl mb-4 text-primary">
             All Products
           </div>
-          <div className="px-4 lg:px-0 flex grid-cols-4 overflow-x-scroll lg:grid gap-5 py-2">
+          <div className="px-4 lg:px-0 flex flex-wrap items-center justify-center lg:grid-cols-4 lg:grid  gap-5 py-2">
             {allProducts?.map((prod) => (
               <ProductCard product={prod.node} key={prod.node.id} />
             ))}

@@ -1,19 +1,20 @@
 'use client';
 
-import { extractProductId } from '@/lib/utils';
+import { extractProductId, formatPrice } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { sendGTMEvent } from '@next/third-parties/google';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import MakeYourBlendOption from './MakeYourBlendOption';
 import MaxWidthWrapper from './MaxWidthWrapper';
-import { Button } from './ui/button';
+import { Button, buttonVariants } from './ui/button';
 
 const MakeYourOwnBlendStepper = ({ product }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [processingOrder, setProcessingOrder] = useState(false);
   const [showBlendPreview, setShowBlendPreview] = useState(false);
+  const [matchingVariant, setMatchingVariant] = useState({});
 
   const steps = product?.options?.map((option) => {
     return {
@@ -28,10 +29,7 @@ const MakeYourOwnBlendStepper = ({ product }) => {
 
   const allStepsCompleted = selectedOptions.length === steps.length;
 
-  const handlePlaceOrder = async () => {
-    let matchingVariant = null;
-    setProcessingOrder(true);
-
+  const getMatchingVariant = () => {
     // Check Matching variant
     for (const variant of variants) {
       let isMatch = true;
@@ -50,10 +48,14 @@ const MakeYourOwnBlendStepper = ({ product }) => {
       }
 
       if (isMatch) {
-        matchingVariant = variant;
+        setMatchingVariant(variant);
         break;
       }
     }
+  };
+
+  const handlePlaceOrder = async () => {
+    setProcessingOrder(true);
 
     if (matchingVariant) {
       const checkoutUrl = await addToCart(matchingVariant.id, 1);
@@ -96,6 +98,7 @@ const MakeYourOwnBlendStepper = ({ product }) => {
         if (allStepsCompleted) {
           // Show the preview
           setShowBlendPreview(true);
+          getMatchingVariant();
         }
       }
     } else {
@@ -117,7 +120,7 @@ const MakeYourOwnBlendStepper = ({ product }) => {
     <>
       <MaxWidthWrapper
         className={
-          'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-16 max-w-4xl'
+          'mx-auto pt-8 pb-52 w-full grid grid-cols-1 gap-12 lg:gap-16 max-w-4xl'
         }
       >
         {!showBlendPreview ? (
@@ -144,18 +147,46 @@ const MakeYourOwnBlendStepper = ({ product }) => {
         ) : (
           // BLEND PREVIEW
           <>
-            <h2 className="font-fraunces text-xl text-primary font-semibold">
+            <div className="font-fraunces text-xl text-primary font-semibold">
               Your Blend Preview
-            </h2>
-            <div className="flex gap-4 flex-wrap">
-              {selectedOptions.map((option, index) => (
-                <MakeYourBlendOption
-                  name={option.value}
-                  key={index}
-                  selected={true}
-                  clickable={false}
-                />
-              ))}
+            </div>
+
+            <div className="flex flex-col items-start gap-4 w-full">
+              <div className="font-questrial text-lg text-primary font-medium">
+                Selected Blend
+              </div>
+              <div className="flex gap-4 flex-wrap w-full">
+                {selectedOptions.map((option, index) => (
+                  <MakeYourBlendOption
+                    name={option.value}
+                    key={index}
+                    selected={true}
+                    clickable={false}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start gap-2">
+              <div className="font-questrial text-lg text-primary font-medium">
+                Size
+              </div>
+              <div
+                className={buttonVariants({ className: 'cursor-not-allowed' })}
+              >
+                100gm
+              </div>
+            </div>
+            <div className="flex flex-col items-start gap-2">
+              <div className="font-questrial text-lg text-primary font-medium">
+                Price
+              </div>
+              <div className="font-questrial font-semibold text-lg  text-primary">
+                {formatPrice(matchingVariant?.price?.amount)}
+                <span className="text-xs font-questrial text-gray-600 ml-2">
+                  (Tax Included)
+                </span>
+              </div>
             </div>
           </>
         )}
@@ -165,8 +196,11 @@ const MakeYourOwnBlendStepper = ({ product }) => {
           className={'flex flex-col items-center max-w-4xl gap-4'}
         >
           <div className="bg-[#F2E2D4] px-4 py-2 w-full rounded-lg font-questrial text-sm text-primary font-semibold">
-            Note: 1 option needs to be selected.
+            {!showBlendPreview
+              ? 'Note: 1 option needs to be selected.'
+              : 'Place Order to continue'}
           </div>
+
           <div className={'flex justify-between gap-6 w-full'}>
             <Button
               className="flex-1 text-primary border-primary"

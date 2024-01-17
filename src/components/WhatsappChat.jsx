@@ -20,7 +20,8 @@ const WhatsappChat = () => {
       <div
         className={cn(
           'fixed bottom-4 right-4 lg:bottom-10 lg:right-10 z-30 flex flex-col items-end gap-4',
-          pathName.includes('/products') && 'bottom-20'
+          pathName.includes('/products') && 'bottom-20',
+          pathName.includes('/make-your-own-blend/start') && 'bottom-36'
         )}
       >
         {showChatBox && (
