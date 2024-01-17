@@ -20,10 +20,11 @@ export const HOME_PAGE_BANNERS = [
 ];
 
 export const HOME_PAGE_AS_SEEN_ON = [
-  `${ASSETS.AS_SEEN_ON}/lbb.png`,
   `${ASSETS.AS_SEEN_ON}/ny-times.png`,
+  `${ASSETS.AS_SEEN_ON}/shark-tank.png`,
   `${ASSETS.AS_SEEN_ON}/the-economist.png`,
   `${ASSETS.AS_SEEN_ON}/the-hindu.webp`,
+  `${ASSETS.AS_SEEN_ON}/lbb.png`,
   `${ASSETS.AS_SEEN_ON}/the-telegraph.png`,
   `${ASSETS.AS_SEEN_ON}/filmfare.png`,
 ];

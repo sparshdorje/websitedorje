@@ -13,6 +13,7 @@ const BestsellerCard = ({
   className,
   truncateLimit = 120,
   variantTruncateLimit = 30,
+  showTotalRating = true,
 }) => {
   const [ratingData, setRatingData] = useState({});
   const productId = extractProductId(product.id);
@@ -64,6 +65,7 @@ const BestsellerCard = ({
               <StarRating
                 rating={ratingData.averageRating}
                 totalRatings={ratingData.totalRatings}
+                showTotalRating={showTotalRating}
                 variant={'default'}
                 size="20"
                 className={' opacity-60 text-xs'}

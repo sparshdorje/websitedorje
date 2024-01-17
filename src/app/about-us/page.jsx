@@ -138,6 +138,7 @@ const page = async () => {
                   className={'min-w-[250px] w-[250px] h-[420px]'}
                   truncateLimit={60}
                   variantTruncateLimit={20}
+                  showTotalRating={false}
                 />
               ))}
             </div>
