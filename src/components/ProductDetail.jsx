@@ -126,7 +126,7 @@ const ProductDetail = ({ product, ratingData, productId }) => {
     >
       <MaxWidthWrapper className="lg:grid lg:grid-cols-2 lg:gap-8 lg:justify-between px-4 max-w-screen-xl">
         <div className="hidden lg:block col-6">
-          <div className="h-[600px] w-[520px] rounded-lg">
+          <div className="h-[600px] md:w-[480px] xl:w-[520px] rounded-lg">
             <ImageSlider urls={validUrls} />
           </div>
         </div>

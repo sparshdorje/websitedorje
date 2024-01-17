@@ -3,6 +3,7 @@ import CollectionsBox from '@/components/CollectionsBox';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import SpotifyPlaylistSlider from '@/components/SpotifyPlaylistSlider';
 import ProductCard from '@/components/ProductCard';
+import AllCollections from '@/components/AllCollections';
 import { ASSETS } from '@/config';
 import CollectionService from '@/services/collection';
 import Image from 'next/image';
@@ -44,11 +45,13 @@ const page = async ({ params }) => {
       const bestSellingProductsData =
         fetchedProducts?.data?.data?.collection?.products?.edges?.slice(0, 4);
       const allProductsData =
-        fetchedProducts?.data?.data?.collection?.products?.edges?.slice(4);
+        fetchedProducts?.data?.data?.collection?.products?.edges
+          ?.slice(4)
+          .concat(bestSellingProductsData);
 
       return {
-        allProducts: allProductsData,
-        bestSellingProducts: bestSellingProductsData,
+        allProducts: allProductsData || [],
+        bestSellingProducts: bestSellingProductsData || [],
       };
     } catch (e) {
       console.log(e);
@@ -130,16 +133,22 @@ const page = async ({ params }) => {
 
       {/* ALL PRODUCTS */}
 
-      {allProducts.length > 0 && (
+      {collectionHandle !== 'shop-all' ? (
+        allProducts.length > 0 && (
+          <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+            <div className="px-4 lg:px-0 font-fraunces text-center lg:text-left font-semibold text-xl mb-4 text-primary">
+              All {collection.title} Products
+            </div>
+            <div className="px-4 lg:px-0 flex flex-wrap items-center justify-center lg:grid-cols-4 lg:grid gap-5 py-2">
+              {allProducts?.map((prod) => (
+                <ProductCard product={prod.node} key={prod.node.id} />
+              ))}
+            </div>
+          </MaxWidthWrapper>
+        )
+      ) : (
         <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
-          <div className="px-4 lg:px-0 font-fraunces font-semibold text-xl mb-4 text-primary">
-            All {collection.title} Products
-          </div>
-          <div className="px-4 lg:px-0 flex grid-cols-4 overflow-x-scroll lg:grid gap-5 py-2">
-            {allProducts?.map((prod) => (
-              <ProductCard product={prod.node} key={prod.node.id} />
-            ))}
-          </div>
+          <AllCollections />
         </MaxWidthWrapper>
       )}
 
