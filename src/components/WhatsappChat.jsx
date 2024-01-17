@@ -4,16 +4,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import WhatsappLogo from '../../public/assets/svg/WhatsappLogo.svg';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const WhatsappChat = () => {
   const [showChatBox, setShowChatBox] = useState(false);
+
+  const pathName = usePathname();
 
   const toggleChatBox = () => {
     setShowChatBox(!showChatBox);
   };
   return (
     <>
-      <div className="fixed bottom-4 right-4 lg:bottom-10 lg:right-10 z-50 flex flex-col items-end gap-4">
+      <div
+        className={cn(
+          'fixed bottom-4 right-4 lg:bottom-10 lg:right-10 z-30 flex flex-col items-end gap-4',
+          pathName.includes('/products') && 'bottom-20'
+        )}
+      >
         {showChatBox && (
           <div
             className="flex flex-col animate-in items-start gap-5 min-w-[300px] bg-white rounded-lg p-6 border-primary border-2"
