@@ -72,8 +72,8 @@ const StarRating = ({
       </div>
       {showTotalRating && (
         <>
-          <div className={cn('ml-2 mt-1 text-gray-600', className)}>•</div>
-          <div className={cn('ml-2 mt-1 text-gray-600', className)}>
+          <div className={cn('ml-2 text-gray-600', className)}>•</div>
+          <div className={cn('ml-2 text-gray-600', className)}>
             {totalRatings > 0 ? `${totalRatings} Ratings` : 'No Ratings'}
           </div>
         </>

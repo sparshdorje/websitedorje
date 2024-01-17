@@ -13,6 +13,7 @@ const BestsellerCard = ({
   className,
   truncateLimit = 120,
   variantTruncateLimit = 30,
+  showTotalRating = true,
 }) => {
   const [ratingData, setRatingData] = useState({});
   const productId = extractProductId(product.id);
@@ -51,7 +52,7 @@ const BestsellerCard = ({
         </div>
       </Link>
 
-      <div className="flex flex-col w-full items-start justify-between h-full gap-6">
+      <div className="flex flex-col w-full items-start justify-between h-full gap-4">
         <Link
           className="flex px-4 flex-col w-full items-start justify-between h-full"
           href={`/products/${product.handle}`}
@@ -64,7 +65,7 @@ const BestsellerCard = ({
               <StarRating
                 rating={ratingData.averageRating}
                 totalRatings={ratingData.totalRatings}
-                showTotalRating={false}
+                showTotalRating={showTotalRating}
                 variant={'default'}
                 size="20"
                 className={' opacity-60 text-xs'}

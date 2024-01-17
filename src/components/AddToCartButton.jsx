@@ -21,12 +21,15 @@ const AddToCartButton = ({
     const productId = extractProductId(product.id) || '';
     sendGTMEvent({
       event: 'AddToCart',
-      quantity,
-      product_name: product.product.title,
+      num_items: quantity,
+      content_name: product.product.title,
       price: product.price.amount,
       variant: product.title,
-      value: product?.product?.title,
-      productId,
+      value: product.price.amount,
+      contents: [{ id: productId, quantity }],
+      content_type: 'product_group',
+      content_ids: [productId],
+      currency: 'INR',
     });
   };
 

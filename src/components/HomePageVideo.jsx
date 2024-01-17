@@ -10,6 +10,7 @@ const HomePageVideo = () => {
         height="100%"
         width="100%"
         className="rounded-xl overflow-hidden h-full object-cover aspect-video"
+        controls
       />
     </>
   );

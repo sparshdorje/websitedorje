@@ -90,7 +90,6 @@ const ProductCard = ({ product, bestSeller = false }) => {
               <StarRating
                 rating={ratingData.averageRating}
                 totalRatings={ratingData.totalRatings}
-                showTotalRating={false}
                 variant={'default'}
                 size="20"
                 className={' opacity-80 text-xs'}
