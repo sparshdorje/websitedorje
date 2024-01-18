@@ -73,6 +73,7 @@ const ProductDetail = ({ product, ratingData, productId }) => {
         contents: [{ id: extractProductId(selectedVariant.id), quantity }],
         value: selectedVariant?.price?.amount,
         variant_names: [selectedVariant?.title],
+        eventID: parseInt(Math.random() * 10000000000),
       });
 
       window.location.href = checkoutUrl;
@@ -106,6 +107,7 @@ const ProductDetail = ({ product, ratingData, productId }) => {
         };
       }),
       value: product?.priceRange?.minVariantPrice?.amount,
+      eventID: parseInt(Math.random() * 10000000000),
     });
   }, []);
 

@@ -10,6 +10,7 @@ const NewlyLaunchedCard = ({ item }) => {
     sendGTMEvent({
       event: 'ViewCategory',
       content_category: item?.href,
+      eventID: parseInt(Math.random() * 10000000000),
     });
   };
 

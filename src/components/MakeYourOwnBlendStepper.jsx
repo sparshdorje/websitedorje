@@ -69,6 +69,7 @@ const MakeYourOwnBlendStepper = ({ product }) => {
           contents: [{ id: extractProductId(matchingVariant.id), quantity: 1 }],
           value: matchingVariant?.price?.amount,
           variantName: matchingVariant?.title,
+          eventID: parseInt(Math.random() * 10000000000),
         });
 
         window.location.href = checkoutUrl;

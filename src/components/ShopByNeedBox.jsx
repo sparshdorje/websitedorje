@@ -10,6 +10,7 @@ const ShopByNeedBoxes = ({ collectionHandle = '' }) => {
     sendGTMEvent({
       event: 'ViewCategory',
       content_category: href,
+      eventID: parseInt(Math.random() * 10000000000),
     });
   };
   return (

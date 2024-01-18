@@ -30,6 +30,7 @@ const AddToCartButton = ({
       content_type: 'product_group',
       content_ids: [productId],
       currency: 'INR',
+      eventID: Math.random(),
     });
   };
 

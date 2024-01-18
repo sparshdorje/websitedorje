@@ -77,6 +77,7 @@ const Cart = () => {
         contents,
         value: cartTotal,
         variant_names,
+        eventID: parseInt(Math.random() * 10000000000),
       });
 
       const cartResponse = await CartService.createCartWithLineItems(lineItems);
@@ -101,6 +102,7 @@ const Cart = () => {
       contents,
       content_type: 'product_group',
       value: cartTotal,
+      eventID: parseInt(Math.random() * 10000000000),
     });
   };
 
