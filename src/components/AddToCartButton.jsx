@@ -26,7 +26,7 @@ const AddToCartButton = ({
       price: parseInt(product.price.amount),
       variant: product.title,
       value: parseInt(product.price.amount),
-      contents: [{ id: productId, quantity }],
+      contents: [JSON.stringify({ id: productId, quantity })],
       content_type: 'product_group',
       content_ids: [productId],
       currency: 'INR',
