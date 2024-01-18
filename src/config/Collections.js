@@ -5,13 +5,13 @@ const COLLECTIONS = [
     name: 'Darjeeling Tea',
     href: `/collections/black-tea`,
     handle: 'black-tea',
-    imageSrc: `${ASSETS.SHOP_NOW}/darjeeling-tea.png`,
+    imageSrc: `${ASSETS.SHOP_NOW}/darjeeling-tea.webp`,
   },
   {
     name: 'Wellness Range',
     href: '/collections/wellness-range',
     handle: 'wellness-range',
-    imageSrc: `${ASSETS.SHOP_NOW}/wellness-range.png`,
+    imageSrc: `${ASSETS.SHOP_NOW}/wellness-range.webp`,
   },
   {
     name: 'Original Chai',
