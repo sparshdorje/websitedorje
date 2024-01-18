@@ -12,6 +12,7 @@ const CollectionsBox = ({ collectionHandle = '', showTransition = true }) => {
     sendGTMEvent({
       event: 'ViewCategory',
       content_category: href,
+      eventID: parseInt(Math.random() * 10000000000),
     });
   };
 

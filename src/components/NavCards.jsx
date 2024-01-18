@@ -9,6 +9,7 @@ const NavCards = ({ item, variant = 'collection-card' }) => {
     sendGTMEvent({
       event: 'ViewCategory',
       content_category: item?.href,
+      eventID: parseInt(Math.random() * 10000000000),
     });
   };
 
