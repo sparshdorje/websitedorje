@@ -66,7 +66,9 @@ const MakeYourOwnBlendStepper = ({ product }) => {
           content_type: 'product_group',
           currency: 'INR',
           content_ids: [extractProductId(matchingVariant.id)],
-          contents: [{ id: extractProductId(matchingVariant.id), quantity: 1 }],
+          contents: JSON.stringify([
+            { id: extractProductId(matchingVariant.id), quantity: 1 },
+          ]),
           value: matchingVariant?.price?.amount,
           variantName: matchingVariant?.title,
           eventID: parseInt(Math.random() * 10000000000),

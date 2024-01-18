@@ -70,7 +70,9 @@ const ProductDetail = ({ product, ratingData, productId }) => {
         content_type: 'product_group',
         currency: 'INR',
         content_ids: [extractProductId(selectedVariant.id)],
-        contents: [{ id: extractProductId(selectedVariant.id), quantity }],
+        contents: JSON.stringify([
+          { id: extractProductId(selectedVariant.id), quantity },
+        ]),
         value: selectedVariant?.price?.amount,
         variant_names: [selectedVariant?.title],
         eventID: parseInt(Math.random() * 10000000000),
@@ -100,12 +102,14 @@ const ProductDetail = ({ product, ratingData, productId }) => {
       content_name: product.title,
       content_ids: [productId],
       content_type: 'product_group',
-      contents: product?.variants?.edges?.map((variant) => {
-        return {
-          id: extractProductId(variant?.node?.id),
-          quantity: 1,
-        };
-      }),
+      contents: JSON.stringify(
+        product?.variants?.edges?.map((variant) => {
+          return {
+            id: extractProductId(variant?.node?.id),
+            quantity: 1,
+          };
+        })
+      ),
       value: product?.priceRange?.minVariantPrice?.amount,
       eventID: parseInt(Math.random() * 10000000000),
     });
