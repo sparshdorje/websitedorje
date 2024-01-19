@@ -46,7 +46,7 @@ const Cart = () => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
+  const pathName = usePathname();
 
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,6 +78,7 @@ const Cart = () => {
         value: cartTotal,
         variant_names,
         eventID: parseInt(Math.random() * 10000000000),
+        eventSourceUrl: `https://www.dorjeteas.com${pathName}`,
       });
 
       const cartResponse = await CartService.createCartWithLineItems(lineItems);
@@ -103,6 +104,7 @@ const Cart = () => {
       content_type: 'product_group',
       value: cartTotal,
       eventID: parseInt(Math.random() * 10000000000),
+      eventSourceUrl: `https://www.dorjeteas.com${pathName}`,
     });
   };
 
@@ -111,10 +113,10 @@ const Cart = () => {
 
     if (searchParams.get('openCart') === 'true') {
       setIsSheetOpen(true);
-      router.replace(pathname, { scroll: false });
+      router.replace(pathName, { scroll: false });
       setSheetKey((prevKey) => prevKey + 1);
     }
-  }, [searchParams, pathname]);
+  }, [searchParams, pathName]);
 
   return (
     <Sheet key={sheetKey} defaultOpen={isSheetOpen} className="max-h-screen ">
