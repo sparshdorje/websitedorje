@@ -2,15 +2,24 @@
 import { ASSETS } from '@/config';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import WhatsappLogo from '../../public/assets/svg/WhatsappLogo.svg';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 const WhatsappChat = () => {
   const [showChatBox, setShowChatBox] = useState(false);
 
   const pathName = usePathname();
+
+  useEffect(() => {
+    sendGTMEvent({
+      event: 'PageView',
+      eventID: parseInt(Math.random() * 10000000000),
+      externalID: parseInt(Math.random() * 10000000000),
+    });
+  }, [pathName]);
 
   const toggleChatBox = () => {
     setShowChatBox(!showChatBox);
