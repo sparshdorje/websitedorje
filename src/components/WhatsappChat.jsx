@@ -18,6 +18,7 @@ const WhatsappChat = () => {
       event: 'PageView',
       eventID: parseInt(Math.random() * 10000000000),
       externalID: parseInt(Math.random() * 10000000000),
+      eventSourceUrl: pathName,
     });
   }, [pathName]);
 

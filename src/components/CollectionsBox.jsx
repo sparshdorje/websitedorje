@@ -6,13 +6,16 @@ import Link from 'next/link';
 import COLLECTIONS from '../config/Collections';
 
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const CollectionsBox = ({ collectionHandle = '', showTransition = true }) => {
+  const pathName = usePathname();
   const sendViewCategoryEvent = ({ href }) => {
     sendGTMEvent({
       event: 'ViewCategory',
       content_category: href,
       eventID: parseInt(Math.random() * 10000000000),
+      eventSourceUrl: `https://www.dorjeteas.com${pathName}`,
     });
   };
 

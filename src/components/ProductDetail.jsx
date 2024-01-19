@@ -9,6 +9,7 @@ import { extractProductId, formatPrice } from '@/lib/utils';
 import { addToCart } from '@/services/ShopifyService';
 import { sendGTMEvent } from '@next/third-parties/google';
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const ProductDetail = ({ product, ratingData, productId }) => {
@@ -16,6 +17,8 @@ const ProductDetail = ({ product, ratingData, productId }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [variants, setVariants] = useState([]);
   const [selectedVariant, setSelectedVariant] = useState({});
+
+  const pathName = usePathname();
 
   const handleOptionSelect = (optionIdx, optionName, value) => {
     setSelectedOptions((prevState) => {
@@ -76,6 +79,7 @@ const ProductDetail = ({ product, ratingData, productId }) => {
         value: parseInt(selectedVariant?.price?.amount),
         variant_names: [selectedVariant?.title],
         eventID: parseInt(Math.random() * 10000000000),
+        eventSourceUrl: `https://www.dorjeteas.com${pathName}`,
       });
 
       window.location.href = checkoutUrl;
@@ -112,6 +116,7 @@ const ProductDetail = ({ product, ratingData, productId }) => {
       ),
       value: parseInt(product?.priceRange?.minVariantPrice?.amount),
       eventID: parseInt(Math.random() * 10000000000),
+      eventSourceUrl: `https://www.dorjeteas.com${pathName}`,
     });
   }, []);
 

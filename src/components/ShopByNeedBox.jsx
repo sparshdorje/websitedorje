@@ -4,13 +4,16 @@ import SHOP_BY_NEED from '@/config/ShopByNeed';
 import { sendGTMEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const ShopByNeedBoxes = ({ collectionHandle = '' }) => {
+  const pathName = usePathname();
   const sendViewCategoryEvent = ({ href }) => {
     sendGTMEvent({
       event: 'ViewCategory',
       content_category: href,
       eventID: parseInt(Math.random() * 10000000000),
+      eventSourceUrl: `https://www.dorjeteas.com${pathName}`,
     });
   };
   return (

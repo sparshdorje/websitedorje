@@ -3,13 +3,16 @@
 import { sendGTMEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const NavCards = ({ item, variant = 'collection-card' }) => {
+  const pathName = usePathname();
   const sendViewCategoryEvent = () => {
     sendGTMEvent({
       event: 'ViewCategory',
       content_category: item?.href,
       eventID: parseInt(Math.random() * 10000000000),
+      eventSourceUrl: `https://www.dorjeteas.com${pathName}`,
     });
   };
 
