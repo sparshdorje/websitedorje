@@ -8,11 +8,12 @@ import { toast } from 'sonner';
 import MakeYourBlendOption from './MakeYourBlendOption';
 import MaxWidthWrapper from './MaxWidthWrapper';
 import { Button, buttonVariants } from './ui/button';
+import AddToCartButton from './AddToCartButton';
 
 const MakeYourOwnBlendStepper = ({ product }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [processingOrder, setProcessingOrder] = useState(false);
+  // const [processingOrder, setProcessingOrder] = useState(false);
   const [showBlendPreview, setShowBlendPreview] = useState(false);
   const [matchingVariant, setMatchingVariant] = useState({});
 
@@ -54,35 +55,35 @@ const MakeYourOwnBlendStepper = ({ product }) => {
     }
   };
 
-  const handlePlaceOrder = async () => {
-    setProcessingOrder(true);
+  // const handlePlaceOrder = async () => {
+  //   setProcessingOrder(true);
 
-    if (matchingVariant) {
-      const checkoutUrl = await addToCart(matchingVariant.id, 1);
-      if (checkoutUrl) {
-        sendGTMEvent({
-          event: 'InitiateCheckout',
-          num_items: 1,
-          content_type: 'product_group',
-          currency: 'INR',
-          content_ids: [extractProductId(matchingVariant.id)],
-          contents: JSON.stringify([
-            { id: extractProductId(matchingVariant.id), quantity: 1 },
-          ]),
-          value: matchingVariant?.price?.amount,
-          variantName: matchingVariant?.title,
-          eventID: parseInt(Math.random() * 10000000000),
-        });
+  //   if (matchingVariant) {
+  //     const checkoutUrl = await addToCart(matchingVariant.id, 1);
+  //     if (checkoutUrl) {
+  //       sendGTMEvent({
+  //         event: 'InitiateCheckout',
+  //         num_items: 1,
+  //         content_type: 'product_group',
+  //         currency: 'INR',
+  //         content_ids: [extractProductId(matchingVariant.id)],
+  //         contents: JSON.stringify([
+  //           { id: extractProductId(matchingVariant.id), quantity: 1 },
+  //         ]),
+  //         value: matchingVariant?.price?.amount,
+  //         variantName: matchingVariant?.title,
+  //         eventID: parseInt(Math.random() * 10000000000),
+  //       });
 
-        window.location.href = checkoutUrl;
-      } else {
-        setProcessingOrder(false);
-        toast.error('Failed to add the product to the cart.');
-      }
-    } else {
-      toast.error('Something Went Wrong');
-    }
-  };
+  //       window.location.href = checkoutUrl;
+  //     } else {
+  //       setProcessingOrder(false);
+  //       toast.error('Failed to add the product to the cart.');
+  //     }
+  //   } else {
+  //     toast.error('Something Went Wrong');
+  //   }
+  // };
 
   const handleOptionSelect = (option) => {
     const updatedOptions = [...selectedOptions];
@@ -194,14 +195,14 @@ const MakeYourOwnBlendStepper = ({ product }) => {
           </>
         )}
       </MaxWidthWrapper>
-      <div className="fixed bottom-0 p-4 border-t-2 border-[#F2E2D4] w-full bg-background">
+      <div className="fixed bottom-0 px-2 py-4 lg:px-4 border-t-2 border-[#F2E2D4] w-full bg-background">
         <MaxWidthWrapper
           className={'flex flex-col items-center max-w-4xl gap-4'}
         >
           <div className="bg-[#F2E2D4] px-4 py-2 w-full rounded-lg font-questrial text-sm text-primary font-semibold">
             {!showBlendPreview
               ? 'Note: 1 option needs to be selected.'
-              : 'Place Order to continue'}
+              : 'Add to cart to continue'}
           </div>
 
           <div className={'flex justify-between gap-6 w-full'}>
@@ -222,13 +223,19 @@ const MakeYourOwnBlendStepper = ({ product }) => {
                 Next
               </Button>
             ) : (
-              <Button
-                className="flex-1"
-                onClick={handlePlaceOrder}
-                disabled={!selectedOptions[currentStep]}
-              >
-                {processingOrder ? 'Processing...' : 'Place Order'}
-              </Button>
+              // <Button
+              //   className="flex-1"
+              //   onClick={handlePlaceOrder}
+              //   disabled={!selectedOptions[currentStep]}
+              // >
+              //   {processingOrder ? 'Processing...' : 'Place Order'}
+              // </Button>
+              <AddToCartButton
+                product={matchingVariant}
+                quantity={1}
+                variant="default"
+                extraClasses={'py-2 w-full text-white text-sm lg:text-sm'}
+              />
             )}
           </div>
         </MaxWidthWrapper>

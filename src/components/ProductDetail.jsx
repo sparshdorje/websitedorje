@@ -73,7 +73,7 @@ const ProductDetail = ({ product, ratingData, productId }) => {
         contents: JSON.stringify([
           { id: extractProductId(selectedVariant.id), quantity },
         ]),
-        value: selectedVariant?.price?.amount,
+        value: parseInt(selectedVariant?.price?.amount),
         variant_names: [selectedVariant?.title],
         eventID: parseInt(Math.random() * 10000000000),
       });
@@ -110,7 +110,7 @@ const ProductDetail = ({ product, ratingData, productId }) => {
           };
         })
       ),
-      value: product?.priceRange?.minVariantPrice?.amount,
+      value: parseInt(product?.priceRange?.minVariantPrice?.amount),
       eventID: parseInt(Math.random() * 10000000000),
     });
   }, []);

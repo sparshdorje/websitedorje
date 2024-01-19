@@ -95,7 +95,7 @@ const BestsellerCard = ({
             product={product?.variants?.edges?.[0]?.node}
             quantity={1}
             extraClasses={
-              'py-2 w-full text-white rounded-3xl text-sm lg:text-sm !important'
+              'py-2 w-full text-white rounded-3xl text-sm lg:text-sm'
             }
             variant="default"
           />
