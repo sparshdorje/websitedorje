@@ -53,7 +53,8 @@ const KnowYourTeaSlider = ({ productHandle }) => {
         {knowYourTeaUrls.map((url, i) => (
           <SwiperSlide key={i} className="-z-10  relative h-full w-full">
             <Image
-              fill
+              width={800}
+              height={800}
               loading="lazy"
               className="h-full w-full object-cover object-center rounded-xl"
               src={url}
