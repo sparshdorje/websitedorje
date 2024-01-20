@@ -67,5 +67,12 @@ export const KNOW_YOUR_TEA_IMAGES = {
     `${ASSETS.KNOW_YOUR_TEA}/3.jpg`,
     `${ASSETS.KNOW_YOUR_TEA}/4.jpg`,
   ],
+  'moonlight-sonata-limited-edition': [
+    `${ASSETS.KNOW_YOUR_TEA}/moonlight-tea/1.webp`,
+    `${ASSETS.KNOW_YOUR_TEA}/moonlight-tea/2.webp`,
+    `${ASSETS.KNOW_YOUR_TEA}/moonlight-tea/3.webp`,
+    `${ASSETS.KNOW_YOUR_TEA}/moonlight-tea/4.webp`,
+    `${ASSETS.KNOW_YOUR_TEA}/moonlight-tea/5.webp`,
+  ],
   default: [`${ASSETS.KNOW_YOUR_TEA}/3.jpg`, `${ASSETS.KNOW_YOUR_TEA}/4.jpg`],
 };
