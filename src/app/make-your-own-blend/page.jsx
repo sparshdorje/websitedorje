@@ -40,14 +40,14 @@ const page = () => {
         'pb-0 lg:pb-52 w-full flex flex-col items-center gap-24 min-h-screen'
       }
     >
-      <div className="bg-[#679FA1] relative bg-opacity-50 w-full h-[300px] lg:h-[400px]">
+      <div className="bg-[#679FA1] relative bg-opacity-50 w-full h-[300px] lg:h-[430px]">
         <Image
           src={'/assets/make-your-own-blend/banner.webp'}
-          height={700}
-          width={700}
+          height={1000}
+          width={1000}
           loading="lazy"
           alt="banner"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-center"
         />
 
         <div className="absolute -bottom-26 min-h-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:w-fit bg-white flex items-center border border-gray-300 shadow-md justify-center px-6 py-6 lg:py-8">
