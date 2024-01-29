@@ -1,17 +1,5 @@
 import { shopifyInstance } from './ShopifyService';
 
-//https://judge.me/api/v1/reviews
-
-// url: dorjeteas.myshopify.com
-// shop_domain: dorjeteas.myshopify.com
-// platform: shopify
-// name: Abhishek
-// email: abhishekyadav6700.ay@gmail.com
-// rating: 5
-// title: Good product!
-// body: Good product!
-// id: 7470969454817
-
 const ProductService = {
   getAllProducts: async () => {
     return shopifyInstance.post('/', {

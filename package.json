@@ -25,6 +25,7 @@
     "colorthief": "^2.4.0",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.294.0",
+    "moment": "^2.30.1",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
     "nextjs-toploader": "^1.6.4",
