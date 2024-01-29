@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import WhatsappChat from '@/components/WhatsappChat';
-import Loading from './loading';
+// import Loading from './loading-prev';
 import { cn } from '@/lib/utils';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Fraunces, Quicksand } from 'next/font/google';
@@ -75,8 +75,8 @@ export default function RootLayout({ children }) {
 
         <main className="relative flex flex-col min-h-screen">
           <Navbar />
-          <Suspense fallback={<Loading />}>
-            <div className="flex-grow flex-1">{children}</div>
+          <Suspense>
+            <div className="flex-grow flex-1 min-h-screen">{children}</div>
           </Suspense>
           <Footer />
           <WhatsappChat />

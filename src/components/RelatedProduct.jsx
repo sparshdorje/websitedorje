@@ -1,12 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
 import ProductService from '../services/product';
+import PeopleAlsoBoughtCard from './PeopleAlsoBoughtCard';
 import RelatedProductCard from './RelatedProductCard';
 
 const RelatedProduct = ({
   productId,
   className = 'mx-auto flex items-start justify-start overflow-x-scroll lg:justify-center gap-6 px-2.5 lg:px-0',
   ratingCardVariant = 'default',
+  setIsSheetOpen,
+  sheetKey,
+  setSheetKey,
+  isCart = false,
 }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -28,11 +33,24 @@ const RelatedProduct = ({
   return (
     <div className={className}>
       {relatedProducts?.map((product) => (
-        <RelatedProductCard
-          variant={ratingCardVariant}
-          key={product.id}
-          product={product}
-        />
+        <>
+          {isCart ? (
+            <PeopleAlsoBoughtCard
+              variant={ratingCardVariant}
+              key={product.id}
+              product={product}
+              setIsSheetOpen={setIsSheetOpen}
+              sheetKey={sheetKey}
+              setSheetKey={setSheetKey}
+            />
+          ) : (
+            <RelatedProductCard
+              variant={ratingCardVariant}
+              key={product.id}
+              product={product}
+            />
+          )}
+        </>
       ))}
     </div>
   );
