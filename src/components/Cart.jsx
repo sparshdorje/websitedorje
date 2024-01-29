@@ -186,11 +186,15 @@ const Cart = () => {
                 <div className="text-lg px-2 lg:pl-4 text-center mb-4 font-fraunces text-primary font-semibold">
                   People also bought...
                 </div>
-                <div className="w-full lg:pl-4">
+                <div className="w-full lg:pl-4 z-30">
                   <RelatedProduct
                     productId={items?.[0]?.product?.product?.id}
                     className="flex items-start justify-start overflow-x-scroll lg:overflow-x-auto lg:justify-between lg:flex-wrap gap-6 px-2.5 lg:px-0 lg:pr-4"
                     ratingCardVariant="dark"
+                    setIsSheetOpen={setIsSheetOpen}
+                    setSheetKey={setSheetKey}
+                    sheetKey={sheetKey}
+                    isCart={true}
                   />
                 </div>
               </div>

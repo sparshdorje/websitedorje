@@ -198,6 +198,32 @@ const ProductService = {
           id
           title
           handle
+          variants(first: 1) {
+            edges {
+              cursor
+              node {
+                availableForSale
+                selectedOptions{
+                  name
+                  value
+                }
+                id
+                title
+                image{
+                  url
+                }
+                price {
+                  amount
+                  currencyCode
+                }
+                product{
+                  title
+                  id
+                  handle
+                }
+              }
+            }
+          }
           images(first: 100) {
           edges {
           node {

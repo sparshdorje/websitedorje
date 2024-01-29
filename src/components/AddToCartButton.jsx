@@ -12,6 +12,7 @@ const AddToCartButton = ({
   quantity,
   extraClasses,
   variant = 'outline',
+  isCart = false,
 }) => {
   const { addItem } = useCart();
   const [isSuccess, setIsSuccess] = useState(false);
@@ -55,7 +56,7 @@ const AddToCartButton = ({
         addItem({ ...product, quantity });
         sendAddToCartEvent();
         setIsSuccess(true);
-        openCart();
+        !isCart && openCart();
       }}
       variant={variant}
       className={cn(
