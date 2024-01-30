@@ -97,15 +97,17 @@ const ProductDetail = ({ product, ratingData, productId }) => {
     });
 
     product?.options?.map((option, optionIdx) => {
-      if (product.handle === 'original-chai') {
-        handleOptionSelect(
-          optionIdx,
-          option.name,
-          option.values?.[option?.values?.length - 1]
-        );
-      } else {
-        handleOptionSelect(optionIdx, option.name, option.values?.[0]);
-      }
+      handleOptionSelect(optionIdx, option.name, option.values?.[0]);
+
+      // if (product.handle === 'original-chai') {
+      //   handleOptionSelect(
+      //     optionIdx,
+      //     option.name,
+      //     option.values?.[option?.values?.length - 1]
+      //   );
+      // } else {
+      //   handleOptionSelect(optionIdx, option.name, option.values?.[0]);
+      // }
     });
 
     sendGTMEvent({
