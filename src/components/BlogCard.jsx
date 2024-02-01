@@ -1,3 +1,4 @@
+import { truncate } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -6,9 +7,9 @@ const BlogCard = ({ blog }) => {
   return (
     <Link
       href={`/blogs/posts/${blog?.node?.handle}`}
-      className="flex flex-col items-start min-w-[300px] w-[300px] h-[480px] gap-3"
+      className="flex flex-col items-start w-full lg:w-[350px] lg:h-[500px] gap-3"
     >
-      <div className="rounded-lg h-[280px] w-full overflow-hidden">
+      <div className="rounded-lg h-[280px] w-full overflow-hidden shadow-md">
         <Image
           alt="Blog Image"
           width={200}
@@ -18,14 +19,13 @@ const BlogCard = ({ blog }) => {
         />
       </div>
 
-      <div className="font-fraunces font-medium text-primary text-xl">
-        {blog?.node?.title}
+      <div className="font-inter font-medium text-primary text-xl">
+        {truncate(blog?.node?.title, 60)}
       </div>
 
-      <div
-        dangerouslySetInnerHTML={{ __html: `${blog?.node?.excerptHtml}` }}
-        className="font-questrial font-medium text-primary text-sm"
-      ></div>
+      <div className="font-inter text-primary text-base">
+        {truncate(blog?.node?.excerpt, 180)}
+      </div>
     </Link>
   );
 };

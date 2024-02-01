@@ -4,7 +4,7 @@ import WhatsappChat from '@/components/WhatsappChat';
 // import Loading from './loading-prev';
 import { cn } from '@/lib/utils';
 import { GoogleTagManager } from '@next/third-parties/google';
-import { Fraunces, Quicksand } from 'next/font/google';
+import { Fraunces, Quicksand, Inter } from 'next/font/google';
 import Script from 'next/script';
 
 import { Toaster } from 'sonner';
@@ -20,6 +20,10 @@ const fraunces = Fraunces({
 const questrial = Quicksand({
   subsets: ['latin'],
   variable: '--font-questrial',
+});
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
 export const metadata = {
@@ -68,7 +72,8 @@ export default function RootLayout({ children }) {
         className={cn(
           'relative h-full font-sans antiliased',
           fraunces.variable,
-          questrial.variable
+          questrial.variable,
+          inter.variable
         )}
       >
         <NextTopLoader color="#B3C8C7" showSpinner={false} crawl={true} />
@@ -76,7 +81,7 @@ export default function RootLayout({ children }) {
         <main className="relative flex flex-col min-h-screen">
           <Navbar />
           <Suspense>
-            <div className="flex-grow flex-1 min-h-screen">{children}</div>
+            <div className="flex-grow flex-1">{children}</div>
           </Suspense>
           <Footer />
           <WhatsappChat />

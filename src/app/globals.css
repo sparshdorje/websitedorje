@@ -95,3 +95,12 @@
 *{
   scroll-behavior: smooth;
 }
+
+.blog-content p, .blog-content div{
+  margin-bottom: 24px;
+}
+
+.blog-content img{
+  width: 100%;
+  object-fit: contain;
+}

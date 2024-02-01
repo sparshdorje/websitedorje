@@ -23,6 +23,9 @@ const BlogsService = {
                     image{
                       url
                     }
+                    authorV2{
+                      name
+                    }
                     id
                     title
                     contentHtml
@@ -31,11 +34,7 @@ const BlogsService = {
                     publishedAt
                     handle
                     excerptHtml
-                    authorV2{
-                      bio
-                      email
-                      name
-                    }
+                    excerpt
                   }
                 }
               }
@@ -60,12 +59,11 @@ const BlogsService = {
                     publishedAt
                     handle
                     excerptHtml
+                    excerpt
                     image{
                       url
                     }
                     authorV2{
-                      bio
-                      email
                       name
                     }
                 }             
