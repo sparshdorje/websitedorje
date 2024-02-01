@@ -6,6 +6,7 @@ import BlogsNavigationButtons from '@/components/BlogsNavigationButtons';
 import Link from 'next/link';
 import Image from 'next/image';
 import moment from 'moment';
+import { ASSETS } from '@/config';
 
 const fetchBlogs = cache(async ({ endCursor = null }) => {
   try {
@@ -15,6 +16,26 @@ const fetchBlogs = cache(async ({ endCursor = null }) => {
     console.error('Error fetching Blogs:', error);
   }
 });
+
+export async function generateMetadata() {
+  return {
+    title: 'Posts',
+    description:
+      'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+    openGraph: {
+      title: 'Posts',
+      description:
+        'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+      url: `https://dorjeteas.com/blogs/posts`,
+      siteName: 'Dorje Teas',
+      images: [
+        {
+          url: `${ASSETS.ICONS}/dorje-logo.png`, // Must be an absolute URL
+        },
+      ],
+    },
+  };
+}
 
 const page = async ({ params, searchParams }) => {
   const { endCursor } = searchParams;
@@ -41,6 +62,8 @@ const page = async ({ params, searchParams }) => {
             width={900}
             height={900}
             className="w-full h-full object-cover"
+            loading="eager"
+            alt="blog image"
           />
         </div>
         <div className="w-full lg:w-[30%] lg:h-full flex flex-col items-start justify-between">

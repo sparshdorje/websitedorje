@@ -1,5 +1,26 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import { ASSETS } from '@/config';
 import React from 'react';
+
+export async function generateMetadata() {
+  return {
+    title: 'Shipping policy',
+    description:
+      'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+    openGraph: {
+      title: 'Shipping policy',
+      description:
+        'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+      url: `https://dorjeteas.com/policies/shipping-policy`,
+      siteName: 'Dorje Teas',
+      images: [
+        {
+          url: `${ASSETS.ICONS}/dorje-logo.png`, // Must be an absolute URL
+        },
+      ],
+    },
+  };
+}
 
 const page = () => {
   return (

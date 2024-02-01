@@ -1,19 +1,18 @@
 import { shopifyInstance } from './ShopifyService';
 
 const BlogsService = {
-  getAllBlogs: async ({ endCursor }) => {
+  getAllBlogs: async ({ endCursor, articleSize = 25 }) => {
     return shopifyInstance.post('/', {
       query: `query {
         blogs(first: 100) {
-         
           edges {
             node {
               id
               title
               handle
-              articles(first: 25, sortKey: PUBLISHED_AT, reverse: true, after: ${
-                endCursor ? JSON.stringify(endCursor) : null
-              }) {
+              articles(first: ${articleSize}, sortKey: PUBLISHED_AT, reverse: true, after: ${
+        endCursor ? JSON.stringify(endCursor) : null
+      }) {
                 pageInfo {
                     hasNextPage
                     endCursor

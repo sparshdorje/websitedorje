@@ -16,6 +16,7 @@ const BlogCard = ({ blog }) => {
           height={200}
           className="w-full h-full object-cover "
           src={blog?.node?.image?.url}
+          loading="eager"
         />
       </div>
 

@@ -22,6 +22,23 @@ const fetchBlogByHandle = cache(async (blogHandle) => {
   }
 });
 
+export async function generateMetadata({ params: { blogHandle } }) {
+  const blog = await fetchBlogByHandle(blogHandle);
+  const { title, excerpt, image } = blog || {};
+
+  return {
+    title,
+    description: excerpt,
+    openGraph: {
+      images: [{ url: image?.url }],
+      title,
+      description: excerpt,
+      url: `https://dorjeteas.com/blogs/posts/${blogHandle}`,
+      siteName: 'Dorje Teas',
+    },
+  };
+}
+
 const page = async ({ params }) => {
   const { blogHandle } = params;
 
@@ -57,7 +74,6 @@ const page = async ({ params }) => {
           dangerouslySetInnerHTML={{ __html: `${blog.contentHtml}` }}
           className="font-inter text-lg blog-content"
         ></div>
-        {/* <div>{JSON.stringify(blog)}</div> */}
 
         <Separator />
 

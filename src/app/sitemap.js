@@ -1,12 +1,13 @@
 import COLLECTIONS from '../config/Collections';
 import SHOP_BY_NEED from '../config/ShopByNeed';
 import ProductService from '../services/product';
+import BlogsService from '../services/blogs';
 
 export default async function sitemap() {
   try {
-    const response = await ProductService.getAllProducts();
+    const productResponse = await ProductService.getAllProducts();
 
-    const productEntries = response?.data?.data?.products?.edges?.map(
+    const productEntries = productResponse?.data?.data?.products?.edges?.map(
       (product) => {
         return {
           url: `${process.env.NEXT_PUBLIC_BASE_URL}/products/${product.node.handle}`,
@@ -14,6 +15,21 @@ export default async function sitemap() {
         };
       }
     );
+
+    const blogsResponse = await BlogsService.getAllBlogs({
+      endCursor: null,
+      articleSize: 250,
+    });
+
+    const blogsEntries =
+      blogsResponse?.data?.data?.blogs?.edges?.[0]?.node?.articles?.edges?.map(
+        (article) => {
+          return {
+            url: `${process.env.NEXT_PUBLIC_BASE_URL}/blogs/posts/${article.node.handle}`,
+            priority: 1,
+          };
+        }
+      );
 
     const collectionEntries = COLLECTIONS.map((collection) => {
       return {
@@ -61,9 +77,38 @@ export default async function sitemap() {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/make-your-own-blend`,
         priority: 0.8,
       },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/policies/privacy-policy`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/policies/refund-policy`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/policies/terms-of-service`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/policies/shipping-policy`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/policies/subscription-policy`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/policies/offline-presence`,
+        priority: 0.8,
+      },
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/blogs/posts`,
+        priority: 0.9,
+      },
       ...productEntries,
       ...collectionEntries,
       ...shopByNeedEntries,
+      ...blogsEntries,
     ];
   } catch (error) {
     console.error('Error fetching product:', error);
