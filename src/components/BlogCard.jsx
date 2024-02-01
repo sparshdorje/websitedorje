@@ -12,10 +12,11 @@ const BlogCard = ({ blog }) => {
       <div className="rounded-lg h-[280px] w-full overflow-hidden shadow-md">
         <Image
           alt="Blog Image"
-          width={200}
-          height={200}
+          width={600}
+          height={600}
           className="w-full h-full object-cover "
           src={blog?.node?.image?.url}
+          loading="eager"
         />
       </div>
 

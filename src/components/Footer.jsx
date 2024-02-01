@@ -105,13 +105,18 @@ const Footer = () => {
                 Tea Club
               </Link> */}
               <Link
-                target="_blank"
                 href={'/collections/black-tea'}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Shop
               </Link>
               <Link
+                href={'/blogs/posts'}
+                className="font-questrial text-white font-medium text-sm "
+              >
+                Blogs
+              </Link>
+              {/* <Link
                 target="_blank"
                 href={`${APP_CONSTATNTS.SHOPYFY_URL}/pages/selim-hill-collective`}
                 className="font-questrial text-white font-medium text-sm "
@@ -124,7 +129,7 @@ const Footer = () => {
                 className="font-questrial text-white font-medium text-sm "
               >
                 Our Farms
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

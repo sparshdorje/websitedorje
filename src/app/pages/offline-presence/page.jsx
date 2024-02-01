@@ -1,5 +1,26 @@
 import React from 'react';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import { ASSETS } from '@/config';
+
+export async function generateMetadata() {
+  return {
+    title: 'Offline Presence',
+    description:
+      'A list of the retail, offline stores where you can get Dorje Teas immediately. All these stores and cafes have tied up with Dorje Teas and are committed to making Darjeeling Tea Accessible, Avialable and Affordable. We only use whole leaf Darjeeling Tea which is plucked, packed and dispatched from Selim Hill Tea Estate',
+    openGraph: {
+      title: 'Offline Presence',
+      description:
+        'A list of the retail, offline stores where you can get Dorje Teas immediately. All these stores and cafes have tied up with Dorje Teas and are committed to making Darjeeling Tea Accessible, Avialable and Affordable. We only use whole leaf Darjeeling Tea which is plucked, packed and dispatched from Selim Hill Tea Estate',
+      url: `https://dorjeteas.com/pages/offline-presence`,
+      siteName: 'Dorje Teas',
+      images: [
+        {
+          url: `${ASSETS.ICONS}/dorje-logo.png`, // Must be an absolute URL
+        },
+      ],
+    },
+  };
+}
 
 const page = () => {
   return (
