@@ -56,43 +56,37 @@ const Footer = () => {
             </div>
             <div className="flex flex-col items-start gap-3">
               <Link
-                target="_blank"
-                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/privacy-policy`}
+                href={`/policies/privacy-policy`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Privacy Policy
               </Link>
               <Link
-                target="_blank"
-                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/refund-policy`}
+                href={`/policies/refund-policy`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Refund Policy
               </Link>
               <Link
-                target="_blank"
-                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/terms-of-service`}
+                href={`/policies/terms-of-service`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Terms of Service
               </Link>
               <Link
-                target="_blank"
-                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/shipping-policy`}
+                href={`/policies/shipping-policy`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Shipping Policy
               </Link>
               <Link
-                target="_blank"
-                href={`${APP_CONSTATNTS.SHOPYFY_URL}/policies/subscription-policy`}
+                href={`/policies/subscription-policy`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Subscription Policy
               </Link>
               <Link
-                target="_blank"
-                href={`${APP_CONSTATNTS.SHOPYFY_URL}/pages/offline-presence`}
+                href={`/pages/offline-presence`}
                 className="font-questrial text-white font-medium text-sm "
               >
                 Offline Presence
