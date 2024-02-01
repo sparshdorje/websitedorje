@@ -47,7 +47,11 @@ const BlogsService = {
     return shopifyInstance.post('/', {
       query: `query {
         blogs(first: 1) {
+          pageInfo {
+            endCursor
+          }
           edges {
+            cursor
             node {
                 articleByHandle(handle: "${handle}"){
                     id
@@ -66,6 +70,41 @@ const BlogsService = {
                       name
                     }
                 }             
+            }
+          }
+        }
+      }`,
+    });
+  },
+  getRelatedBlogs: async ({ cursor, currentBlogPublishTime }) => {
+    return shopifyInstance.post('/', {
+      query: `query {
+        blogs(first: 1) {
+          edges {
+            node {
+              articles(first: 5,sortKey: RELEVANCE, query: "published_at:<${currentBlogPublishTime}", after: ${
+        cursor ? JSON.stringify(cursor) : null
+      }) {
+                edges {
+                  node {
+                    image{
+                      url
+                    }
+                    authorV2{
+                      name
+                    }
+                    id
+                    title
+                    contentHtml
+                    content
+                    tags
+                    publishedAt
+                    handle
+                    excerptHtml
+                    excerpt
+                  }
+                }
+              }
             }
           }
         }

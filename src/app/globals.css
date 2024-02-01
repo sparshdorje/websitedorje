@@ -104,3 +104,8 @@
   width: 100%;
   object-fit: contain;
 }
+
+.blog-content a{
+  color: rgb(56, 56, 199);
+  text-decoration: underline;
+}

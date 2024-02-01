@@ -1,29 +1,39 @@
-import React, { cache } from 'react';
-import BlogsService from '../../../../services/blogs';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import Image from 'next/image';
-import { formatDateString } from '@/lib/utils';
-import moment from 'moment';
+import RelatedBlogsCard from '@/components/RelatedBlogsCard';
 import { Separator } from '@/components/ui/separator';
+import moment from 'moment';
+import Image from 'next/image';
+import { cache } from 'react';
+import BlogsService from '../../../../services/blogs';
 
 const fetchBlogByHandle = cache(async (blogHandle) => {
   try {
     const response = await BlogsService.getBlogsByHandle({
       handle: blogHandle,
     });
-
-    console.log(
-      response?.data?.data?.blogs?.edges?.[0]?.node?.articleByHandle,
-      'blogs'
-    );
-    return response?.data?.data?.blogs?.edges?.[0]?.node?.articleByHandle;
+    return {
+      blog: response?.data?.data?.blogs?.edges?.[0]?.node?.articleByHandle,
+      cursor: response?.data?.data?.blogs?.pageInfo?.endCursor,
+    };
   } catch (error) {
     console.error('Error fetching Blog:', error);
   }
 });
 
+const fetchRelatedBlogs = async (cursor, currentBlogPublishTime) => {
+  try {
+    const response = await BlogsService.getRelatedBlogs({
+      cursor,
+      currentBlogPublishTime,
+    });
+    return response?.data?.data?.blogs?.edges?.[0]?.node?.articles?.edges;
+  } catch (error) {
+    console.error('Error fetching Blog:', error);
+  }
+};
+
 export async function generateMetadata({ params: { blogHandle } }) {
-  const blog = await fetchBlogByHandle(blogHandle);
+  const { blog } = await fetchBlogByHandle(blogHandle);
   const { title, excerpt, image } = blog || {};
 
   return {
@@ -42,7 +52,8 @@ export async function generateMetadata({ params: { blogHandle } }) {
 const page = async ({ params }) => {
   const { blogHandle } = params;
 
-  const blog = await fetchBlogByHandle(blogHandle);
+  const { blog, cursor } = await fetchBlogByHandle(blogHandle);
+  const relatedBlogs = await fetchRelatedBlogs(cursor, blog.publishedAt);
 
   return (
     <div className="w-full h-full bg-white">
@@ -77,8 +88,14 @@ const page = async ({ params }) => {
 
         <Separator />
 
-        <div className="font-inter text-lg text-primary">
+        <div className="font-inter text-lg text-primary mb-4">
           Here are some related articles you may find interesting
+        </div>
+
+        <div className="flex flex-col items-start gap-12">
+          {relatedBlogs?.map((blog) => (
+            <RelatedBlogsCard blog={blog} key={blog?.node?.handle} />
+          ))}
         </div>
       </MaxWidthWrapper>
     </div>
