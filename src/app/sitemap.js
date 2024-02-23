@@ -54,6 +54,10 @@ export default async function sitemap() {
         priority: 0.9,
       },
       {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/experience`,
+        priority: 0.9,
+      },
+      {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/collections/shop-all`,
         priority: 0.9,
       },

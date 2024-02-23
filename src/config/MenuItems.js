@@ -25,13 +25,13 @@ export const MENU_ITEMS = [
     dropdown: true,
     cardType: `rectangle-card`,
   },
-  // {
-  //   label: `EXPERIENCE`,
-  //   value: `experience`,
-  //   openInNewTab: true,
-  //   link: `${APP_CONSTATNTS.SHOPYFY_URL}/pages/our-farms`,
-  //   dropdown: false,
-  // },
+  {
+    label: `EXPERIENCE`,
+    value: `experience`,
+    openInNewTab: false,
+    link: `/experience`,
+    dropdown: false,
+  },
   {
     label: `LEARN MORE`,
     value: `learn_more`,
