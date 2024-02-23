@@ -49,7 +49,11 @@ const RestaurantsOfSelimHillSlider = ({ urls = RESTAURANTS_OF_SELIM_HILL }) => {
             key={i}
             className="-z-10 !h-[306px] relative px-4 lg:px-0 lg:!h-[406px] w-fill"
           >
-            <Link href={url.blogUrl} className="h-full w-full cursor-pointer">
+            <div
+              // target="_blank"
+              // href={url.blogUrl}
+              className="h-full w-full"
+            >
               <div className="relative top-0 bottom-0 right-0 h-full w-full overflow-hidden rounded-2xl">
                 <div className="absolute z-3 bg-black bg-opacity-50 h-full w-full"></div>
                 <Image
@@ -62,10 +66,10 @@ const RestaurantsOfSelimHillSlider = ({ urls = RESTAURANTS_OF_SELIM_HILL }) => {
                 />
               </div>
 
-              <div className="absolute flex items-end justify-center pb-3 w-full top-0 bottom-0 right-0 font-fraunces text-white text-xl lg:text-lg">
+              <div className="absolute flex items-end justify-center pb-3 w-full top-0 bottom-0 right-0 font-fraunces text-white text-xl lg:text-2xl">
                 <div>{url.name}</div>
               </div>
-            </Link>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -8,6 +8,26 @@ import { ASSETS } from '@/config';
 import Image from 'next/image';
 import React from 'react';
 
+export async function generateMetadata() {
+  return {
+    title: 'Experience Darjeeling',
+    description:
+      'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+    openGraph: {
+      title: 'Experience Darjeeling',
+      description:
+        'Dorje Teas sells only whole leaf Darjeeling Tea which has been plucked, packed and dispatched directly from certified Organic Selim Hill Tea Estate. We prepare the tea in small batches. It is our effort to revive and consolidate the beauty and romance of Darjeeling.',
+      url: `https://dorjeteas.com/pages/experience`,
+      siteName: 'Dorje Teas',
+      images: [
+        {
+          url: `${ASSETS.ICONS}/dorje-logo.png`, // Must be an absolute URL
+        },
+      ],
+    },
+  };
+}
+
 const page = () => {
   return (
     <div className={'pt-0 pb-24 w-full grid grid-cols-1 gap-10 lg:gap-16'}>

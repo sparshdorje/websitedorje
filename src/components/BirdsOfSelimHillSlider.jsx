@@ -62,7 +62,7 @@ const BirdsOfSelimHillSlider = ({ urls = BIRDS_OF_SELIM_HILL }) => {
                 />
               </div>
 
-              <div className="absolute flex items-end justify-center pb-3 w-full top-0 bottom-0 right-0 font-fraunces text-white text-xl lg:text-lg">
+              <div className="absolute flex items-end justify-center pb-3 w-full top-0 bottom-0 right-0 font-fraunces text-white text-xl lg:text-2xl">
                 <div>{url.name}</div>
               </div>
             </Link>
