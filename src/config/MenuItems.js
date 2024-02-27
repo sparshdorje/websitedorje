@@ -33,6 +33,12 @@ export const MENU_ITEMS = [
     dropdown: false,
   },
   {
+    label: `BLOGS`,
+    value: `blogs`,
+    link: '/blogs/posts',
+    dropdown: false,
+  },
+  {
     label: `LEARN MORE`,
     value: `learn_more`,
     link: '/about-us',

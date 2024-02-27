@@ -67,7 +67,7 @@ const page = () => {
         <div className="text-3xl px-3 lg:px-10 mb-8 font-fraunces text-secondary font-semibold">
           Moonlight plucking
         </div>
-        <div className="w-full  ">
+        <div className="w-full">
           <KnowYourTeaSlider
             productHandle={'moonlight-sonata-limited-edition'}
           />
