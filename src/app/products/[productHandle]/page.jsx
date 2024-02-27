@@ -101,25 +101,27 @@ const Page = async ({ params }) => {
         )}
 
         {/* KNOW YOUR TEA */}
-        <div
-          style={{
-            width: '100%',
-            height: '100%', // Set your desired height
-            background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
-            backgroundSize: 'cover',
-          }}
-          className="py-16"
-        >
-          <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
-            <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
-              Know your tea
-            </div>
-            <div className="text-base text-center mb-10 font-questrial text-white">
-              Understand the composition of your favourite tea
-            </div>
-            <KnowYourTeaSlider productHandle={product.handle} />
-          </MaxWidthWrapper>
-        </div>
+        {productHandle !== 'original-chai' && (
+          <div
+            style={{
+              width: '100%',
+              height: '100%', // Set your desired height
+              background: `url(/assets/svg/ProductPageBG.svg) no-repeat`,
+              backgroundSize: 'cover',
+            }}
+            className="py-16"
+          >
+            <MaxWidthWrapper className={'max-w-screen-xl px-0'}>
+              <div className="text-3xl text-center mb-3 font-fraunces text-white font-semibold">
+                Know your tea
+              </div>
+              <div className="text-base text-center mb-10 font-questrial text-white">
+                Understand the composition of your favourite tea
+              </div>
+              <KnowYourTeaSlider productHandle={product.handle} />
+            </MaxWidthWrapper>
+          </div>
+        )}
 
         {/* BRAND STORY */}
         <div>

@@ -3,6 +3,7 @@
 import LeftArrow from '@/components/LeftArrow';
 import useSlider from '@/hooks/useSlider';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { BIRDS_OF_SELIM_HILL } from '@/config/BirdsOfSelimHill';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -16,7 +17,13 @@ const BirdsOfSelimHillSlider = ({ urls = BIRDS_OF_SELIM_HILL }) => {
   const { swiper, slideConfig, setSwiper, activeStyles, inactiveStyles } =
     useSlider({ urls });
   return (
-    <div className="relative p-b-8 overflow-hidden h-full  lg:px-10 w-full">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+      className="relative p-b-8 overflow-hidden h-full  lg:px-10 w-full"
+    >
       <div className="hidden lg:block absolute inset-0 transition">
         <RightArrow
           activeStyles={activeStyles}
@@ -69,7 +76,7 @@ const BirdsOfSelimHillSlider = ({ urls = BIRDS_OF_SELIM_HILL }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

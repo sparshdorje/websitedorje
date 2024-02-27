@@ -1,22 +1,28 @@
 'use client';
 
 import LeftArrow from '@/components/LeftArrow';
-import useSlider from '@/hooks/useSlider';
-import Image from 'next/image';
 import { RESTAURANTS_OF_SELIM_HILL } from '@/config/RestaurantsOfSelimHill';
+import useSlider from '@/hooks/useSlider';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import RightArrow from './RigthArrow';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import Link from 'next/link';
 
 const RestaurantsOfSelimHillSlider = ({ urls = RESTAURANTS_OF_SELIM_HILL }) => {
   const isMobile = window && window.innerWidth < 768;
   const { swiper, slideConfig, setSwiper, activeStyles, inactiveStyles } =
     useSlider({ urls });
   return (
-    <div className="relative p-b-8 overflow-hidden h-full  lg:px-10 w-full">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+      className="relative p-b-8 overflow-hidden h-full  lg:px-10 w-full"
+    >
       <div className="hidden lg:block absolute inset-0 transition">
         <RightArrow
           activeStyles={activeStyles}
@@ -73,7 +79,7 @@ const RestaurantsOfSelimHillSlider = ({ urls = RESTAURANTS_OF_SELIM_HILL }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 
