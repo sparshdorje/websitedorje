@@ -15,7 +15,7 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
         {category?.dropdown ? (
           <Button
             className={cn(
-              '   gap-1.5 h-16 rounded-xl font-questrial hover:bg-[#FFF5EB]',
+              '   gap-1 h-16 rounded-xl font-questrial hover:bg-[#FFF5EB]',
               {
                 'bg-[#FFF5EB] shadow-md': isOpen,
               }
@@ -33,7 +33,7 @@ const NavItem = ({ isAnyOpen, category, handleOpen, close, isOpen }) => {
         ) : (
           <Link
             className={buttonVariants({
-              className: 'gap-1.5 h-16 font-questrial font-medium',
+              className: 'gap-1 h-16 font-questrial font-medium',
               variant: 'link',
             })}
             target={category.openInNewTab && '_blank'}

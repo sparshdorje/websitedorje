@@ -109,3 +109,9 @@
   color: rgb(56, 56, 199);
   text-decoration: underline;
 }
+
+.disable-focus-ring:focus {
+  outline: none !important; /* Remove default focus outline */
+  box-shadow: none !important; /* Remove any box shadow for focus */
+  /* Add any other styles to customize the appearance when focused */
+}
