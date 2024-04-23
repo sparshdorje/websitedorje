@@ -227,6 +227,69 @@ const ProductService = {
       }`,
     });
   },
+  getProductsBySearchText: async ({ searchText }) => {
+    return shopifyInstance.post('/', {
+      query: `
+        query getProductsBySearchText {
+          products(query: "title:${searchText}*", first: 6) {
+            edges {
+              node {
+                id
+                title
+                priceRange {
+                  maxVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+                handle
+                images(first: 100) {
+                  edges {
+                    node {
+                      id
+                      originalSrc
+                      altText
+                      url
+                    }
+                  }
+                }
+                variants(first: 1) {
+                  edges {
+                    cursor
+                    node {
+                      availableForSale
+                      selectedOptions{
+                        name
+                        value
+                      }
+                      id
+                      title
+                      image{
+                        url
+                      }
+                      price {
+                        amount
+                        currencyCode
+                      }
+                      product{
+                        title
+                        id
+                        handle
+                      }
+                    }
+                  }
+                }
+
+              }
+            }
+          }
+        }`,
+    });
+  },
 };
 
 export default ProductService;

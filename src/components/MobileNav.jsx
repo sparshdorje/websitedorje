@@ -14,6 +14,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import NavCards from './NavCards';
 import { Button } from './ui/button';
+import SearchBar from './SearchBar';
 
 const MobileNav = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +62,7 @@ const MobileNav = ({ user }) => {
         <div className="w-full h-full">
           <div className="relative flex w-full h-full max-w-sm flex-col justify-between overflow-y-auto bg-white pb-12 shadow-xl">
             <div className="mt-2">
-              <div className="flex justify-between items-center pb-2 pt-5 px-4">
+              <div className="flex justify-between items-center gap-4 pb-2 pt-5 px-4 h-[50px]">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
@@ -69,6 +70,9 @@ const MobileNav = ({ user }) => {
                 >
                   <X className="h-6 w-6" aria-hidden="true" />
                 </button>
+                <div className="lg:hidden flex-1 flex items-end justify-end">
+                  <SearchBar />
+                </div>
                 {user && (
                   <Link href="/account">
                     <UserRound className="h-6 w-6 flex-shrink-0 text-gray-400 hover:text-gray-500" />
