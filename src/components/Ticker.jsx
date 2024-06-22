@@ -18,8 +18,7 @@ const Ticker = () => {
           />
         </div> */}
         <div className="text-white font-medium text-center font-questrial text-sm lg:text-base">
-          Use DORJENY20 to get 20% off on orders above Rs. 999 | LIMITED TIME
-          OFFER
+          Orders will be delayed due to heavy rains in Darjeeling
         </div>
       </MaxWidthWrapper>
     </div>
