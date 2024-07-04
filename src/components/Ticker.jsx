@@ -18,8 +18,7 @@ const Ticker = () => {
           />
         </div> */}
         <div className="text-white font-medium text-center font-questrial text-sm lg:text-base">
-          Orders will be delayed due to heavy rains in Darjeeling
-        </div>
+Welcome Offer: Use code DORJE20 for 20% off | Min Cart Value: Rs. 999  </div>
       </MaxWidthWrapper>
     </div>
   );
