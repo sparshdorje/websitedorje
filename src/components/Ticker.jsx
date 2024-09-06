@@ -18,7 +18,7 @@ const Ticker = () => {
           />
         </div> */}
         <div className="text-white font-medium text-center font-questrial text-sm lg:text-base">
-PAY DAY SALE - 30% off on all Orders Above Rs. 999 | Limited Time Only | Automatic Checkout  </div>
+Welcome Offer: Use code DORJE20 for 20% off | Min Cart Value: Rs. 999  </div>
       </MaxWidthWrapper>
     </div>
   );
