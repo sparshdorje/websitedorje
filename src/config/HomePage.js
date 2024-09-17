@@ -2,6 +2,10 @@ import { ASSETS } from './index';
 
 export const HOME_PAGE_BANNERS = [
   {
+    imgUrl: `${ASSETS.HOME_PAGE_BANNERS}/20.jpg`,
+    href: "/",
+  },
+  {
     imgUrl: `${ASSETS.HOME_PAGE_BANNERS}/selim-hill.webp`,
     href: '/collections/black-tea',
   },
